@@ -5,8 +5,11 @@ using UnityEngine;
 public class Damagedeal : MonoBehaviour
 {
     private int damage = 5;
+    [SerializeField] private GameObject hitboxL;
     [SerializeField] private GameObject Hero;
     private Rigidbody2D rb;
+    float stuntime = 0.5f;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
@@ -14,6 +17,9 @@ public class Damagedeal : MonoBehaviour
     }
     public void ProcessHit()
     {
+        this.spriteRenderer = hitboxL.GetComponent<SpriteRenderer>();
+        this.spriteRenderer.enabled = true;
+        Hero.GetComponent<move>().StunEntity(stuntime);
         Debug.Log("говно");
         Collider2D collider = GetComponent<Collider2D>();
         RaycastHit2D[] hits = new RaycastHit2D[10];
@@ -26,7 +32,9 @@ public class Damagedeal : MonoBehaviour
         {
             RaycastHit2D hit= hits[i];
             if (hit.collider.gameObject.GetComponent<smert>() != null)
-                    hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
+                hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
+                
+                
         }
     }
 }

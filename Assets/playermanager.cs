@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class playermanager : MonoBehaviour
 {
-
+    [SerializeField] private GameObject Hero;
     [SerializeField] private GameObject hitboxL;
     [SerializeField] private GameObject hitboxR;
     [SerializeField] private GameObject hitboxU;
     [SerializeField] private GameObject hitboxD;
+    private SpriteRenderer spriteRenderer;
     private Vector2 cmoveVector;
     private Vector2 moveVector;
     private Vector2 lastmove;
-    [SerializeField] private GameObject Hero;
+    
     // Update is called once per frame
     void Awake()
     {
@@ -36,6 +37,7 @@ public class playermanager : MonoBehaviour
             
             if(lastmove == Vector2.left)
             {
+                
                 Debug.Log("левой");
 
                 hitboxL.gameObject.GetComponent<Damagedeal>().ProcessHit();
@@ -60,8 +62,12 @@ public class playermanager : MonoBehaviour
 
         }
     }
-    private void FixedUpdate()
+    void FixedUpdate()
     {
+        hitboxL.GetComponent<SpriteRenderer>().enabled = false;
+        hitboxR.GetComponent<SpriteRenderer>().enabled = false;
+        hitboxU.GetComponent<SpriteRenderer>().enabled = false;
+        hitboxD.GetComponent<SpriteRenderer>().enabled = false;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
         {
             Hero.GetComponent<Rigidbody2D>().drag = 0;
@@ -69,12 +75,16 @@ public class playermanager : MonoBehaviour
         }
         else
         {
-            Hero.GetComponent<Rigidbody2D>().drag = 10;
+            Hero.GetComponent<Rigidbody2D>().drag = 25;
 
         }
         cmoveVector.x = Input.GetAxis("Horizontal");
         cmoveVector.y = Input.GetAxis("Vertical");
-        Hero.gameObject.GetComponent<move>().MoveHero(cmoveVector.normalized);
+        Hero.gameObject.GetComponent<move>().Move(cmoveVector.normalized);
+
+
     }
 
+    
 }
+
