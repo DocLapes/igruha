@@ -7,11 +7,14 @@ public class move : MonoBehaviour
     bool isstuned;
     private Rigidbody2D rb;
     [SerializeField] private float speed;
+    [SerializeField] private float maxspeed;
     private Vector2 moveVector;
+    [SerializeField] private GameObject visualmodel;
     void Awake()
     {
         
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     void FixedUpdate()
@@ -21,13 +24,15 @@ public class move : MonoBehaviour
     }
     public void Move(Vector2 direction)
     {
+      
       if (isstuned) return;
+      //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
       moveVector = direction;
-        if (moveVector == Vector2.left)
-        {
-
-        }
       rb.AddForce(moveVector * speed * Time.fixedDeltaTime*100, ForceMode2D.Impulse);
+        if (rb.velocity.magnitude > maxspeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxspeed;
+        } 
         
     }
     public void StunEntity(float stuntime)

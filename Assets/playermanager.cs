@@ -13,7 +13,8 @@ public class playermanager : MonoBehaviour
     private Vector2 cmoveVector;
     private Vector2 moveVector;
     private Vector2 lastmove;
-    
+    [SerializeField] private GameObject visualmodel;
+
     // Update is called once per frame
     void Awake()
     {
@@ -22,6 +23,7 @@ public class playermanager : MonoBehaviour
     
     void Update()
     {
+
        
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
         {
@@ -64,19 +66,22 @@ public class playermanager : MonoBehaviour
     }
     void FixedUpdate()
     {
+        
+        //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
         hitboxL.GetComponent<SpriteRenderer>().enabled = false;
         hitboxR.GetComponent<SpriteRenderer>().enabled = false;
         hitboxU.GetComponent<SpriteRenderer>().enabled = false;
         hitboxD.GetComponent<SpriteRenderer>().enabled = false;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
         {
-            Hero.GetComponent<Rigidbody2D>().drag = 0;
+            visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
+            Hero.GetComponent<Rigidbody2D>().drag = 1;
 
         }
         else
         {
             Hero.GetComponent<Rigidbody2D>().drag = 25;
-
+            visualmodel.gameObject.GetComponent<AnimatorManager>().idle();
         }
         cmoveVector.x = Input.GetAxis("Horizontal");
         cmoveVector.y = Input.GetAxis("Vertical");
