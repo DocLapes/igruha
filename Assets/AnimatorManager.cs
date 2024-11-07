@@ -8,6 +8,8 @@ public class AnimatorManager : MonoBehaviour
     private Animator entityanimator;
     private SpriteRenderer spriter;
     private Vector2 atackVector;
+    private int animationpriority;
+    private float atacktime = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,21 +25,29 @@ public class AnimatorManager : MonoBehaviour
     }
     public void Walking()
     {
-        if(Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x > 0)
+        if (animationpriority < 2)
         {
-            spriter.flipX = false;
-            entityanimator.CrossFade("walk", 0f, 0);
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x > 0)
+            {
+                spriter.flipX = false;
+                entityanimator.CrossFade("walk", 0f, 0);
+            }
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
+            {
+                spriter.flipX = true;
+                entityanimator.CrossFade("walk", 0f, 0);
+            }
         }
-        if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
-        {
-            spriter.flipX = true;
-            entityanimator.CrossFade("walk", 0f, 0);
-        }
+        else { return; }
 
     }
     public void Idle()
     {
+        if (animationpriority < 2)
+        {
             entityanimator.CrossFade("idle", 0f, 0); ;
+        }
+        else { return; }
     }
     public void Atack(Vector2 direction)
     {
@@ -45,14 +55,23 @@ public class AnimatorManager : MonoBehaviour
         atackVector = direction;
         if (atackVector == Vector2.right)
         {
+            animationpriority = 2;
+            Invoke(nameof(Prioritychange), atacktime);
             spriter.flipX = false;
             entityanimator.CrossFade("hit", 0f, 0); 
         }
         if (atackVector == Vector2.left)
         {
+            animationpriority = 2;
+            Invoke(nameof(Prioritychange), atacktime);
+            animationpriority = 2;
             spriter.flipX = true;
-            entityanimator.CrossFade("hit", 0f, 0); 
+            entityanimator.CrossFade("hit", 0f, 0);
+            
         }
     }
-
+    public void Prioritychange()
+    {
+        animationpriority=1;
+    }
 }
