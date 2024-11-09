@@ -29,8 +29,8 @@ public class playermanager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
         {
-            moveVector.x = Input.GetAxis("Horizontal");
-            moveVector.y = Input.GetAxis("Vertical");
+            moveVector.x = Input.GetAxisRaw("Horizontal");
+            moveVector.y = Input.GetAxisRaw("Vertical");
             lastmove = moveVector.normalized;
 
         }
