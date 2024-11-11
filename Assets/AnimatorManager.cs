@@ -37,6 +37,14 @@ public class AnimatorManager : MonoBehaviour
                 spriter.flipX = true;
                 entityanimator.CrossFade("walk", 0f, 0);
             }
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
+            {
+                entityanimator.CrossFade("walk", 0f, 0);
+            }
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
+            {
+                entityanimator.CrossFade("walk", 0f, 0);
+            }
         }
         else { return; }
 
@@ -64,10 +72,26 @@ public class AnimatorManager : MonoBehaviour
         {
             animationpriority = 2;
             Invoke(nameof(Prioritychange), atacktime);
-            animationpriority = 2;
+            
             spriter.flipX = true;
             entityanimator.CrossFade("hit", 0f, 0);
             
+        }
+        if (atackVector == Vector2.down)
+        {
+            animationpriority = 2;
+            Invoke(nameof(Prioritychange), atacktime);
+            spriter.flipX = false;
+            entityanimator.CrossFade("hitdown", 0f, 0);
+
+        }
+        if (atackVector == Vector2.up)
+        {
+            animationpriority = 2;
+            Invoke(nameof(Prioritychange), atacktime);
+            spriter.flipX = false;
+            entityanimator.CrossFade("hitup", 0f, 0);
+
         }
     }
     public void Prioritychange()

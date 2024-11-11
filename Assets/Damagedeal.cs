@@ -5,7 +5,8 @@ using UnityEngine;
 public class Damagedeal : MonoBehaviour
 {
     private int damage = 5;
-    [SerializeField] private GameObject hitboxL;
+    private int power = 45;
+    [SerializeField] private GameObject hitbox;
     [SerializeField] private GameObject Hero;
     private Rigidbody2D rb;
     float stuntime = 0.5f;
@@ -38,8 +39,9 @@ public class Damagedeal : MonoBehaviour
             RaycastHit2D hit= hits[i];
             if (hit.collider.gameObject.GetComponent<smert>() != null)
                 hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
-                
-                
+                hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction,power);
+
+
         }
     }
 }

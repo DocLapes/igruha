@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class smert : MonoBehaviour
 {
     [SerializeField] private int playerheath;
+    private Rigidbody2D rb;
+    private Vector2 otkidVector;
+    
+
     public int Playerheath
     {
         get
@@ -18,13 +22,14 @@ public class smert : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
         gameover = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        otkidVector = rb.velocity;
         if (gameover)
         {
             SceneManager.LoadScene("level");
@@ -39,5 +44,15 @@ public class smert : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    public void otkinyt(int power)
+    {
+        
+        rb.AddForce(otkidVector * power * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
+    }
+    public void otkinytbyatack(Vector2 otkidDirection, int power)
+    {
+
+        rb.AddForce(otkidDirection * power * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
     }
 }

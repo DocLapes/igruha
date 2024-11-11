@@ -96,7 +96,7 @@ public class playermanager : MonoBehaviour
         }
         else
         {
-            Hero.GetComponent<Rigidbody2D>().drag = 25;
+            Hero.GetComponent<Rigidbody2D>().drag = 35;
             visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
         }
         cmoveVector.x = Input.GetAxis("Horizontal");

@@ -12,6 +12,7 @@ public class damag : MonoBehaviour
 
         if (collision.gameObject.GetComponent<smert>() != null)
             collision.gameObject.GetComponent<smert>().takedamage(damage);
+            collision.gameObject.GetComponent<smert>().otkinyt(-30);
 
     }
 
@@ -19,6 +20,7 @@ public class damag : MonoBehaviour
     {
         if (other.gameObject.GetComponent<smert>() != null)
             other.gameObject.GetComponent<smert>().takedamage(damage);
+            
     }
 }
 
