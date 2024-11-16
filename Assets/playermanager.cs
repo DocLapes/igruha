@@ -82,7 +82,7 @@ public class playermanager : MonoBehaviour
     }
     void FixedUpdate()
     {
-        
+       
         //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
         hitboxL.GetComponent<SpriteRenderer>().enabled = false;
         hitboxR.GetComponent<SpriteRenderer>().enabled = false;
@@ -102,6 +102,11 @@ public class playermanager : MonoBehaviour
         cmoveVector.x = Input.GetAxis("Horizontal");
         cmoveVector.y = Input.GetAxis("Vertical");
         Hero.gameObject.GetComponent<move>().Move(cmoveVector.normalized);
+        if (Input.GetKey(KeyCode.Space) & isatack == false)
+        {
+            Hero.gameObject.GetComponent<move>().Dash(cmoveVector.normalized);
+            Atackreload(atacktime);
+        }
 
 
     }

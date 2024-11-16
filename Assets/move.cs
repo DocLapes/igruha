@@ -6,6 +6,7 @@ public class move : MonoBehaviour
 {
     bool isstuned;
     private Rigidbody2D rb;
+    private Collider2D colider;
     [SerializeField] private float speed;
     [SerializeField] private float maxspeed;
     private Vector2 moveVector;
@@ -14,6 +15,7 @@ public class move : MonoBehaviour
     {
         
         rb = GetComponent<Rigidbody2D>();
+        colider = GetComponent<Collider2D>();
         
     }
 
@@ -21,6 +23,18 @@ public class move : MonoBehaviour
     {
 
 
+    }
+    public void Dash(Vector2 direction)
+    {
+        if (isstuned) return;
+        colider.enabled = false;
+        Invoke(nameof(OutDash), 0.2f);
+        rb.MovePosition(rb.position + direction*2f);
+        
+    }
+    public void OutDash()
+    {
+        colider.enabled = true;
     }
     public void Move(Vector2 direction)
     {
@@ -46,7 +60,7 @@ public class move : MonoBehaviour
         isstuned = false;
     }
 
-
+    //physic2d raycast
     //public abstract class BaseInputController
     //{
 
