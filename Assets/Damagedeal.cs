@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Damagedeal : MonoBehaviour
 {
-    private int damage = 5;
-    private int power = 45;
-    [SerializeField] private GameObject hitbox;
-    [SerializeField] private GameObject Hero;
+    [SerializeField] private int damage;
+    [SerializeField] private int power;
+    //[SerializeField] private GameObject hitbox;
+    //[SerializeField] private GameObject Hero;
     private Rigidbody2D rb;
     //float stuntime = 0.5f;
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private GameObject hitboxV;
+    //[SerializeField] private GameObject hitboxV;
 
 
     void Start()

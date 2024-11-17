@@ -19,9 +19,9 @@ public class move : MonoBehaviour
         
     }
 
-    void FixedUpdate()
+    void Update()
     {
-
+        
 
     }
     public void Dash(Vector2 direction)
@@ -38,14 +38,15 @@ public class move : MonoBehaviour
     }
     public void Move(Vector2 direction)
     {
-      
+
+      Debug.Log(direction);
       if (isstuned) return;
       //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
       moveVector = direction;
-      rb.AddForce(moveVector * speed * Time.fixedDeltaTime*100, ForceMode2D.Impulse);
+      rb.velocity= moveVector * speed * Time.fixedDeltaTime*100;
         if (rb.velocity.magnitude > maxspeed)
         {
-            rb.velocity = rb.velocity.normalized * maxspeed;
+            //rb.velocity = rb.velocity.normalized * maxspeed;
         } 
         
     }

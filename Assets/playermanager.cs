@@ -26,7 +26,10 @@ public class playermanager : MonoBehaviour
 
     void Update()
     {
-
+        
+        cmoveVector.x = Input.GetAxisRaw("Horizontal");
+        cmoveVector.y = Input.GetAxisRaw("Vertical");
+        
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
         {
@@ -88,7 +91,10 @@ public class playermanager : MonoBehaviour
     }
     void FixedUpdate()
     {
-       
+        if (cmoveVector.normalized != Vector2.zero)
+        {
+            Hero.gameObject.GetComponent<move>().Move(cmoveVector.normalized);
+        }
         //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
         {
@@ -101,9 +107,8 @@ public class playermanager : MonoBehaviour
             Hero.GetComponent<Rigidbody2D>().drag = drift;
             visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
         }
-        cmoveVector.x = Input.GetAxis("Horizontal");
-        cmoveVector.y = Input.GetAxis("Vertical");
-        Hero.gameObject.GetComponent<move>().Move(cmoveVector.normalized);
+        
+        
         if (Input.GetKey(KeyCode.Space) & isatack == false)
         {
             Hero.gameObject.GetComponent<move>().Dash(cmoveVector.normalized);

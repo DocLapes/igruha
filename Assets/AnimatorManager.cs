@@ -49,11 +49,63 @@ public class AnimatorManager : MonoBehaviour
         else { return; }
 
     }
+    public void EnemyWalking()
+    {
+        if (animationpriority < 2)
+        {
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x > 0)
+            {
+                spriter.flipX = false;
+                entityanimator.CrossFade("walk", 0f, 0);
+            }
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
+            {
+                spriter.flipX = true;
+                entityanimator.CrossFade("walk", 0f, 0);
+            }
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
+            {
+                entityanimator.CrossFade("walk", 0f, 0);
+            }
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
+            {
+                entityanimator.CrossFade("walk", 0f, 0);
+            }
+        }
+        else { return; }
+
+    }
+    public void EnemyAtackWalking()
+    {
+        if (animationpriority < 2)
+        {
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x > 0)
+            {
+                spriter.flipX = false;
+                entityanimator.CrossFade("walkatack", 0f, 0);
+            }
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
+            {
+                spriter.flipX = true;
+                entityanimator.CrossFade("walkatack", 0f, 0);
+            }
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
+            {
+                entityanimator.CrossFade("walkatack", 0f, 0);
+            }
+            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
+            {
+                entityanimator.CrossFade("walkatack", 0f, 0);
+            }
+        }
+        else { return; }
+
+    }
     public void Idle()
     {
         if (animationpriority < 2)
         {
-            entityanimator.CrossFade("idle", 0f, 0); ;
+            entityanimator.CrossFade("idle", 0f, 0); 
         }
         else { return; }
     }
