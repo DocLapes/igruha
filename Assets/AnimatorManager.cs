@@ -9,7 +9,7 @@ public class AnimatorManager : MonoBehaviour
     private SpriteRenderer spriter;
     private Vector2 atackVector;
     private int animationpriority;
-    private float atacktime = 0.5f;
+    private float atacktime = 0.56f;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,43 +57,43 @@ public class AnimatorManager : MonoBehaviour
         }
         else { return; }
     }
-    public void Atack(Vector2 direction)
-    {
+    //public void Atack(Vector2 direction)
+    //{
 
-        atackVector = direction;
-        if (atackVector == Vector2.right)
-        {
-            animationpriority = 2;
-            Invoke(nameof(Prioritychange), atacktime);
-            spriter.flipX = false;
-            entityanimator.CrossFade("hit", 0f, 0); 
-        }
-        if (atackVector == Vector2.left)
-        {
-            animationpriority = 2;
-            Invoke(nameof(Prioritychange), atacktime);
+    //    atackVector = direction;
+    //    if (atackVector == Vector2.right)
+    //    {
+    //        animationpriority = 2;
+    //        Invoke(nameof(Prioritychange), atacktime);
+    //        spriter.flipX = false;
+    //        entityanimator.CrossFade("atackLR", 0f, 0); 
+    //    }
+    //    if (atackVector == Vector2.left)
+    //    {
+    //        animationpriority = 2;
+    //        Invoke(nameof(Prioritychange), atacktime);
             
-            spriter.flipX = true;
-            entityanimator.CrossFade("hit", 0f, 0);
+    //        spriter.flipX = true;
+    //        entityanimator.CrossFade("atackLR", 0f, 0);
             
-        }
-        if (atackVector == Vector2.down)
-        {
-            animationpriority = 2;
-            Invoke(nameof(Prioritychange), atacktime);
-            spriter.flipX = false;
-            entityanimator.CrossFade("hitdown", 0f, 0);
+    //    }
+    //    if (atackVector == Vector2.down)
+    //    {
+    //        animationpriority = 2;
+    //        Invoke(nameof(Prioritychange), atacktime);
+    //        spriter.flipX = false;
+    //        entityanimator.CrossFade("hitdown", 0f, 0);
 
-        }
-        if (atackVector == Vector2.up)
-        {
-            animationpriority = 2;
-            Invoke(nameof(Prioritychange), atacktime);
-            spriter.flipX = false;
-            entityanimator.CrossFade("hitup", 0f, 0);
+    //    }
+    //    if (atackVector == Vector2.up)
+    //    {
+    //        animationpriority = 2;
+    //        Invoke(nameof(Prioritychange), atacktime);
+    //        spriter.flipX = false;
+    //        entityanimator.CrossFade("hitup", 0f, 0);
 
-        }
-    }
+    //    }
+    //}
     public void Prioritychange()
     {
         animationpriority=1;

@@ -9,10 +9,10 @@ public class Damagedeal : MonoBehaviour
     [SerializeField] private GameObject hitbox;
     [SerializeField] private GameObject Hero;
     private Rigidbody2D rb;
-    float stuntime = 0.5f;
+    //float stuntime = 0.5f;
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private GameObject visualmodel;
-    
+    [SerializeField] private GameObject hitboxV;
+
 
     void Start()
     {
@@ -21,11 +21,11 @@ public class Damagedeal : MonoBehaviour
     public void ProcessHit(Vector2 direction)
     {
 
-       
+
         //this.spriteRenderer = hitboxL.GetComponent<SpriteRenderer>();
         //this.spriteRenderer.enabled = true;
-        Hero.GetComponent<move>().StunEntity(stuntime);
-        visualmodel.gameObject.GetComponent<AnimatorManager>().Atack(direction);
+        //Hero.GetComponent<move>().StunEntity(stuntime);
+        
         //Debug.Log("говно");
         Collider2D collider = GetComponent<Collider2D>();
         RaycastHit2D[] hits = new RaycastHit2D[10];

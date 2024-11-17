@@ -9,13 +9,14 @@ public class playermanager : MonoBehaviour
     [SerializeField] private GameObject hitboxR;
     [SerializeField] private GameObject hitboxU;
     [SerializeField] private GameObject hitboxD;
+    [SerializeField] private int drift;
     private SpriteRenderer spriteRenderer;
     private Vector2 cmoveVector;
     private Vector2 moveVector;
     private Vector2 lastmove;
     [SerializeField] private GameObject visualmodel;
     private bool isatack;
-    private float atacktime=0.5f;
+    private float atacktime=1f;
 
     // Update is called once per frame
     void Awake()
@@ -44,8 +45,10 @@ public class playermanager : MonoBehaviour
             {
                 
                 Debug.Log("левой");
-
+                
                 hitboxL.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.left);
+                hitboxL.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.left);
+
                 Atackreload(atacktime);
 
             }
@@ -53,18 +56,21 @@ public class playermanager : MonoBehaviour
             {
                 Debug.Log("правой");
                 hitboxR.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.right);
+                hitboxR.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.right);
                 Atackreload(atacktime);
             }
             if (lastmove == Vector2.up)
             {
                 Debug.Log("вверх");
                 hitboxU.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.up);
+                hitboxU.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.up);
                 Atackreload(atacktime);
             }
             if (lastmove == Vector2.down)
             {
                 Debug.Log("вниз");
                 hitboxD.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.down);
+                hitboxD.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.down);
                 Atackreload(atacktime);
             }
 
@@ -84,10 +90,6 @@ public class playermanager : MonoBehaviour
     {
        
         //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
-        hitboxL.GetComponent<SpriteRenderer>().enabled = false;
-        hitboxR.GetComponent<SpriteRenderer>().enabled = false;
-        hitboxU.GetComponent<SpriteRenderer>().enabled = false;
-        hitboxD.GetComponent<SpriteRenderer>().enabled = false;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
         {
             visualmodel.gameObject.GetComponent<AnimatorManager>().Walking();
@@ -96,7 +98,7 @@ public class playermanager : MonoBehaviour
         }
         else
         {
-            Hero.GetComponent<Rigidbody2D>().drag = 35;
+            Hero.GetComponent<Rigidbody2D>().drag = drift;
             visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
         }
         cmoveVector.x = Input.GetAxis("Horizontal");
