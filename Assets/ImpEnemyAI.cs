@@ -12,7 +12,7 @@ public class ImpEnemyAI : MonoBehaviour
     [SerializeField] private GameObject visualmodel;
     [SerializeField] private int drift;
     private bool isatack;
-    private float atacktime = 1f;
+    private float atacktime = 0.25f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -52,11 +52,11 @@ public class ImpEnemyAI : MonoBehaviour
         }
        
     }
-    public void Atack(Vector2 direction)
-    {
-        hitbox.gameObject.GetComponent<Damagedeal>().ProcessHit(direction);
-        Atackreload(atacktime);
-    }
+    //public void Atack(Vector2 direction)
+    //{
+    //    hitbox.gameObject.GetComponent<Damagedeal>().ProcessHit(direction);
+    //    Atackreload(atacktime);
+    //}
     public void Atackreload(float atacktimemetod)
     {
         isatack = true;

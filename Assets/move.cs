@@ -39,15 +39,15 @@ public class move : MonoBehaviour
     public void Move(Vector2 direction)
     {
 
-      Debug.Log(direction);
+      
       if (isstuned) return;
       //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
       moveVector = direction;
       rb.velocity= moveVector * speed * Time.fixedDeltaTime*100;
-        if (rb.velocity.magnitude > maxspeed)
-        {
-            //rb.velocity = rb.velocity.normalized * maxspeed;
-        } 
+        //if (rb.velocity.magnitude > maxspeed)
+        //{
+        //    rb.velocity = rb.velocity.normalized * maxspeed;
+        //} 
         
     }
     public void StunEntity(float stuntime)
