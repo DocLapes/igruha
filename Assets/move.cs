@@ -28,7 +28,7 @@ public class move : MonoBehaviour
     {
         if (isstuned) return;
         colider.enabled = false;
-        Invoke(nameof(OutDash), 0.2f);
+        Invoke(nameof(OutDash), 5f);
         rb.MovePosition(rb.position + direction*2f);
         
     }
@@ -43,7 +43,7 @@ public class move : MonoBehaviour
       if (isstuned) return;
       //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
       moveVector = direction;
-      rb.velocity= moveVector * speed * Time.fixedDeltaTime*100;
+      rb.velocity= moveVector.normalized * speed * Time.fixedDeltaTime*100;
         //if (rb.velocity.magnitude > maxspeed)
         //{
         //    rb.velocity = rb.velocity.normalized * maxspeed;

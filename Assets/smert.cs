@@ -52,7 +52,7 @@ public class smert : MonoBehaviour
     }
     public void otkinytbyatack(Vector2 otkidDirection, int power)
     {
-
+        rb.velocity = Vector2.zero;
         rb.AddForce(otkidDirection * power * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
     }
 }

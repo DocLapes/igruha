@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Damagedeal : MonoBehaviour
+public class DamagedealEnemy : MonoBehaviour
 {
     [SerializeField] private int damage;
     [SerializeField] private int power;
@@ -16,7 +16,7 @@ public class Damagedeal : MonoBehaviour
 
     void Start()
     {
-       
+
     }
     public void ProcessHit(Vector2 direction)
     {
@@ -25,7 +25,7 @@ public class Damagedeal : MonoBehaviour
         //this.spriteRenderer = hitboxL.GetComponent<SpriteRenderer>();
         //this.spriteRenderer.enabled = true;
         //Hero.GetComponent<move>().StunEntity(stuntime);
-        
+
         //Debug.Log("говно");
         Collider2D collider = GetComponent<Collider2D>();
         RaycastHit2D[] hits = new RaycastHit2D[10];
@@ -36,16 +36,15 @@ public class Damagedeal : MonoBehaviour
         int c_hits = collider.Cast(Vector2.zero, filter, hits);
         for (int i = 0; i < c_hits; i++)
         {
-            RaycastHit2D hit= hits[i];
+            RaycastHit2D hit = hits[i];
             if (hit.collider.gameObject.GetComponent<smert>() != null)
-                hit.collider.gameObject.GetComponent<ImpEnemyAI>().StunEntity(stuntime);
+                hit.collider.gameObject.GetComponent<move>().StunEntity(stuntime);
                 hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
-                hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction,power);
-               
+                hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction, power);
+
 
 
 
         }
     }
-  
 }

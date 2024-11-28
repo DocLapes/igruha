@@ -6,6 +6,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class ImpEnemyAI : MonoBehaviour
 {
+    bool isstuned;
     [SerializeField] private Transform Player;
     [SerializeField] private GameObject hitbox;
     private Rigidbody2D rb;
@@ -28,29 +29,46 @@ public class ImpEnemyAI : MonoBehaviour
         var heading = Player.position - transform.position;
         float distance = heading.sqrMagnitude;
         //SpriteRenderer sprite = hitbox.gameObject.GetComponent<SpriteRenderer>();
-        rb.gameObject.GetComponent<move>().Move(targetDir);
+
         //var direction = heading / distance;
-        if (rb.velocity != Vector2.zero && distance  > 5.0f)
+        if (isstuned == true)
         {
-            visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
-            rb.drag = 0;
-            
-        }
-        if (rb.velocity != Vector2.zero && distance <= 5.0f && isatack == false)
-        {
-            visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyAtackWalking();
-            rb.drag = 0;
-            hitbox.gameObject.GetComponent<Damagedeal>().ProcessHit(targetDir);
-            
-            Atackreload(atacktime);
-        }
-        if (rb.velocity == Vector2.zero)
-        {
-            Debug.Log("idle" + distance);
-            rb.drag = drift;
             visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
+            rb.drag = drift;
+            
         }
+        else { rb.gameObject.GetComponent<move>().Move(targetDir); }
+        
+        if (rb.velocity != Vector2.zero && isstuned == false)
+        {
+            
+            rb.drag = 0;
+            if (distance > 5.0f) { visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking(); }
+               
+            if (distance <= 5.0f ) 
+            {
+                visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyAtackWalking();
+                if (isatack == false) 
+                {
+                    hitbox.gameObject.GetComponent<DamagedealEnemy>().ProcessHit(targetDir);
+                    Atackreload(atacktime); 
+                }
+                
+            }
+            
+
+        }
+        //if (rb.velocity != Vector2.zero && distance <= 5.0f && isatack == false)
+        //{
+        //    visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyAtackWalking();
+        //    rb.drag = 0;
+        //    hitbox.gameObject.GetComponent<DamagedealEnemy>().ProcessHit(targetDir);
+            
+        //    Atackreload(atacktime);
+        //}
        
+
+
     }
     //public void Atack(Vector2 direction)
     //{
@@ -66,4 +84,15 @@ public class ImpEnemyAI : MonoBehaviour
     {
         isatack = false;
     }
+    public void StunEntity(float stuntime)
+    {
+        
+        isstuned = true;
+        Invoke(nameof(OutStunEntity), stuntime);
+    }
+    public void OutStunEntity()
+    {
+        isstuned = false;
+    }
+
 }

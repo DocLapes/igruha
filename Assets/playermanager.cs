@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class playermanager : MonoBehaviour
@@ -42,41 +43,8 @@ public class playermanager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) & isatack == false )
         {
-            
 
-            if (lastmove == Vector2.left)
-            {
-                
-                Debug.Log("левой");
-                
-                hitboxL.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.left);
-                hitboxL.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.left);
-
-                Atackreload(atacktime);
-
-            }
-            if (lastmove == Vector2.right)
-            {
-                Debug.Log("правой");
-                hitboxR.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.right);
-                hitboxR.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.right);
-                Atackreload(atacktime);
-            }
-            if (lastmove == Vector2.up)
-            {
-                Debug.Log("вверх");
-                hitboxU.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.up);
-                hitboxU.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.up);
-                Atackreload(atacktime);
-            }
-            if (lastmove == Vector2.down)
-            {
-                Debug.Log("вниз");
-                hitboxD.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.down);
-                hitboxD.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.down);
-                Atackreload(atacktime);
-            }
-
+            StartCoroutine(Atackwithdelay(lastmove));
 
         }
     }
@@ -89,6 +57,7 @@ public class playermanager : MonoBehaviour
     {
         isatack = false;
     }
+    
     void FixedUpdate()
     {
         if (cmoveVector.normalized != Vector2.zero)
@@ -116,6 +85,38 @@ public class playermanager : MonoBehaviour
         }
 
 
+    }
+
+    private IEnumerator Atackwithdelay( Vector2 Atackdirection)
+    {
+        if (Atackdirection == Vector2.left)
+        {
+            hitboxL.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.left);
+            yield return new WaitForSeconds(0.1f);
+            hitboxL.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.left);
+            Atackreload(atacktime);
+        }
+        if (Atackdirection == Vector2.right)
+        {
+            hitboxR.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.right);
+            yield return new WaitForSeconds(0.1f);
+            hitboxR.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.right);
+            Atackreload(atacktime);
+        }
+        if (Atackdirection == Vector2.up)
+        {
+            hitboxU.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.up);
+            yield return new WaitForSeconds(0.1f);
+            hitboxU.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.up);
+            Atackreload(atacktime);
+        }
+        if (Atackdirection == Vector2.down)
+        {
+            hitboxD.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.down);
+            yield return new WaitForSeconds(0.1f);
+            hitboxD.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.down);
+            Atackreload(atacktime);
+        }
     }
 
 }
