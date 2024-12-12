@@ -9,7 +9,7 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] float spawnRate;
     [SerializeField] float timeBetweenWaves ;
     [SerializeField] private Transform Player;
-    private int enemy_count=4;
+    private int enemy_count=2;
     [SerializeField] public GameObject impenemy;
     private bool waveisdone;
     // Start is called before the first frame update

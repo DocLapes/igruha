@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900c1fae80a2f314c98e2e217d3c8738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerheath: 40
+  entityheath: 10
 --- !u!114 &2312431137931603655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55195cc07b48b1e4ab287bba27086f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.8
+  speed: 1.5
   maxspeed: 1
   visualmodel: {fileID: 8592188822168210828}
 --- !u!114 &784567501729977345
@@ -203,7 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e1ea03038ddb14792f75d78452079c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   hitbox: {fileID: 8204686702700887807}
   visualmodel: {fileID: 8592188822168210828}
   drift: 10

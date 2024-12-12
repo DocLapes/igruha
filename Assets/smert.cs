@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class smert : MonoBehaviour
 {
-    [SerializeField] private int playerheath;
+    [SerializeField] private int entityheath;
     private Rigidbody2D rb;
     private Vector2 otkidVector;
-    
+    private int stealedhealth;
 
-    public int Playerheath
+    public int Entityheath
     {
         get
         {
-            return playerheath;
+            return entityheath;
         }
     }
 
@@ -38,13 +38,24 @@ public class smert : MonoBehaviour
     }
     public void takedamage(int damageCount)
     {
-       playerheath -= damageCount ;
-        Debug.Log(playerheath);
-        if (playerheath <= 0)
+       entityheath -= damageCount ;
+        
+        if (entityheath <= 0)
         {
             Destroy(gameObject);
+            
         }
     }
+    public void Lifesteal(GameObject entity,float stealpercent)
+    {
+        stealedhealth = (int)(entityheath * stealpercent);
+        entity.GetComponent<smert>().GetHeal(stealedhealth);
+    }
+    public void GetHeal(int stealedhealth)
+    {
+        entityheath += stealedhealth;
+    }
+
     public void otkinyt(int power)
     {
         

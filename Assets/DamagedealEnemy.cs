@@ -30,7 +30,7 @@ public class DamagedealEnemy : MonoBehaviour
         Collider2D collider = GetComponent<Collider2D>();
         RaycastHit2D[] hits = new RaycastHit2D[10];
         ContactFilter2D filter = new ContactFilter2D();
-        filter.layerMask = LayerMask.GetMask("entity");
+        filter.layerMask = LayerMask.GetMask("player");
         filter.useTriggers = true;
         filter.useLayerMask = true;
         int c_hits = collider.Cast(Vector2.zero, filter, hits);

@@ -12,13 +12,13 @@ public class healtbar : MonoBehaviour
     private int health;
     void Awake()
     {
-        health = Hero.GetComponent<smert>().Playerheath;
+        health = Hero.GetComponent<smert>().Entityheath;
     }
 
     // Update is called once per frame
     void Update()
     {
-        health = Hero.GetComponent<smert>().Playerheath;
+        health = Hero.GetComponent<smert>().Entityheath;
         if (healthslider.value != health)
         {
             healthslider.value = health;

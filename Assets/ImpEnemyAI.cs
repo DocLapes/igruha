@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Cinemachine.CinemachineOrbitalTransposer;
 using static UnityEngine.Rendering.DebugUI;
@@ -7,7 +8,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class ImpEnemyAI : MonoBehaviour
 {
     bool isstuned;
-    [SerializeField] private Transform Player;
+    private Transform Player;
     [SerializeField] private GameObject hitbox;
     private Rigidbody2D rb;
     [SerializeField] private GameObject visualmodel;
@@ -18,13 +19,13 @@ public class ImpEnemyAI : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        
-
+        Player = GameManager.instance.Player.transform;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log(rb.GetComponent<smert>().Entityheath);
         Vector2 targetDir = Player.position - transform.position;
         var heading = Player.position - transform.position;
         float distance = heading.sqrMagnitude;

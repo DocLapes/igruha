@@ -10,6 +10,8 @@ public class playermanager : MonoBehaviour
     [SerializeField] private GameObject hitboxR;
     [SerializeField] private GameObject hitboxU;
     [SerializeField] private GameObject hitboxD;
+    [SerializeField] private GameObject shieldR;
+    [SerializeField] private GameObject shieldL;
     [SerializeField] private int drift;
     private SpriteRenderer spriteRenderer;
     private Vector2 cmoveVector;
@@ -17,7 +19,9 @@ public class playermanager : MonoBehaviour
     private Vector2 lastmove;
     [SerializeField] private GameObject visualmodel;
     private bool isatack;
+    private bool shieldisatack;
     private float atacktime=1f;
+    private float shieldatacktime = 1f;
 
     // Update is called once per frame
     void Awake()
@@ -27,9 +31,11 @@ public class playermanager : MonoBehaviour
 
     void Update()
     {
+       
         
         cmoveVector.x = Input.GetAxisRaw("Horizontal");
         cmoveVector.y = Input.GetAxisRaw("Vertical");
+
         
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
@@ -40,6 +46,12 @@ public class playermanager : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.E) & shieldisatack == false)
+        {
+
+            StartCoroutine(ShieldAtackwithdelay(lastmove));
+
+        }
 
         if (Input.GetMouseButtonDown(0) & isatack == false )
         {
@@ -57,9 +69,19 @@ public class playermanager : MonoBehaviour
     {
         isatack = false;
     }
-    
+    public void ShieldAtackreload(float atacktimemetod)
+    {
+        shieldisatack = true;
+        Invoke(nameof(ShieldOutAtackreload), atacktimemetod);
+    }
+    public void ShieldOutAtackreload()
+    {
+        shieldisatack = false;
+    }
+
     void FixedUpdate()
     {
+        //Debug.Log(Hero.GetComponent<smert>().Playerheath);
         if (cmoveVector.normalized != Vector2.zero)
         {
             Hero.gameObject.GetComponent<move>().Move(cmoveVector.normalized);
@@ -100,7 +122,7 @@ public class playermanager : MonoBehaviour
         {
             hitboxR.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.right);
             yield return new WaitForSeconds(0.1f);
-            hitboxR.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.right);
+            hitboxR.gameObject.GetComponent<Damagedeal>().ProcessHitlifesteal(Vector2.right,Hero);
             Atackreload(atacktime);
         }
         if (Atackdirection == Vector2.up)
@@ -118,6 +140,24 @@ public class playermanager : MonoBehaviour
             Atackreload(atacktime);
         }
     }
+    private IEnumerator ShieldAtackwithdelay(Vector2 Atackdirection)
+    {
+        if (Atackdirection == Vector2.left)
+        {
 
+            shieldL.gameObject.GetComponentInChildren<AtackAnimatiomManager>().ShieldAtack(Vector2.left);
+            yield return new WaitForSeconds(0.1f);
+            shieldL.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.left);
+            ShieldAtackreload(atacktime);
+        }
+        if (Atackdirection == Vector2.right)
+        {
+            
+            shieldR.gameObject.GetComponentInChildren<AtackAnimatiomManager>().ShieldAtack(Vector2.right);
+            yield return new WaitForSeconds(0.1f);
+            shieldR.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.right);
+            ShieldAtackreload(shieldatacktime);
+        }
+    }
 }
 
