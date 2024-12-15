@@ -54,6 +54,7 @@ public class smert : MonoBehaviour
     public void GetHeal(int stealedhealth)
     {
         entityheath += stealedhealth;
+        Debug.Log(stealedhealth);
     }
 
     public void otkinyt(int power)

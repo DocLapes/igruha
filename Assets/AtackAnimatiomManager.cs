@@ -10,6 +10,7 @@ public class AtackAnimatiomManager : MonoBehaviour
     private Vector2 atackVector;
     private float atacktime = 0.56f;
     private float shieldatacktime = 0.42f;
+    private float healatacktime = 0.49f;
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +95,16 @@ public class AtackAnimatiomManager : MonoBehaviour
 
         }
 
+
+    }
+
+    public void HealAtack()
+    {
+        
+        spriter.enabled = true;
+        Invoke(nameof(Otobrazeniechange), 0.6f);
+        entityanimator.CrossFade("heal", 0f, 0);
+        Invoke(nameof(Default), shieldatacktime);
 
     }
     public void Otobrazeniechange()

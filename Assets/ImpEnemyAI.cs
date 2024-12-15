@@ -25,7 +25,7 @@ public class ImpEnemyAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(rb.GetComponent<smert>().Entityheath);
+        //Debug.Log(rb.GetComponent<smert>().Entityheath);
         Vector2 targetDir = Player.position - transform.position;
         var heading = Player.position - transform.position;
         float distance = heading.sqrMagnitude;

@@ -12,6 +12,7 @@ public class playermanager : MonoBehaviour
     [SerializeField] private GameObject hitboxD;
     [SerializeField] private GameObject shieldR;
     [SerializeField] private GameObject shieldL;
+    [SerializeField] private GameObject HealAtack;
     [SerializeField] private int drift;
     private SpriteRenderer spriteRenderer;
     private Vector2 cmoveVector;
@@ -20,8 +21,10 @@ public class playermanager : MonoBehaviour
     [SerializeField] private GameObject visualmodel;
     private bool isatack;
     private bool shieldisatack;
-    private float atacktime=1f;
-    private float shieldatacktime = 1f;
+    private bool healisatack;
+    [SerializeField] private float atacktime=1f;
+    [SerializeField] private float shieldatacktime = 1f;
+    [SerializeField] private float healdatacktime = 1f;
 
     // Update is called once per frame
     void Awake()
@@ -52,6 +55,12 @@ public class playermanager : MonoBehaviour
             StartCoroutine(ShieldAtackwithdelay(lastmove));
 
         }
+        if (Input.GetKeyDown(KeyCode.Q) & healisatack == false)
+        {
+
+            StartCoroutine(HealAtackwithdelay());
+
+        }
 
         if (Input.GetMouseButtonDown(0) & isatack == false )
         {
@@ -78,7 +87,15 @@ public class playermanager : MonoBehaviour
     {
         shieldisatack = false;
     }
-
+    public void HealdAtackreload(float atacktimemetod)
+    {
+        healisatack = true;
+        Invoke(nameof(HealdOutAtackreload), atacktimemetod);
+    }
+    public void HealdOutAtackreload()
+    {
+        healisatack = false;
+    }
     void FixedUpdate()
     {
         //Debug.Log(Hero.GetComponent<smert>().Playerheath);
@@ -122,7 +139,7 @@ public class playermanager : MonoBehaviour
         {
             hitboxR.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.right);
             yield return new WaitForSeconds(0.1f);
-            hitboxR.gameObject.GetComponent<Damagedeal>().ProcessHitlifesteal(Vector2.right,Hero);
+            hitboxR.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.right);
             Atackreload(atacktime);
         }
         if (Atackdirection == Vector2.up)
@@ -148,7 +165,7 @@ public class playermanager : MonoBehaviour
             shieldL.gameObject.GetComponentInChildren<AtackAnimatiomManager>().ShieldAtack(Vector2.left);
             yield return new WaitForSeconds(0.1f);
             shieldL.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.left);
-            ShieldAtackreload(atacktime);
+            ShieldAtackreload(shieldatacktime);
         }
         if (Atackdirection == Vector2.right)
         {
@@ -159,5 +176,13 @@ public class playermanager : MonoBehaviour
             ShieldAtackreload(shieldatacktime);
         }
     }
+        private IEnumerator HealAtackwithdelay()
+        {
+            HealAtack.gameObject.GetComponentInChildren<AtackAnimatiomManager>().HealAtack();
+            yield return new WaitForSeconds(0.21f);
+            HealAtack.gameObject.GetComponent<Damagedeal>().ProcessHitlifesteal(Vector2.right, Hero);
+            HealdAtackreload(healdatacktime);
+        }
+
 }
 

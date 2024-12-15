@@ -39,10 +39,11 @@ public class Damagedeal : MonoBehaviour
         {
             RaycastHit2D hit= hits[i];
             if (hit.collider.gameObject.GetComponent<smert>() != null)
+            {
                 hit.collider.gameObject.GetComponent<ImpEnemyAI>().StunEntity(stuntime);
                 hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
-                hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction,power);
-               
+                hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction, power);
+            }
 
 
 
@@ -68,11 +69,12 @@ public class Damagedeal : MonoBehaviour
         {
             RaycastHit2D hit = hits[i];
             if (hit.collider.gameObject.GetComponent<smert>() != null)
+            {
                 hit.collider.gameObject.GetComponent<ImpEnemyAI>().StunEntity(stuntime);
-            hit.collider.gameObject.GetComponent<smert>().Lifesteal(entity, lifestealpercent);
-            hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
-            hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction, power);
-
+                hit.collider.gameObject.GetComponent<smert>().Lifesteal(entity, lifestealpercent);
+                hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
+                hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction, power);
+            }
 
 
 
