@@ -109,6 +109,18 @@ public class AnimatorManager : MonoBehaviour
         }
         else { return; }
     }
+    public void EnemyGetReady()
+    {
+        if (animationpriority < 2)
+        {
+            entityanimator.CrossFade("getready", 0f, 0);
+        }
+        else { return; }
+    }
+    public void Atack()
+    {
+        entityanimator.CrossFade("atack", 0f, 0);
+    }
     //public void Atack(Vector2 direction)
     //{
 
@@ -124,10 +136,10 @@ public class AnimatorManager : MonoBehaviour
     //    {
     //        animationpriority = 2;
     //        Invoke(nameof(Prioritychange), atacktime);
-            
+
     //        spriter.flipX = true;
     //        entityanimator.CrossFade("atackLR", 0f, 0);
-            
+
     //    }
     //    if (atackVector == Vector2.down)
     //    {

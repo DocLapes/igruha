@@ -8,6 +8,7 @@ public class move : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D colider;
     [SerializeField] private float speed;
+    [SerializeField] private float speedatk;
     [SerializeField] private float maxspeed;
     private Vector2 moveVector;
     [SerializeField] private GameObject visualmodel;
@@ -26,16 +27,12 @@ public class move : MonoBehaviour
     }
     public void Dash(Vector2 direction)
     {
-        if (isstuned) return;
-        colider.enabled = false;
-        Invoke(nameof(OutDash), 5f);
+        StunEntity(0.1f);
         rb.MovePosition(rb.position + direction*2f);
+        //rb.AddForce(direction * 40f * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
         
     }
-    public void OutDash()
-    {
-        colider.enabled = true;
-    }
+   
     public void Move(Vector2 direction)
     {
 
@@ -49,6 +46,20 @@ public class move : MonoBehaviour
         //    rb.velocity = rb.velocity.normalized * maxspeed;
         //} 
         
+    }
+    public void MoveAtack(Vector2 direction)
+    {
+
+
+        if (isstuned) return;
+        //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
+        moveVector = direction;
+        rb.velocity = moveVector.normalized * speedatk * Time.fixedDeltaTime * 100;
+        //if (rb.velocity.magnitude > maxspeed)
+        //{
+        //    rb.velocity = rb.velocity.normalized * maxspeed;
+        //} 
+
     }
     public void StunEntity(float stuntime)
     {
