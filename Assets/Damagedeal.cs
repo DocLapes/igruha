@@ -12,6 +12,7 @@ public class Damagedeal : MonoBehaviour
     private Rigidbody2D rb;
     [SerializeField] private float stuntime;
     private SpriteRenderer spriteRenderer;
+    [SerializeField] public GameObject projectile;
     //[SerializeField] private GameObject hitboxV;
 
 
@@ -35,12 +36,22 @@ public class Damagedeal : MonoBehaviour
         filter.useTriggers = true;
         filter.useLayerMask = true;
         int c_hits = collider.Cast(Vector2.zero, filter, hits);
+        // Instantiate the projectile at the position and rotation of this transform
+        if (projectile != null)
+        {
+            GameObject clone;
+            clone = Instantiate(projectile, transform.position, Quaternion.identity);
+
+            clone.GetComponent<Projectile>().GetDir(direction);
+        }
         for (int i = 0; i < c_hits; i++)
         {
             RaycastHit2D hit= hits[i];
             if (hit.collider.gameObject.GetComponent<smert>() != null)
             {
-                hit.collider.gameObject.GetComponent<ImpEnemyAI>().StunEntity(stuntime);
+                
+                hit.collider.gameObject.GetComponentInChildren<EntityAi>().StunEntity(stuntime);
+
                 hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
                 hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction, power);
             }
@@ -70,7 +81,7 @@ public class Damagedeal : MonoBehaviour
             RaycastHit2D hit = hits[i];
             if (hit.collider.gameObject.GetComponent<smert>() != null)
             {
-                hit.collider.gameObject.GetComponent<ImpEnemyAI>().StunEntity(stuntime);
+                hit.collider.gameObject.GetComponent<EntityAi>().StunEntity(stuntime);
                 hit.collider.gameObject.GetComponent<smert>().Lifesteal(entity, lifestealpercent);
                 hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
                 hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction, power);

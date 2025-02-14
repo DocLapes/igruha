@@ -5,15 +5,14 @@ using UnityEngine;
 using static Cinemachine.CinemachineOrbitalTransposer;
 using static UnityEngine.Rendering.DebugUI;
 
-public class ImpEnemyAI : MonoBehaviour
+public class ImpEnemyAI : EntityAi
 {
-    bool isstuned;
+    
     private Transform Player;
     [SerializeField] private GameObject hitbox;
-    private Rigidbody2D rb;
     [SerializeField] private GameObject visualmodel;
     [SerializeField] private int drift;
-    private bool isatack;
+   
     private float atacktime = 0.25f;
     // Start is called before the first frame update
     void Awake()
@@ -76,24 +75,5 @@ public class ImpEnemyAI : MonoBehaviour
     //    hitbox.gameObject.GetComponent<Damagedeal>().ProcessHit(direction);
     //    Atackreload(atacktime);
     //}
-    public void Atackreload(float atacktimemetod)
-    {
-        isatack = true;
-        Invoke(nameof(OutAtackreload), atacktimemetod);
-    }
-    public void OutAtackreload()
-    {
-        isatack = false;
-    }
-    public void StunEntity(float stuntime)
-    {
-        
-        isstuned = true;
-        Invoke(nameof(OutStunEntity), stuntime);
-    }
-    public void OutStunEntity()
-    {
-        isstuned = false;
-    }
 
 }

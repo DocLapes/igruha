@@ -9,9 +9,9 @@ public class move : MonoBehaviour
     private Collider2D colider;
     [SerializeField] private float speed;
     [SerializeField] private float speedatk;
-    [SerializeField] private float maxspeed;
+    //[SerializeField] private float maxspeed;
     private Vector2 moveVector;
-    [SerializeField] private GameObject visualmodel;
+    //[SerializeField] private GameObject visualmodel;
     void Awake()
     {
         

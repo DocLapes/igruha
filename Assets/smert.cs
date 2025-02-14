@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -67,4 +68,9 @@ public class smert : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.AddForce(otkidDirection * power * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
     }
+    public void StunEntitySpear(float stuntime)
+    {
+        rb.GetComponent<SpearEnemyAi>().StunEntity(stuntime);
+    }
+    
 }

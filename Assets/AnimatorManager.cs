@@ -121,6 +121,10 @@ public class AnimatorManager : MonoBehaviour
     {
         entityanimator.CrossFade("atack", 0f, 0);
     }
+    public void AtackOut()
+    {
+        entityanimator.CrossFade("atackout", 0f, 0);
+    }
     //public void Atack(Vector2 direction)
     //{
 
