@@ -41,4 +41,8 @@ public class EntityAi : MonoBehaviour
     {
         isstuned = false;
     }
+    public void OnDestroy()
+    {
+        rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
+    }
 }

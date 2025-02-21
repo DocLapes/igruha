@@ -6,6 +6,7 @@ using UnityEngine;
 public class playermanager : MonoBehaviour
 {
     [SerializeField] private GameObject Hero;
+    [SerializeField] private GameObject Aim;
     [SerializeField] private GameObject hitboxL;
     [SerializeField] private GameObject hitboxR;
     [SerializeField] private GameObject hitboxU;
@@ -62,20 +63,28 @@ public class playermanager : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonDown(0) & isatack == false )
-        {
+        //if (Input.GetMouseButtonDown(0) & isatack == false )
+        //{
 
-            StartCoroutine(Atackwithdelay(lastmove));
+        //    StartCoroutine(Atackwithdelay(lastmove));
+
+        //}
+        if (Input.GetMouseButtonDown(0) & isatack == false)
+        {
+            
+            StartCoroutine(Atackwithdelay1());
 
         }
     }
     public void Atackreload(float atacktimemetod)
     {
         isatack = true;
+        Aim.gameObject.GetComponentInChildren<PlayerAim>().ChangeBool();
         Invoke(nameof(OutAtackreload), atacktimemetod);
     }
     public void OutAtackreload()
     {
+        Aim.gameObject.GetComponentInChildren<PlayerAim>().ChangeBool();
         isatack = false;
     }
     public void ShieldAtackreload(float atacktimemetod)
@@ -117,45 +126,53 @@ public class playermanager : MonoBehaviour
         }
         
         
-        if (Input.GetKey(KeyCode.Space) & isatack == false)
+        if (Input.GetKey(KeyCode.Space))
         {
             Hero.gameObject.GetComponent<move>().Dash(cmoveVector.normalized);
-            Atackreload(atacktime);
+            
         }
 
 
     }
 
-    private IEnumerator Atackwithdelay( Vector2 Atackdirection)
+    //private IEnumerator Atackwithdelay( Vector2 Atackdirection)
+    //{
+    //    if (Atackdirection == Vector2.left)
+    //    {
+    //        hitboxL.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.left);
+    //        yield return new WaitForSeconds(0.1f);
+    //        hitboxL.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.left);
+    //        Atackreload(atacktime);
+    //    }
+    //    if (Atackdirection == Vector2.right)
+    //    {
+    //        hitboxR.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.right);
+    //        yield return new WaitForSeconds(0.1f);
+    //        hitboxR.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.right);
+    //        Atackreload(atacktime);
+    //    }
+    //    if (Atackdirection == Vector2.up)
+    //    {
+    //        hitboxU.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.up);
+    //        yield return new WaitForSeconds(0.1f);
+    //        hitboxU.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.up);
+    //        Atackreload(atacktime);
+    //    }
+    //    if (Atackdirection == Vector2.down)
+    //    {
+    //        hitboxD.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.down);
+    //        yield return new WaitForSeconds(0.1f);
+    //        hitboxD.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.down);
+    //        Atackreload(atacktime);
+    //    }
+    //}
+    private IEnumerator Atackwithdelay1( )
     {
-        if (Atackdirection == Vector2.left)
-        {
-            hitboxL.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.left);
-            yield return new WaitForSeconds(0.1f);
-            hitboxL.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.left);
-            Atackreload(atacktime);
-        }
-        if (Atackdirection == Vector2.right)
-        {
-            hitboxR.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.right);
-            yield return new WaitForSeconds(0.1f);
-            hitboxR.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.right);
-            Atackreload(atacktime);
-        }
-        if (Atackdirection == Vector2.up)
-        {
-            hitboxU.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.up);
-            yield return new WaitForSeconds(0.1f);
-            hitboxU.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.up);
-            Atackreload(atacktime);
-        }
-        if (Atackdirection == Vector2.down)
-        {
-            hitboxD.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack(Vector2.down);
-            yield return new WaitForSeconds(0.1f);
-            hitboxD.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.down);
-            Atackreload(atacktime);
-        }
+        Atackreload(atacktime);
+        Aim.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack();
+        yield return new WaitForSeconds(0.1f);
+        Aim.gameObject.GetComponentInChildren<PlayerAim>().Hit();
+        
     }
     private IEnumerator ShieldAtackwithdelay(Vector2 Atackdirection)
     {

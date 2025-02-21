@@ -30,47 +30,49 @@ public class AtackAnimatiomManager : MonoBehaviour
         
         
     }
-    public void Atack(Vector2 direction)
+    public void Atack()
     {
+        spriter.enabled = true;
+        entityanimator.CrossFade("Atack", 0f, 0);
+        Invoke(nameof(Default), 0.42f);
+        //atackVector = direction;
+        //if (atackVector == Vector2.right)
+        //{
 
-        atackVector = direction;
-        if (atackVector == Vector2.right)
-        {
-           
-            spriter.enabled = true;
-            Invoke(nameof(Otobrazeniechange), 0.6f);
-            entityanimator.CrossFade("atackLR", 0f, 0);
-            Invoke(nameof(Default), atacktime);
-            
-        }
-        if (atackVector == Vector2.left)
-        {
-            
-            spriter.enabled = true;
-            Invoke(nameof(Otobrazeniechange), 0.6f);
-            entityanimator.CrossFade("atackLR", 0f, 0);
-            Invoke(nameof(Default), atacktime);
-            
+        //    spriter.enabled = true;
+        //    Invoke(nameof(Otobrazeniechange), 0.6f);
+        //    entityanimator.CrossFade("atackLR", 0f, 0);
+        //    Invoke(nameof(Default), atacktime);
 
-        }
-        if (atackVector == Vector2.down)
-        {
-           
-            spriter.enabled = true;
-            Invoke(nameof(Otobrazeniechange), 0.6f);
-            entityanimator.CrossFade("atackDW", 0f, 0);
-            Invoke(nameof(Default), atacktime);
+        //}
+        //if (atackVector == Vector2.left)
+        //{
 
-        }
-        if (atackVector == Vector2.up)
-        {
-           
-            spriter.enabled = true;
-            Invoke(nameof(Otobrazeniechange), 0.6f);
-            entityanimator.CrossFade("atackUP", 0f, 0);
-            Invoke(nameof(Default), atacktime);
+        //    spriter.enabled = true;
+        //    Invoke(nameof(Otobrazeniechange), 0.6f);
+        //    entityanimator.CrossFade("atackLR", 0f, 0);
+        //    Invoke(nameof(Default), atacktime);
 
-        }
+
+        //}
+        //if (atackVector == Vector2.down)
+        //{
+
+        //    spriter.enabled = true;
+        //    Invoke(nameof(Otobrazeniechange), 0.6f);
+        //    entityanimator.CrossFade("atackDW", 0f, 0);
+        //    Invoke(nameof(Default), atacktime);
+
+        //}
+        //if (atackVector == Vector2.up)
+        //{
+
+        //    spriter.enabled = true;
+        //    Invoke(nameof(Otobrazeniechange), 0.6f);
+        //    entityanimator.CrossFade("atackUP", 0f, 0);
+        //    Invoke(nameof(Default), atacktime);
+
+        //}
     }
     public void ShieldAtack(Vector2 direction)
     {

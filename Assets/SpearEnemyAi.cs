@@ -10,11 +10,11 @@ public class SpearEnemyAi : EntityAi
     // Start is called before the first frame update
 
     
-    private Transform Player1;
+    
     [SerializeField] private GameObject hitbox;
     private Collider2D cl;
     [SerializeField] private GameObject visualmodel;
-    [SerializeField] private Transform Player;
+    private Transform Player;
     [SerializeField] private int drift;
     private bool havedirection;
     private float atacktime = 5f;
@@ -24,6 +24,7 @@ public class SpearEnemyAi : EntityAi
     {
         Stalk,
         Atack,
+        AtackPrepare,
         AtackOut
     }
     private EnemyState enemyState = EnemyState.Stalk;
@@ -32,7 +33,7 @@ public class SpearEnemyAi : EntityAi
     {
         rb = GetComponent<Rigidbody2D>();
         cl = GetComponent<CircleCollider2D>();
-        //Player = GameManager.instance.Player.transform;
+        Player = GameManager.instance.Player.transform;
     }
 
     // Update is called once per frame
@@ -67,7 +68,7 @@ public class SpearEnemyAi : EntityAi
 
             Atackpoint = targetDir;
             
-            if (distance <= 50.0f && isatack== false) enemyState = EnemyState.Atack;
+            if (distance <= 50.0f && isatack== false) enemyState = EnemyState.AtackPrepare;
 
 
 
@@ -93,6 +94,12 @@ public class SpearEnemyAi : EntityAi
         {
             StartCoroutine(AtackOutM());
         }
+        if (enemyState == EnemyState.AtackPrepare)
+        {
+            Atackpoint = targetDir;
+            StartCoroutine(AtackPrepare());
+
+        }
     }
 
     //private IEnumerator Atack(Vector2 direction)
@@ -116,6 +123,12 @@ public class SpearEnemyAi : EntityAi
         ChangeState1(0f);
 
     }
+    private IEnumerator AtackPrepare()
+    {
+        visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyGetReady();
+        yield return new WaitForSeconds(0.49f);
+        ChangeState4();
+    }
     private void ChangeState2()
     {
         enemyState = EnemyState.AtackOut;
@@ -125,6 +138,10 @@ public class SpearEnemyAi : EntityAi
     private void ChangeState3()
     {
         enemyState = EnemyState.Stalk;
+    }
+    private void ChangeState4()
+    {
+        enemyState = EnemyState.Atack;
     }
 
     private void ChangeState1(float atacktimemetod)

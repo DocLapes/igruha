@@ -5,6 +5,7 @@ using UnityEngine;
 public class move : MonoBehaviour
 {
     bool isstuned;
+    bool nodash;
     private Rigidbody2D rb;
     private Collider2D colider;
     [SerializeField] private float speed;
@@ -27,10 +28,11 @@ public class move : MonoBehaviour
     }
     public void Dash(Vector2 direction)
     {
+        if (nodash) return;
         StunEntity(0.1f);
-        rb.MovePosition(rb.position + direction*2f);
+        rb.MovePosition(rb.position + direction*3f);
         //rb.AddForce(direction * 40f * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
-        
+        DashKD(3);
     }
    
     public void Move(Vector2 direction)
@@ -41,11 +43,12 @@ public class move : MonoBehaviour
       //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
       moveVector = direction;
       rb.velocity= moveVector.normalized * speed * Time.fixedDeltaTime*100;
+        
         //if (rb.velocity.magnitude > maxspeed)
         //{
         //    rb.velocity = rb.velocity.normalized * maxspeed;
         //} 
-        
+
     }
     public void MoveAtack(Vector2 direction)
     {
@@ -70,6 +73,16 @@ public class move : MonoBehaviour
     public void OutStunEntity()
     {
         isstuned = false;
+    }
+    public void DashKD(float stuntime)
+    {
+
+        nodash = true;
+        Invoke(nameof(DashKDEnd), stuntime);
+    }
+    public void DashKDEnd()
+    {
+        nodash = false;
     }
 
     //physic2d raycast

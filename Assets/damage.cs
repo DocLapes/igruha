@@ -8,7 +8,8 @@ public class damag : MonoBehaviour
 {
     private int damage = 5;
     private bool isatack;
-
+    
+    
     //private void OnCollisionEnter2D(Collision2D collision)
     //{
 
@@ -31,10 +32,12 @@ public class damag : MonoBehaviour
 
     //    collider.GetComponent<DamagedealEnemy>().ProcessHit(Vector2.left);
     //}
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
 
         Collider2D collider = GetComponent<Collider2D>();
+        
         RaycastHit2D[] hits = new RaycastHit2D[10];
         ContactFilter2D filter = new ContactFilter2D();
         filter.layerMask = LayerMask.GetMask("player");

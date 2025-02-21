@@ -10,6 +10,7 @@ public class Damagedeal : MonoBehaviour
     //[SerializeField] private GameObject hitbox;
     //[SerializeField] private GameObject Hero;
     private Rigidbody2D rb;
+    private GameObject gm;
     [SerializeField] private float stuntime;
     private SpriteRenderer spriteRenderer;
     [SerializeField] public GameObject projectile;
@@ -30,7 +31,7 @@ public class Damagedeal : MonoBehaviour
         
         //Debug.Log("говно");
         Collider2D collider = GetComponent<Collider2D>();
-        RaycastHit2D[] hits = new RaycastHit2D[10];
+        RaycastHit2D[] hits = new RaycastHit2D[2];
         ContactFilter2D filter = new ContactFilter2D();
         filter.layerMask = LayerMask.GetMask("entity");
         filter.useTriggers = true;
@@ -62,7 +63,7 @@ public class Damagedeal : MonoBehaviour
     }
     public void ProcessHitlifesteal(Vector2 direction, GameObject entity)
     {
-
+        gm = gameObject;
 
         //this.spriteRenderer = hitboxL.GetComponent<SpriteRenderer>();
         //this.spriteRenderer.enabled = true;
@@ -84,7 +85,7 @@ public class Damagedeal : MonoBehaviour
                 hit.collider.gameObject.GetComponent<EntityAi>().StunEntity(stuntime);
                 hit.collider.gameObject.GetComponent<smert>().Lifesteal(entity, lifestealpercent);
                 hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
-                hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction, power);
+                hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(hit.collider.gameObject.transform.position - gm.transform.position, power);
             }
 
 
