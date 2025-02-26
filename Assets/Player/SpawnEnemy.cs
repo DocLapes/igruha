@@ -22,7 +22,7 @@ public class SpawnEnemy : MonoBehaviour
     void Start()
     {
         StartCoroutine(Enemyspawn());
-        //StartCoroutine(EnemyspawnGorgoel());
+        StartCoroutine(EnemyspawnGorgoel());
         StartCoroutine(EnemyspawnSkelet());
     }
 
@@ -76,7 +76,7 @@ public class SpawnEnemy : MonoBehaviour
 
             
         }
-        yield return new WaitForSeconds(Random.Range(8f, 12f));
+        yield return new WaitForSeconds(Random.Range(10f, 15f));
         StartCoroutine(EnemyspawnSkelet());
     }
     private IEnumerator EnemyspawnGorgoel()
@@ -96,7 +96,7 @@ public class SpawnEnemy : MonoBehaviour
 
             
         }
-        yield return new WaitForSeconds(Random.Range(10f, 15));
+        yield return new WaitForSeconds(Random.Range(15f, 20f));
         StartCoroutine(EnemyspawnGorgoel());
     }
     public void ChangeDif()

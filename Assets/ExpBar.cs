@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class ExpBar : MonoBehaviour
 {
     // Start is called before the first frame update
-    
+    [SerializeField] private GameObject upgradeList;
     public Slider expslider;
     private int Exp;
     private int ExpforNextLevel=50;
     private int Expleft;
+    private int lvl=1;
 
 
     void Awake()
@@ -30,6 +31,9 @@ public class ExpBar : MonoBehaviour
             Exp = Expleft;
             ExpforNextLevel += 50;
             expslider.maxValue = ExpforNextLevel;
+            lvl++;
+            UpgradeMenu.isupgrademenu = true;
+            upgradeList.GetComponent<UpgradeList>().RNG_Upgrade();
         }
 
     }

@@ -29,11 +29,15 @@ public class Projectile : MonoBehaviour
 
     void Awake()
     {
-        Pr = gameObject;
+        Pr = gameObject; 
+        Invoke(nameof(Destr), 5);
+        //Pr.GetComponent<Rigidbody2D>().velocity = Direction.normalized * 3f * Time.fixedDeltaTime * 100;
+
     }
     private void FixedUpdate()
     {
         Pr.GetComponent<move>().Move(Direction);
+        
 
 
     }
@@ -69,6 +73,10 @@ public class Projectile : MonoBehaviour
     public void GetDir(Vector3 dir)
     {
         Direction=dir;
+    }
+    public void Destr()
+    {
+        Destroy(Pr);
     }
     //public void Atackreload(float atacktimemetod)
     //{

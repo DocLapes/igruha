@@ -43,7 +43,8 @@ public class move : MonoBehaviour
       //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
       moveVector = direction;
       rb.velocity= moveVector.normalized * speed * Time.fixedDeltaTime*100;
-        
+      //rb.AddForce(moveVector.normalized * 1f * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
+
         //if (rb.velocity.magnitude > maxspeed)
         //{
         //    rb.velocity = rb.velocity.normalized * maxspeed;

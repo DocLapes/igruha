@@ -12,7 +12,12 @@ public class GorguelEnemyAI : EntityAi
     [SerializeField] private GameObject visualmodel;
     [SerializeField] private int drift;
     private Collider2D cl;
+    Vector2 targetDir;
+    Vector2 heading;
+    float distance;
     
+
+
     enum EnemyState
     {
         Stalk,
@@ -21,7 +26,7 @@ public class GorguelEnemyAI : EntityAi
         Stun
     }
     private EnemyState enemyState = EnemyState.Stalk;
-    private float atacktime = 5f;
+    private float atacktime = 2f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -30,14 +35,15 @@ public class GorguelEnemyAI : EntityAi
         cl = GetComponent<CircleCollider2D>();
         cl.enabled = false;
     }
-
+    
     // Update is called once per frame
     void FixedUpdate()
     {
         //Debug.Log(rb.GetComponent<smert>().Entityheath);
-        Vector2 targetDir = Player.position - transform.position;
-        var heading = Player.position - transform.position;
-        float distance = heading.sqrMagnitude;
+
+        targetDir = Player.position - transform.position;
+        heading = Player.position - transform.position;
+        distance = heading.sqrMagnitude;
         //SpriteRenderer sprite = hitbox.gameObject.GetComponent<SpriteRenderer>();
 
         //var direction = heading / distance;
@@ -51,7 +57,7 @@ public class GorguelEnemyAI : EntityAi
                 
                 visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
             }
-            if (distance <= 1.0f )
+            if (distance <= 1.0f & isatack==false)
             {
                 visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
                 rb.drag = 100;

@@ -26,6 +26,7 @@ public class playermanager : MonoBehaviour
     [SerializeField] private float atacktime=1f;
     [SerializeField] private float shieldatacktime = 1f;
     [SerializeField] private float healdatacktime = 1f;
+    bool atacking;
 
     // Update is called once per frame
     void Awake()
@@ -49,32 +50,41 @@ public class playermanager : MonoBehaviour
             lastmove = moveVector.normalized;
 
         }
-
-        if (Input.GetKeyDown(KeyCode.E) & shieldisatack == false)
+        if (PauseMenu.ispaused == false)
         {
+            if (Input.GetKeyDown(KeyCode.E) & shieldisatack == false)
+            {
 
-            StartCoroutine(ShieldAtackwithdelay(lastmove));
+                StartCoroutine(ShieldAtackwithdelay(lastmove));
 
+            }
+            if (Input.GetKeyDown(KeyCode.Q) & healisatack == false)
+            {
+
+                StartCoroutine(HealAtackwithdelay());
+
+            }
+
+            //if (Input.GetMouseButtonDown(0) & isatack == false )
+            //{
+
+            //    StartCoroutine(Atackwithdelay(lastmove));
+
+            //}
+            if (atacking==true & isatack == false)
+            {
+
+                StartCoroutine(Atackwithdelay1());
+
+            }
+            if (Input.GetMouseButtonDown(0) )
+            {
+
+                atacking = !atacking;
+
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Q) & healisatack == false)
-        {
-
-            StartCoroutine(HealAtackwithdelay());
-
-        }
-
-        //if (Input.GetMouseButtonDown(0) & isatack == false )
-        //{
-
-        //    StartCoroutine(Atackwithdelay(lastmove));
-
-        //}
-        if (Input.GetMouseButtonDown(0) & isatack == false)
-        {
-            
-            StartCoroutine(Atackwithdelay1());
-
-        }
+       
     }
     public void Atackreload(float atacktimemetod)
     {
@@ -173,6 +183,7 @@ public class playermanager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         Aim.gameObject.GetComponentInChildren<PlayerAim>().Hit();
         
+
     }
     private IEnumerator ShieldAtackwithdelay(Vector2 Atackdirection)
     {

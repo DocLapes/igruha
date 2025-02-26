@@ -40,6 +40,7 @@ public class smert : MonoBehaviour
     public void takedamage(int damageCount)
     {
        entityheath -= damageCount ;
+       
         
         if (entityheath <= 0)
         {
