@@ -9,7 +9,7 @@ public class healtbar : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private GameObject Hero;
     public Slider healthslider;
-    private int health;
+    private float health;
     void Awake()
     {
         health = Hero.GetComponent<smert>().Entityheath;

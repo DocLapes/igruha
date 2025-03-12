@@ -6,7 +6,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class damag : MonoBehaviour
 {
-    private int damage = 5;
+    [SerializeField] private int damage;
     private bool isatack;
     
     

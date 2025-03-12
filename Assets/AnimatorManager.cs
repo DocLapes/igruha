@@ -10,11 +10,13 @@ public class AnimatorManager : MonoBehaviour
     private Vector2 atackVector;
     private int animationpriority;
     private float atacktime = 0.56f;
+    private Rigidbody2D rb;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         spriter = GetComponent<SpriteRenderer>();
         entityanimator = GetComponent<Animator>();
+        rb = Hero.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -27,23 +29,26 @@ public class AnimatorManager : MonoBehaviour
     {
         if (animationpriority < 2)
         {
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x > 0)
+            if (rb != null)
             {
-                spriter.flipX = false;
-                entityanimator.CrossFade("walk", 0f, 0);
-            }
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
-            {
-                spriter.flipX = true;
-                entityanimator.CrossFade("walk", 0f, 0);
-            }
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
-            {
-                entityanimator.CrossFade("walk", 0f, 0);
-            }
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
-            {
-                entityanimator.CrossFade("walk", 0f, 0);
+                if (rb.velocity.x > 0)
+                {
+                    spriter.flipX = false;
+                    entityanimator.CrossFade("walk", 0f, 0);
+                }
+                if (rb.velocity.x < 0)
+                {
+                    spriter.flipX = true;
+                    entityanimator.CrossFade("walk", 0f, 0);
+                }
+                if (rb.velocity.y < 0)
+                {
+                    entityanimator.CrossFade("walk", 0f, 0);
+                }
+                if (rb.velocity.y > 0)
+                {
+                    entityanimator.CrossFade("walk", 0f, 0);
+                }
             }
         }
         else { return; }
@@ -53,23 +58,27 @@ public class AnimatorManager : MonoBehaviour
     {
         if (animationpriority < 2)
         {
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x > 0)
+            if (rb != null)
             {
-                spriter.flipX = false;
-                entityanimator.CrossFade("walk", 0f, 0);
-            }
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
-            {
-                spriter.flipX = true;
-                entityanimator.CrossFade("walk", 0f, 0);
-            }
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
-            {
-                entityanimator.CrossFade("walk", 0f, 0);
-            }
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
-            {
-                entityanimator.CrossFade("walk", 0f, 0);
+                if (rb.velocity.x > 0)
+                {
+
+                    spriter.flipX = false;
+                    entityanimator.CrossFade("walk", 0f, 0);
+                }
+                if (rb.velocity.x < 0)
+                {
+                    spriter.flipX = true;
+                    entityanimator.CrossFade("walk", 0f, 0);
+                }
+                if (rb.velocity.y < 0)
+                {
+                    entityanimator.CrossFade("walk", 0f, 0);
+                }
+                if (rb.velocity.y > 0)
+                {
+                    entityanimator.CrossFade("walk", 0f, 0);
+                }
             }
         }
         else { return; }
@@ -79,23 +88,26 @@ public class AnimatorManager : MonoBehaviour
     {
         if (animationpriority < 2)
         {
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x > 0)
+            if (rb != null)
             {
-                spriter.flipX = false;
-                entityanimator.CrossFade("walkatack", 0f, 0);
-            }
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.x < 0)
-            {
-                spriter.flipX = true;
-                entityanimator.CrossFade("walkatack", 0f, 0);
-            }
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
-            {
-                entityanimator.CrossFade("walkatack", 0f, 0);
-            }
-            if (Hero.gameObject.GetComponent<Rigidbody2D>().velocity.y > 0)
-            {
-                entityanimator.CrossFade("walkatack", 0f, 0);
+                if (rb.velocity.x > 0)
+                {
+                    spriter.flipX = false;
+                    entityanimator.CrossFade("walkatack", 0f, 0);
+                }
+                if (rb.velocity.x < 0)
+                {
+                    spriter.flipX = true;
+                    entityanimator.CrossFade("walkatack", 0f, 0);
+                }
+                if (rb.velocity.y < 0)
+                {
+                    entityanimator.CrossFade("walkatack", 0f, 0);
+                }
+                if (rb.velocity.y > 0)
+                {
+                    entityanimator.CrossFade("walkatack", 0f, 0);
+                }
             }
         }
         else { return; }

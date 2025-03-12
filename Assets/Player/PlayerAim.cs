@@ -9,7 +9,7 @@ public class PlayerAim : MonoBehaviour
     Vector3 localscale;
     [SerializeField] private GameObject Aim;
     Transform KopieTrans;
-    private GameObject cube;
+    private GameObject ThisGameObj;
     float angle;
     private bool isAtack=false;
     // Start is called before
@@ -20,7 +20,7 @@ public class PlayerAim : MonoBehaviour
     }
     void Start()
     {
-        cube = gameObject;
+        ThisGameObj = gameObject;
       
     }
 
@@ -66,8 +66,8 @@ public class PlayerAim : MonoBehaviour
     }
     public void Hit()
     {
-        
-        cube.GetComponent<Damagedeal>().ProcessHit(aimDirection);
+
+        ThisGameObj.GetComponent<Damagedeal>().ProcessHit(aimDirection);
     }
    
 

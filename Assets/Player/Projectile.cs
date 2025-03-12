@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     private int damage = 5;
     private bool isatack;
+    [SerializeField] private string Maska;
     private GameObject Pr;
     private Vector2 Direction;
     //private void OnCollisionEnter2D(Collision2D collision)
@@ -45,9 +46,9 @@ public class Projectile : MonoBehaviour
     {
 
         Collider2D collider = GetComponent<Collider2D>();
-        RaycastHit2D[] hits = new RaycastHit2D[10];
+        RaycastHit2D[] hits = new RaycastHit2D[2];
         ContactFilter2D filter = new ContactFilter2D();
-        filter.layerMask = LayerMask.GetMask("entity");
+        filter.layerMask = LayerMask.GetMask(Maska);
         filter.useTriggers = true;
         filter.useLayerMask = true;
         int c_hits = collider.Cast(Vector2.zero, filter, hits);
@@ -58,14 +59,6 @@ public class Projectile : MonoBehaviour
                 //hit.collider.gameObject.GetComponent<move>().StunEntity(stuntime);
                 hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
                 Destroy(Pr);
-            //hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction, power);
-            //Atackreload(3);
-            if (hit.collider.gameObject.GetComponent<smert>() == null)
-            {
-                Destroy(Pr);
-            }
-
-
 
         }
 
@@ -73,6 +66,10 @@ public class Projectile : MonoBehaviour
     public void GetDir(Vector3 dir)
     {
         Direction=dir;
+    }
+    public void UpdateDmg(int numdmg)
+    {
+        damage = numdmg;
     }
     public void Destr()
     {

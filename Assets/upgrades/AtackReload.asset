@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: AtackReload
   Description: AtackReload decrease
-  Stat: 0
+  Stat: 2
   Icon: {fileID: 21300000, guid: 2fb1423e1f3251142b3ee9a1fac2221e, type: 3}

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: ExtraHealth
   Description: Add extra health
-  Stat: 10
+  Stat: 3
   Icon: {fileID: 21300000, guid: 2fb1423e1f3251142b3ee9a1fac2221e, type: 3}

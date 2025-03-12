@@ -7,13 +7,10 @@ public class playermanager : MonoBehaviour
 {
     [SerializeField] private GameObject Hero;
     [SerializeField] private GameObject Aim;
-    [SerializeField] private GameObject hitboxL;
-    [SerializeField] private GameObject hitboxR;
-    [SerializeField] private GameObject hitboxU;
-    [SerializeField] private GameObject hitboxD;
     [SerializeField] private GameObject shieldR;
     [SerializeField] private GameObject shieldL;
     [SerializeField] private GameObject HealAtack;
+    private Rigidbody2D rb;
     [SerializeField] private int drift;
     private SpriteRenderer spriteRenderer;
     private Vector2 cmoveVector;
@@ -31,7 +28,7 @@ public class playermanager : MonoBehaviour
     // Update is called once per frame
     void Awake()
     {
-        
+        rb = Hero.GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -126,12 +123,12 @@ public class playermanager : MonoBehaviour
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A))
         {
             visualmodel.gameObject.GetComponent<AnimatorManager>().Walking();
-            Hero.GetComponent<Rigidbody2D>().drag = 0;
+            rb.drag = 0;
 
         }
         else
         {
-            Hero.GetComponent<Rigidbody2D>().drag = drift;
+            rb.drag = drift;
             visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
         }
         
@@ -139,7 +136,7 @@ public class playermanager : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             Hero.gameObject.GetComponent<move>().Dash(cmoveVector.normalized);
-            
+           
         }
 
 
@@ -179,9 +176,9 @@ public class playermanager : MonoBehaviour
     private IEnumerator Atackwithdelay1( )
     {
         Atackreload(atacktime);
-        Aim.gameObject.GetComponentInChildren<AtackAnimatiomManager>().Atack();
+        Aim.gameObject.GetComponentInChildren<SpearAtackNumberV>().AtackSpearVisual();
         yield return new WaitForSeconds(0.1f);
-        Aim.gameObject.GetComponentInChildren<PlayerAim>().Hit();
+        Aim.gameObject.GetComponentInChildren<SpearAtackNumber>().AtackSpear();
         
 
     }
@@ -192,7 +189,7 @@ public class playermanager : MonoBehaviour
 
             shieldL.gameObject.GetComponentInChildren<AtackAnimatiomManager>().ShieldAtack(Vector2.left);
             yield return new WaitForSeconds(0.1f);
-            shieldL.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.left);
+            shieldL.gameObject.GetComponent<Damagedeal>().ProcessHitShield(Vector2.left);
             ShieldAtackreload(shieldatacktime);
         }
         if (Atackdirection == Vector2.right)
@@ -200,7 +197,7 @@ public class playermanager : MonoBehaviour
             
             shieldR.gameObject.GetComponentInChildren<AtackAnimatiomManager>().ShieldAtack(Vector2.right);
             yield return new WaitForSeconds(0.1f);
-            shieldR.gameObject.GetComponent<Damagedeal>().ProcessHit(Vector2.right);
+            shieldR.gameObject.GetComponent<Damagedeal>().ProcessHitShield(Vector2.right);
             ShieldAtackreload(shieldatacktime);
         }
     }
@@ -212,5 +209,19 @@ public class playermanager : MonoBehaviour
             HealdAtackreload(healdatacktime);
         }
 
+    public void UpgradeDMG()
+    {
+        Aim.GetComponentInChildren<SpearAtackNumber>().UpgradeDamage();
+    }
+    public void UpgradeHealth()
+    {
+        Hero.GetComponent<smert>().HP();
+        
+    }
+    public void UpgradeReload()
+    {
+        atacktime += -0.05f;
+        Debug.Log(atacktime);
+    }
 }
 

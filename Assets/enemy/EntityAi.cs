@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EntityAi : MonoBehaviour
 {
+    
     protected bool isstuned;
     protected Rigidbody2D rb;
     protected bool isatack;
@@ -44,5 +45,6 @@ public class EntityAi : MonoBehaviour
     public void OnDestroy()
     {
         rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
+        
     }
 }

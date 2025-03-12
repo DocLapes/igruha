@@ -10,6 +10,8 @@ public class move : MonoBehaviour
     private Collider2D colider;
     [SerializeField] private float speed;
     [SerializeField] private float speedatk;
+    [SerializeField] private GameObject ExplosionAfterDash;
+    [SerializeField] private bool isSpecialDash;
     //[SerializeField] private float maxspeed;
     private Vector2 moveVector;
     //[SerializeField] private GameObject visualmodel;
@@ -30,6 +32,7 @@ public class move : MonoBehaviour
     {
         if (nodash) return;
         StunEntity(0.1f);
+        if (isSpecialDash == true) { ExplosionAfterDash.GetComponent<SpawnObject>().Spawn(transform.position); }
         rb.MovePosition(rb.position + direction*3f);
         //rb.AddForce(direction * 40f * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
         DashKD(3);

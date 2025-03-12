@@ -6,16 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class smert : MonoBehaviour
 {
-    [SerializeField] private int entityheath;
+    private int CurrentEntityheath;
+    [SerializeField] private int MaxHealth;
     private Rigidbody2D rb;
     private Vector2 otkidVector;
     private int stealedhealth;
 
-    public int Entityheath
+    public float Entityheath
     {
         get
         {
-            return entityheath;
+            return (float)CurrentEntityheath/ (float)MaxHealth;
         }
     }
 
@@ -23,6 +24,7 @@ public class smert : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        CurrentEntityheath = MaxHealth;
         rb = GetComponent<Rigidbody2D>();
         gameover = false;
     }
@@ -35,14 +37,18 @@ public class smert : MonoBehaviour
         {
             SceneManager.LoadScene("level");
         }
+        if (CurrentEntityheath > MaxHealth)
+        {
+            CurrentEntityheath = MaxHealth;
+        }
         
     }
     public void takedamage(int damageCount)
     {
-       entityheath -= damageCount ;
+        CurrentEntityheath -= damageCount ;
        
         
-        if (entityheath <= 0)
+        if (CurrentEntityheath <= 0)
         {
             Destroy(gameObject);
             
@@ -50,12 +56,12 @@ public class smert : MonoBehaviour
     }
     public void Lifesteal(GameObject entity,float stealpercent)
     {
-        stealedhealth = (int)(entityheath * stealpercent);
+        stealedhealth = (int)(CurrentEntityheath * stealpercent);
         entity.GetComponent<smert>().GetHeal(stealedhealth);
     }
     public void GetHeal(int stealedhealth)
     {
-        entityheath += stealedhealth;
+        CurrentEntityheath += stealedhealth;
         Debug.Log(stealedhealth);
     }
 
@@ -74,4 +80,10 @@ public class smert : MonoBehaviour
         rb.GetComponent<SpearEnemyAi>().StunEntity(stuntime);
     }
     
+    public void HP()
+    {
+        MaxHealth += 10;
+        CurrentEntityheath += 10;
+        Debug.Log(MaxHealth);
+    }
 }

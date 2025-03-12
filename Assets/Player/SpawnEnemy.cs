@@ -9,7 +9,9 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] float spawnRate;
     float timeBetweenWaves = 5;
     [SerializeField] private Transform Player;
-    private int enemy_count=2;
+    private int enemy_count=4;
+    private int enemy_count_current = 0;
+    private int enemy_count_max= 10;
     [SerializeField] public GameObject impenemy;
     [SerializeField] public GameObject spearskeleton;
     [SerializeField] public GameObject gorguel;
@@ -30,13 +32,14 @@ public class SpawnEnemy : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        int minutes = Mathf.FloorToInt(time / 60);
+        int minutes = Mathf.FloorToInt(time / 25);
         if ( t < minutes )
         {
             t = minutes;
             dificulty++;
             enemy_count += 2;
             Debug.Log(dificulty);
+            enemy_count_max += 3;
             return;
         }
 
@@ -44,24 +47,28 @@ public class SpawnEnemy : MonoBehaviour
 
     private IEnumerator Enemyspawn( )
     {
-        
-        
-        for (int i = 0; i < enemy_count; i++)
+
+        if (enemy_count_max > enemy_count_current)
         {
-            Vector2 circle = Random.onUnitSphere;
-            circle = circle.normalized;
-            Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
-            GameObject enemy = Instantiate(impenemy, swpawnpoint, Quaternion.identity);
-            
+            for (int i = 0; i < enemy_count; i++)
+            {
+                enemy_count_current += 1;
+                Vector2 circle = Random.onUnitSphere;
+                circle = circle.normalized;
+                Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
+                GameObject enemy = Instantiate(impenemy, swpawnpoint, Quaternion.identity);
+
+            }
         }
-        Debug.Log(enemy_count);
+        Debug.Log(enemy_count_current);
+        
        
         yield return new WaitForSeconds(timeBetweenWaves);
         StartCoroutine(Enemyspawn());
     }
     private IEnumerator EnemyspawnSkelet()
     {
-        if (dificulty == 0)
+        if (dificulty > 0)
         {
             spearskeleton_count = Random.Range(1, 2);
             for (int i = 0; i < spearskeleton_count; i++)
@@ -76,12 +83,12 @@ public class SpawnEnemy : MonoBehaviour
 
             
         }
-        yield return new WaitForSeconds(Random.Range(10f, 15f));
+        yield return new WaitForSeconds(Random.Range(15f, 19f));
         StartCoroutine(EnemyspawnSkelet());
     }
     private IEnumerator EnemyspawnGorgoel()
     {
-        if (dificulty == 0)
+        if (dificulty > 1)
         {
 
             for (int i = 0; i < gorguel_count; i++)
@@ -96,13 +103,11 @@ public class SpawnEnemy : MonoBehaviour
 
             
         }
-        yield return new WaitForSeconds(Random.Range(15f, 20f));
+        yield return new WaitForSeconds(Random.Range(19f, 26f));
         StartCoroutine(EnemyspawnGorgoel());
     }
-    public void ChangeDif()
+    public void MinusEnemy()
     {
-        //enemy_count += 3;
-        dificulty += 1;
-        Debug.Log(dificulty);
+        enemy_count_current += -1;
     }
 }

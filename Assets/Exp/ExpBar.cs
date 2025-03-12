@@ -12,7 +12,7 @@ public class ExpBar : MonoBehaviour
     private int Exp;
     private int ExpforNextLevel=50;
     private int Expleft;
-    private int lvl=1;
+    public int lvl=1;
 
 
     void Awake()
@@ -35,6 +35,7 @@ public class ExpBar : MonoBehaviour
             UpgradeMenu.isupgrademenu = true;
             upgradeList.GetComponent<UpgradeList>().RNG_Upgrade();
         }
+       
 
     }
     public void addExp() {

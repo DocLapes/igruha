@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234b9fd46b3b7f045a455643a822546f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Maska: entity
 --- !u!114 &8592814076943225506
 MonoBehaviour:
   m_ObjectHideFlags: 0
