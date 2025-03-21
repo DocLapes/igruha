@@ -22,8 +22,8 @@ public class UpgradeList : MonoBehaviour
     {
         
         int count = Massive.Length;
-        int n1 = Random.Range(0, count-1);
-        int n2 = Random.Range(0, count-1);
+        int n1 = Random.Range(0, count);
+        int n2 = Random.Range(0, count);
         upgrade upgr1 = Massive[n1];
         upgrade upgr2 = Massive[n2];
 

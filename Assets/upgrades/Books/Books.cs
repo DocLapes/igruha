@@ -35,11 +35,13 @@ public class Books : MonoBehaviour
                 hit.collider.gameObject.GetComponent<move>().StunEntity(0.1f);
                 hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
                 hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(hit.collider.gameObject.transform.position - gm.transform.position, power);
-            
-
-
 
         }
 
+    }
+    public void GetStats(int dam )
+    {
+        damage = dam;
+        
     }
 }

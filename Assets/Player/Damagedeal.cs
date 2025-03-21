@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class Damagedeal : MonoBehaviour
 {
     [SerializeField] private int damage;
+    private int projdamage;
+    private int numofhits;
     [SerializeField] private int power;
     [SerializeField] private float lifestealpercent;
     //[SerializeField] private GameObject hitbox;
@@ -43,7 +46,8 @@ public class Damagedeal : MonoBehaviour
         {
             GameObject clone;
             clone = Instantiate(projectile, transform.position, Quaternion.identity);
-
+            clone.GetComponent<Projectile>().GetDmg(projdamage); 
+            clone.GetComponent<Projectile>().GetNum(numofhits);
             clone.GetComponent<Projectile>().GetDir(direction);
         }
         for (int i = 0; i < c_hits; i++)
@@ -150,13 +154,25 @@ public class Damagedeal : MonoBehaviour
 
         }
     }
-    public void DMG()
-    {
-        damage += 3;
-    }
+    
     public void GetPrjctl()
     {
         isprojectile = true;
+    }
+    public void GetDamag(int dmg)
+    {
+       
+        damage = dmg;
+    }
+    public void GetProjDamag(int dmg)
+    {
+        isprojectile = true;
+        projdamage = dmg;
+
+    }
+    public void NumberofHits(int num)
+    {
+        numofhits = num;
     }
 
 }

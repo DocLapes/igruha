@@ -8,7 +8,9 @@ public class CheckEnemyTrack : MonoBehaviour
     
     [SerializeField] private GameObject projectile;
     private GameObject thisgm;
-    private int projNumber=2;
+    private int projNumber=1;
+    private float reloadtime = 7f;
+    private int damage = 13;
 
     private bool isreload=false;
     void Awake()
@@ -22,7 +24,7 @@ public class CheckEnemyTrack : MonoBehaviour
         if (isreload==false)
         {
             SendProjectile();
-            Atackreload(5f);
+            Atackreload(reloadtime);
         }
     }
     public void SendProjectile()
@@ -79,6 +81,7 @@ public class CheckEnemyTrack : MonoBehaviour
             {
                 clone1[n] = Instantiate(projectile, transform.position, Quaternion.identity);
                 clone1[n].GetComponent<TrackingProjectile>().GetDir(hit3.collider.gameObject);
+                clone1[n].GetComponent<TrackingProjectile>().UpdateDmg(damage);
             }
         }
 
@@ -95,5 +98,22 @@ public class CheckEnemyTrack : MonoBehaviour
     public void OutAtackreload()
     {
         isreload = false;
+    }
+    public void GetUpgradeType1()
+    {
+        damage += 3;
+        reloadtime += -0.25f;
+
+    }
+    public void GetUpgradeType2(int lvl)
+    {
+        if (lvl == 2)
+        {
+            projNumber = 3;
+        }
+        if (lvl == 4)
+        {
+            projNumber = 5;
+        }
     }
 }

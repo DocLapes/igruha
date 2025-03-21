@@ -8,11 +8,12 @@ public class ExpBar : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private GameObject upgradeList;
+    [SerializeField] private GameObject specialupgradeList;
     public Slider expslider;
     private int Exp;
     private int ExpforNextLevel=50;
     private int Expleft;
-    public int lvl=1;
+    private int lvl=1;
 
 
     void Awake()
@@ -25,17 +26,32 @@ public class ExpBar : MonoBehaviour
     void Update()
     {
         expslider.value = Exp;
-        
-        if (Exp == ExpforNextLevel || Exp > ExpforNextLevel) {
+        if (Input.GetKeyUp(KeyCode.LeftControl)) {
+            Exp += 100;
+        }
+        if (lvl % 2 == 1 && (Exp == ExpforNextLevel || Exp > ExpforNextLevel)) {
+            Expleft = Exp - ExpforNextLevel;
+            Exp = Expleft;
+            ExpforNextLevel += 30;
+            expslider.maxValue = ExpforNextLevel;
+            lvl++;
+            Debug.Log(lvl + "¿œ√–Ã≈Õ" + lvl%2 );
+            UpgradeMenu.isupgrademenu = true;
+            upgradeList.GetComponent<UpgradeList>().RNG_Upgrade();
+            
+        }
+        if (lvl % 2 ==0 && (Exp == ExpforNextLevel || Exp > ExpforNextLevel) )
+        {
             Expleft = Exp - ExpforNextLevel;
             Exp = Expleft;
             ExpforNextLevel += 50;
             expslider.maxValue = ExpforNextLevel;
             lvl++;
-            UpgradeMenu.isupgrademenu = true;
-            upgradeList.GetComponent<UpgradeList>().RNG_Upgrade();
+            Debug.Log(lvl + "—œ≈ÿ¿œ√–Ã≈Õ" + lvl % 2);
+            SpecialUpgradeMenu.isspecialupgrademenu = true;
+            specialupgradeList.GetComponent<SpecialUpgradeList>().RNG_Upgrade();
         }
-       
+
 
     }
     public void addExp() {

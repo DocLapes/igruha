@@ -10,28 +10,14 @@ public class Projectile : MonoBehaviour
     [SerializeField] private string Maska;
     private GameObject Pr;
     private Vector2 Direction;
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-
-    //    if (collision.gameObject.GetComponent<smert>() != null)
-    //        collision.gameObject.GetComponent<smert>().takedamage(damage);
-    //        collision.gameObject.GetComponent<smert>().otkinyt(-30);
-
-    //}
-
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.gameObject.GetComponent<smert>() != null)
-    //        other.gameObject.GetComponent<smert>().takedamage(damage);
-    //        other.gameObject.GetComponent<move>().StunEntity(stuntime);
-    //        other.gameObject.GetComponent<smert>().otkinytbyatack(direction, power);
-
-    //}
+    private int numberofHits=1;
+    int numofhits = 0;
 
     void Awake()
     {
         Pr = gameObject; 
         Invoke(nameof(Destr), 5);
+        
         //Pr.GetComponent<Rigidbody2D>().velocity = Direction.normalized * 3f * Time.fixedDeltaTime * 100;
 
     }
@@ -44,7 +30,7 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-
+        
         Collider2D collider = GetComponent<Collider2D>();
         RaycastHit2D[] hits = new RaycastHit2D[2];
         ContactFilter2D filter = new ContactFilter2D();
@@ -54,11 +40,22 @@ public class Projectile : MonoBehaviour
         int c_hits = collider.Cast(Vector2.zero, filter, hits);
         for (int i = 0; i < c_hits; i++)
         {
+            
+            numofhits += 1;
             RaycastHit2D hit = hits[i];
-            if (hit.collider.gameObject.GetComponent<smert>() != null )
+            Debug.Log(numofhits);
+            Debug.Log(numberofHits);
+            if (hit.collider.gameObject.GetComponent<smert>() != null)
+            {
                 //hit.collider.gameObject.GetComponent<move>().StunEntity(stuntime);
                 hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
-                Destroy(Pr);
+                if (numberofHits == numofhits)
+                {
+                    Debug.Log("встреча проджа и варага2");
+                    Destroy(Pr);
+                }
+            }
+                
 
         }
 
@@ -67,21 +64,17 @@ public class Projectile : MonoBehaviour
     {
         Direction=dir;
     }
-    public void UpdateDmg(int numdmg)
+    public void GetDmg(int numdmg)
     {
         damage = numdmg;
+    }
+    public void GetNum(int numhits)
+    {
+        numberofHits = numhits;
     }
     public void Destr()
     {
         Destroy(Pr);
     }
-    //public void Atackreload(float atacktimemetod)
-    //{
-    //    isatack = true;
-    //    Invoke(nameof(OutAtackreload), atacktimemetod);
-    //}
-    //public void OutAtackreload()
-    //{
-    //    isatack = false;
-    //}
+   
 }

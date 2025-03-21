@@ -211,7 +211,7 @@ public class playermanager : MonoBehaviour
 
     public void UpgradeDMG()
     {
-        Aim.GetComponentInChildren<SpearAtackNumber>().UpgradeDamage();
+        Aim.GetComponent<SpearList>().DMG();
     }
     public void UpgradeHealth()
     {

@@ -44,10 +44,6 @@ public class UpgradeMenu : MonoBehaviour
         }
     }
 
-    public void Proj()
-    {
-        Hero.GetComponentInChildren<Damagedeal>().GetPrjctl();
-    }
 
 
 }

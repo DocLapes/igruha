@@ -51,8 +51,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 3
+  m_LinearDrag: 20
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -93,6 +93,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.2
   speedatk: 0
+  ExplosionAfterDash: {fileID: 0}
+  isSpecialDash: 0
 --- !u!70 &1564896439974912848
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

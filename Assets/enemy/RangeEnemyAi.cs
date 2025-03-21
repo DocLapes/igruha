@@ -31,7 +31,7 @@ public class RangeEnemyAi : EntityAi
     {
         rb = GetComponent<Rigidbody2D>();
         cl = GetComponent<CircleCollider2D>();
-        //Player = GameManager.instance.Player.transform;
+        Player = GameManager.instance.Player.transform;
 
     }
 
@@ -71,31 +71,57 @@ public class RangeEnemyAi : EntityAi
                 visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
 
             }
-            if (isstuned == false) rb.gameObject.GetComponent<move>().Move(targetDir);
+            if (isstuned == false) {
+                rb.gameObject.GetComponent<move>().Move(targetDir);
+                if (distance <= 80.0f) ChangeState4();
+            }
            
-            if (distance <= 80.0f) ChangeState4();
+            
         }
         if (enemyState == EnemyState.Atack)
         {
-            rb.drag = 100;
-            if (isatack == false)
-            {
-                StartCoroutine(Atackwithdelay(targetDir));
-            }
-            if (isatack == true && isatacking==false)
+            if (isstuned == true)
             {
                 visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
+                rb.drag = drift;
 
-                if (distance < 30.0f) ChangeState2();
             }
+            if (isstuned == false)
+            {
+                rb.drag = 20;
+                if (isatack == false)
+                {
+                    StartCoroutine(Atackwithdelay(targetDir));
+                }
+                if (isatack == true && isatacking == false)
+                {
+                    visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
 
+                    if (distance < 30.0f) ChangeState2();
+                }
+            }
         }
         if (enemyState == EnemyState.Retreat)
         {
-            rb.drag = 0;
-            visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
-            rb.gameObject.GetComponent<move>().Move(rb.transform.position - Player.position);
-            if (distance >= 90.0f) ChangeState3();
+            if (isstuned == true)
+            {
+                visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
+                rb.drag = drift;
+
+            }
+
+            if (rb.velocity != Vector2.zero && isstuned == false)
+            {
+                rb.drag = 0;
+                visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
+
+            }
+
+            if (isstuned == false) {
+                rb.gameObject.GetComponent<move>().Move(targetDir); rb.gameObject.GetComponent<move>().Move(rb.transform.position - Player.position);
+                if (distance >= 90.0f) ChangeState3();
+            }
+            
         }
     }
   

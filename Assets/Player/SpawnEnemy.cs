@@ -15,17 +15,20 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField] public GameObject impenemy;
     [SerializeField] public GameObject spearskeleton;
     [SerializeField] public GameObject gorguel;
-    int dificulty = 0;
+    [SerializeField] public GameObject range;
+    private int dificulty = 0;
     float time;
-    int t =0;
-    int spearskeleton_count;
-    int gorguel_count=1;
+    private int t =0;
+    private int spearskeleton_count;
+    private int range_count;
+    private int gorguel_count=1;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Enemyspawn());
         StartCoroutine(EnemyspawnGorgoel());
         StartCoroutine(EnemyspawnSkelet());
+        StartCoroutine(EnemyspawnRange());
     }
 
     // Update is called once per frame
@@ -60,7 +63,7 @@ public class SpawnEnemy : MonoBehaviour
 
             }
         }
-        Debug.Log(enemy_count_current);
+        //Debug.Log(enemy_count_current);
         
        
         yield return new WaitForSeconds(timeBetweenWaves);
@@ -79,12 +82,32 @@ public class SpawnEnemy : MonoBehaviour
                 GameObject enemy = Instantiate(spearskeleton, swpawnpoint, Quaternion.identity);
 
             }
-            Debug.Log(enemy_count);
+            //Debug.Log(enemy_count);
 
             
         }
         yield return new WaitForSeconds(Random.Range(15f, 19f));
         StartCoroutine(EnemyspawnSkelet());
+    }
+    private IEnumerator EnemyspawnRange()
+    {
+        if (dificulty >= 0)
+        {
+            range_count = Random.Range(1, 2);
+            for (int i = 0; i < range_count; i++)
+            {
+                Vector2 circle = Random.onUnitSphere;
+                circle = circle.normalized;
+                Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
+                GameObject enemy = Instantiate(range, swpawnpoint, Quaternion.identity);
+
+            }
+            //Debug.Log(enemy_count);
+
+
+        }
+        yield return new WaitForSeconds(Random.Range(10f, 15f));
+        StartCoroutine(EnemyspawnRange());
     }
     private IEnumerator EnemyspawnGorgoel()
     {

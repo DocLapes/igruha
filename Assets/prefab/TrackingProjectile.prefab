@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5536388529460227275}
   - component: {fileID: 6685505983919178045}
   - component: {fileID: 8984383582068262988}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TrackingProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,6 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   speedatk: 0
+  ExplosionAfterDash: {fileID: 0}
+  isSpecialDash: 0
 --- !u!50 &5536388529460227275
 Rigidbody2D:
   serializedVersion: 4

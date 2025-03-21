@@ -7,7 +7,9 @@ public class CheckEnemy : MonoBehaviour
     
     [SerializeField] private GameObject projectile;
     private GameObject thisgm;
-
+    private int damage = 25;
+    private int numberofHits = 1;
+    private float reloadtime = 7f;
     private bool isreload=false;
     void Awake()
     {
@@ -20,7 +22,7 @@ public class CheckEnemy : MonoBehaviour
         if (isreload==false)
         {
             SendProjectile();
-            Atackreload(5);
+            Atackreload(reloadtime);
         }
     }
     public void SendProjectile()
@@ -54,16 +56,19 @@ public class CheckEnemy : MonoBehaviour
             GameObject clone2;
             GameObject clone3;
             clone = Instantiate(projectile, transform.position, Quaternion.identity);
+            clone.GetComponent<Projectile>().GetDmg(damage);
+            clone.GetComponent<Projectile>().GetNum(numberofHits);
             clone.GetComponent<Projectile>().GetDir(hit.transform.position - thisgm.transform.position);
             clone2 = Instantiate(projectile, transform.position, Quaternion.identity);
+            clone2.GetComponent<Projectile>().GetDmg(damage);
+            clone2.GetComponent<Projectile>().GetNum(numberofHits);
             clone2.GetComponent<Projectile>().GetDir(hit.transform.position - thisgm.transform.position + new Vector3(1f, 1f, 0));
             clone3 = Instantiate(projectile, transform.position, Quaternion.identity);
+            clone3.GetComponent<Projectile>().GetDmg(damage);
+            clone3.GetComponent<Projectile>().GetNum(numberofHits);
             clone3.GetComponent<Projectile>().GetDir(hit.transform.position - thisgm.transform.position + new Vector3(-1f, -1f, 0));
 
         }
-
-
-
         
     }
     public void Atackreload(float atacktimemetod)
@@ -75,5 +80,22 @@ public class CheckEnemy : MonoBehaviour
     public void OutAtackreload()
     {
         isreload = false;
+    }
+    public void GetUpgradeType1()
+    {
+        damage += 5;
+        reloadtime += -0.25f;
+        
+    }
+    public void GetUpgradeType2(int lvl)
+    {
+        if (lvl == 2)
+        {
+            numberofHits = 2;
+        }
+        if (lvl == 4)
+        {
+            numberofHits = 3;
+        }
     }
 }

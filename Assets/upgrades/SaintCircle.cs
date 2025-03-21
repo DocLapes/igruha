@@ -9,7 +9,9 @@ public class SaintCircle : MonoBehaviour
     private GameObject circle;
     private bool isreload;
     private float reloadtime = 1;
-    void Start()
+    int damage = 6;
+    private Vector3 Scale;
+    void Awake()
     {
         circle= gameObject;
     }
@@ -32,5 +34,15 @@ public class SaintCircle : MonoBehaviour
     public void OutAtackreload()
     {
         isreload = false;
+    }
+    public void GetUpgradeType1()
+    {
+        damage += 3;
+        circle.GetComponent<Damagedeal>().GetDamag(damage);
+
+    }
+    public void GetUpgradeType2(int lvl)
+    {
+        circle.transform.localScale = circle.transform.localScale * 1.2f;
     }
 }
