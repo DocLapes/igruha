@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    private GameObject ThisGameObj;
+    [SerializeField] private GameObject Visual;
+    private int damage;
+    [SerializeField] private float time;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        ThisGameObj= gameObject;
+        
         StartCoroutine(Boom());
         
     }
     public IEnumerator Boom()
     {
-        //gameObject.GetComponentInChildren<AtackAnimatiomManager>().();
-        yield return new WaitForSeconds(0.1f);
+        Visual.GetComponent<AnimatorManager>().Explosion();
+        yield return new WaitForSeconds(0.07f); 
         gameObject.GetComponentInChildren<Damagedeal>().ProcessHitCircle();
-        yield return new WaitForSeconds(0.1f);
-        Destroy(ThisGameObj);
+        gameObject.GetComponentInChildren<Damagedeal>().GetDamag(damage);
+        yield return new WaitForSeconds(time);
+        Destroy(gameObject);
 
+    }
+    public void GiveExplosionDamage(int dmg) {
+
+        damage=dmg;
     }
     
 }

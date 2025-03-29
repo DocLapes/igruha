@@ -37,10 +37,10 @@ public class DamagedealEnemy : MonoBehaviour
         for (int i = 0; i < c_hits; i++)
         {
             RaycastHit2D hit = hits[i];
-            if (hit.collider.gameObject.GetComponent<smert>() != null)
+            if (hit.collider.gameObject.GetComponent<Smert>() != null)
                 hit.collider.gameObject.GetComponent<move>().StunEntity(stuntime);
-                hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
-                hit.collider.gameObject.GetComponent<smert>().otkinytbyatack(direction, power);
+                hit.collider.gameObject.GetComponent<Smert>().takedamage(damage);
+                hit.collider.gameObject.GetComponent<Smert>().otkinytbyatack(direction, power);
 
 
 

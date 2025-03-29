@@ -82,7 +82,7 @@ public class AtackAnimatiomManager : MonoBehaviour
 
             spriter.enabled = true;
             Invoke(nameof(Otobrazeniechange), 0.6f);
-            entityanimator.CrossFade("shield", 0f, 0);
+            entityanimator.CrossFade("shieldx", 0f, 0);
             Invoke(nameof(Default), shieldatacktime);
 
         }
@@ -91,10 +91,27 @@ public class AtackAnimatiomManager : MonoBehaviour
 
             spriter.enabled = true;
             Invoke(nameof(Otobrazeniechange), 0.6f);
-            entityanimator.CrossFade("shield", 0f, 0);
+            entityanimator.CrossFade("shieldx", 0f, 0);
             Invoke(nameof(Default), shieldatacktime);
 
 
+        }
+        if (atackVector == Vector2.down)
+        {
+
+            spriter.enabled = true;
+            Invoke(nameof(Otobrazeniechange), 0.6f);
+            entityanimator.CrossFade("shieldy", 0f, 0);
+            Invoke(nameof(Default), shieldatacktime);
+
+        }
+        if (atackVector == Vector2.up)
+        {
+
+            spriter.enabled = true;
+            Invoke(nameof(Otobrazeniechange), 0.6f);
+            entityanimator.CrossFade("shieldy", 0f, 0);
+            Invoke(nameof(Default), shieldatacktime);
         }
 
 

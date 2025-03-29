@@ -9,6 +9,8 @@ public class playermanager : MonoBehaviour
     [SerializeField] private GameObject Aim;
     [SerializeField] private GameObject shieldR;
     [SerializeField] private GameObject shieldL;
+    [SerializeField] private GameObject shieldU;
+    [SerializeField] private GameObject shieldD;
     [SerializeField] private GameObject HealAtack;
     private Rigidbody2D rb;
     [SerializeField] private int drift;
@@ -21,13 +23,16 @@ public class playermanager : MonoBehaviour
     private bool shieldisatack;
     private bool healisatack;
     [SerializeField] private float atacktime=1f;
-    [SerializeField] private float shieldatacktime = 1f;
-    [SerializeField] private float healdatacktime = 1f;
+    [SerializeField] private float shieldatacktime = 5f;
+    [SerializeField] private float healdatacktime = 20f;
     bool atacking;
+    [SerializeField] private GameObject Skill;
+    [SerializeField] private GameObject Skill2;
 
     // Update is called once per frame
     void Awake()
     {
+       
         rb = Hero.GetComponent<Rigidbody2D>();
     }
 
@@ -53,12 +58,14 @@ public class playermanager : MonoBehaviour
             {
 
                 StartCoroutine(ShieldAtackwithdelay(lastmove));
+                Skill.GetComponent<Skill>().StartReload(shieldatacktime);
 
             }
             if (Input.GetKeyDown(KeyCode.Q) & healisatack == false)
             {
 
                 StartCoroutine(HealAtackwithdelay());
+                Skill2.GetComponent<Skill>().StartReload(healdatacktime);
 
             }
 
@@ -200,6 +207,22 @@ public class playermanager : MonoBehaviour
             shieldR.gameObject.GetComponent<Damagedeal>().ProcessHitShield(Vector2.right);
             ShieldAtackreload(shieldatacktime);
         }
+        if (Atackdirection == Vector2.up)
+        {
+
+            shieldU.gameObject.GetComponentInChildren<AtackAnimatiomManager>().ShieldAtack(Vector2.up);
+            yield return new WaitForSeconds(0.1f);
+            shieldU.gameObject.GetComponent<Damagedeal>().ProcessHitShield(Vector2.up);
+            ShieldAtackreload(shieldatacktime);
+        }
+        if (Atackdirection == Vector2.down)
+        {
+
+            shieldD.gameObject.GetComponentInChildren<AtackAnimatiomManager>().ShieldAtack(Vector2.down);
+            yield return new WaitForSeconds(0.1f);
+            shieldD.gameObject.GetComponent<Damagedeal>().ProcessHitShield(Vector2.down);
+            ShieldAtackreload(shieldatacktime);
+        }
     }
         private IEnumerator HealAtackwithdelay()
         {
@@ -215,12 +238,12 @@ public class playermanager : MonoBehaviour
     }
     public void UpgradeHealth()
     {
-        Hero.GetComponent<smert>().HP();
+        Hero.GetComponent<Smert>().HP();
         
     }
     public void UpgradeReload()
     {
-        atacktime += -0.05f;
+        atacktime += -0.05f * Time.deltaTime;
         Debug.Log(atacktime);
     }
 }

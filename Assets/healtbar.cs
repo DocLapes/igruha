@@ -10,19 +10,23 @@ public class healtbar : MonoBehaviour
     [SerializeField] private GameObject Hero;
     public Slider healthslider;
     private float health;
+    private Smert Ymer;
     void Awake()
     {
-        health = Hero.GetComponent<smert>().Entityheath;
+        health = Hero.GetComponent<Smert>().Entityheath;
+        Ymer = Hero.GetComponent<Smert>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        health = Hero.GetComponent<smert>().Entityheath;
-        if (healthslider.value != health)
+        if (Ymer != null)
         {
-            healthslider.value = health;
+            health = Ymer.Entityheath;
+            if (healthslider.value != health)
+            {
+                healthslider.value = health;
+            }
         }
-        
     }
 }

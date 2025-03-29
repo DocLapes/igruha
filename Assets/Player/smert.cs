@@ -4,13 +4,16 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class smert : MonoBehaviour
+public class Smert : MonoBehaviour
 {
     private int CurrentEntityheath;
     [SerializeField] private int MaxHealth;
+    [SerializeField] private GameObject AnimatorManager;
     private Rigidbody2D rb;
     private Vector2 otkidVector;
     private int stealedhealth;
+   
+    
 
     public float Entityheath
     {
@@ -33,10 +36,6 @@ public class smert : MonoBehaviour
     void Update()
     {
         otkidVector = rb.velocity;
-        if (gameover)
-        {
-            SceneManager.LoadScene("level");
-        }
         if (CurrentEntityheath > MaxHealth)
         {
             CurrentEntityheath = MaxHealth;
@@ -45,6 +44,10 @@ public class smert : MonoBehaviour
     }
     public void takedamage(int damageCount)
     {
+        if (AnimatorManager != null)
+        {
+            AnimatorManager.GetComponent<AnimatorManager>().hit();
+        }
         CurrentEntityheath -= damageCount ;
        
         
@@ -57,7 +60,7 @@ public class smert : MonoBehaviour
     public void Lifesteal(GameObject entity,float stealpercent)
     {
         stealedhealth = (int)(CurrentEntityheath * stealpercent);
-        entity.GetComponent<smert>().GetHeal(stealedhealth);
+        entity.GetComponent<Smert>().GetHeal(stealedhealth);
     }
     public void GetHeal(int stealedhealth)
     {
@@ -86,4 +89,5 @@ public class smert : MonoBehaviour
         CurrentEntityheath += 10;
         Debug.Log(MaxHealth);
     }
+   
 }

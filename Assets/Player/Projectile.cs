@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
     private int damage = 5;
     private bool isatack;
+    Vector3 localscale;
     [SerializeField] private string Maska;
     private GameObject Pr;
     private Vector2 Direction;
     private int numberofHits=1;
     int numofhits = 0;
 
-    void Awake()
+    void Start()
     {
         Pr = gameObject; 
         Invoke(nameof(Destr), 5);
@@ -45,10 +48,10 @@ public class Projectile : MonoBehaviour
             RaycastHit2D hit = hits[i];
             Debug.Log(numofhits);
             Debug.Log(numberofHits);
-            if (hit.collider.gameObject.GetComponent<smert>() != null)
+            if (hit.collider.gameObject.GetComponent<Smert>() != null)
             {
                 //hit.collider.gameObject.GetComponent<move>().StunEntity(stuntime);
-                hit.collider.gameObject.GetComponent<smert>().takedamage(damage);
+                hit.collider.gameObject.GetComponent<Smert>().takedamage(damage);
                 if (numberofHits == numofhits)
                 {
                     Debug.Log("встреча проджа и варага2");
@@ -63,6 +66,22 @@ public class Projectile : MonoBehaviour
     public void GetDir(Vector3 dir)
     {
         Direction=dir;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        gameObject.transform.eulerAngles = new Vector3(0, 0, angle);
+        if (angle > 90 || angle < -90)
+        {
+            localscale.y = -0.5f;
+            localscale.x = 0.5f;
+            localscale.z = 1;
+        }
+        else
+        {
+            localscale.y = +0.5f;
+            localscale.x = 0.5f;
+            localscale.z = 1;
+        }
+        gameObject.transform.localScale = localscale;
+        
     }
     public void GetDmg(int numdmg)
     {

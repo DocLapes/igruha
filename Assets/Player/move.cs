@@ -11,6 +11,7 @@ public class move : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float speedatk;
     [SerializeField] private GameObject ExplosionAfterDash;
+    [SerializeField] private GameObject Nimb;
     [SerializeField] private bool isSpecialDash=false;
     //[SerializeField] private float maxspeed;
     private Vector2 moveVector;
@@ -25,7 +26,10 @@ public class move : MonoBehaviour
 
     void Update()
     {
-        
+        if (Nimb != null && nodash==false)
+        {
+            Nimb.GetComponent<AnimatorManager>().Idle();
+        }
 
     }
     public void Dash(Vector2 direction)
@@ -35,7 +39,8 @@ public class move : MonoBehaviour
         if (isSpecialDash == true) {
             ExplosionAfterDash.GetComponent<SpawnObject>().Spawn(transform.position);
         }
-        rb.MovePosition(rb.position + direction*3f);
+        //rb.MovePosition(rb.position + direction*3f);
+        rb.velocity = moveVector.normalized * 15 * Time.fixedDeltaTime * 100;
         //rb.AddForce(direction * 40f * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
         DashKD(3);
     }
@@ -84,11 +89,14 @@ public class move : MonoBehaviour
     {
 
         nodash = true;
+        Nimb.SetActive(false);
         Invoke(nameof(DashKDEnd), stuntime);
     }
     public void DashKDEnd()
     {
         nodash = false;
+        Nimb.SetActive(true);
+        Nimb.GetComponent<AnimatorManager>().Ready();
     }
     public void AktivSpDash()
     {

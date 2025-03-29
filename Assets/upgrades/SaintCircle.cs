@@ -10,10 +10,12 @@ public class SaintCircle : MonoBehaviour
     private bool isreload;
     private float reloadtime = 1;
     int damage = 6;
+    private float angle;
     private Vector3 Scale;
     void Awake()
     {
-        circle= gameObject;
+        angle = gameObject.transform.eulerAngles.z;
+        circle = gameObject;
     }
 
     // Update is called once per frame
@@ -24,6 +26,11 @@ public class SaintCircle : MonoBehaviour
             circle.gameObject.GetComponent<Damagedeal>().ProcessHitCircle();
             Atackreload(reloadtime);
         }
+        
+        angle += 50f * Time.deltaTime;
+        gameObject.transform.eulerAngles = new Vector3(0, 0, angle);
+
+        
     }
     public void Atackreload(float atacktimemetod)
     {

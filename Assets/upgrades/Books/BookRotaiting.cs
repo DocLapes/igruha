@@ -28,7 +28,7 @@ public class BookRotaiting : MonoBehaviour
         
         if (isreload == false)
         {
-            angle += 75f*Time.deltaTime;
+            angle += 100f*Time.deltaTime;
             GameObject.transform.eulerAngles = new Vector3(0, 0, angle);
             
         }

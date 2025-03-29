@@ -109,15 +109,15 @@ public class SpecialUpgradeList : MonoBehaviour
             {
                 upgr1 = ListUpg1[n1];
             }
+            upgrade upgr2;
             if (Lvls[n2] % 2 == 1)
             {
-                upgr1 = ListUpg2[n2];
+                upgr2 = ListUpg2[n2];
             }
             else
             {
-                upgr1 = ListUpg1[n2];
+                upgr2 = ListUpg1[n2];
             }
-            upgrade upgr2 = ListUpg1[n2];
             upgrade upgr3 = ListUpg1[n3];
 
 
@@ -139,8 +139,43 @@ public class SpecialUpgradeList : MonoBehaviour
     }   
     public void NewActiveUpgrade(int upgrnumber)
     {
-        Debug.Log(upgrnumber);
-        ListActiveUpg.Add(upgrnumber-1);
+        Debug.Log("Колво скилов" + ListActiveUpg.Count);
+        int nums=0;
+        if (ListActiveUpg.Count == 0)
+        {
+            ListActiveUpg.Add(upgrnumber - 1);
+        }
+
+        if (ListActiveUpg.Count > 0)
+        {
+            foreach (int upnum in ListActiveUpg)
+            {
+                if (upnum != upgrnumber - 1)
+                {
+                    nums += 1;
+                    Debug.Log("Nuyms" + nums);
+                }
+            }
+        }
+        
+        if (nums != 0 && nums == ListActiveUpg.Count)
+        {
+            ListActiveUpg.Add(upgrnumber - 1);
+            Debug.Log("Колво скилов" + ListActiveUpg.Count);
+        }
+        
         Lvls[upgrnumber-1] = Lvls[upgrnumber-1] + 1;
+        Debug.Log("Лвл" + Lvls[upgrnumber - 1]);
+        if(Lvls[upgrnumber - 1] == 4)
+        {
+            ListUpg1.RemoveAt(upgrnumber - 1);
+            ListUpg2.RemoveAt(upgrnumber - 1);
+            Debug.Log("Удалено" + (upgrnumber-1) );
+            
+        }
+    }
+    public void CompleteSkill()
+    {
+
     }
 }

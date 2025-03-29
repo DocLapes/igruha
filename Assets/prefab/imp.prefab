@@ -91,7 +91,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &546864769866382363
 Rigidbody2D:
   serializedVersion: 4
@@ -108,7 +108,7 @@ Rigidbody2D:
   m_LinearDrag: 20
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 925a9327d3dd5554fabe8f8b1f24a3f0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -131,7 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 900c1fae80a2f314c98e2e217d3c8738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 25
+  MaxHealth: 19
+  AnimatorManager: {fileID: 8592188822168210828}
+  Menu: {fileID: 0}
+  isplayer: 0
 --- !u!114 &2312431137931603655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +150,7 @@ MonoBehaviour:
   speed: 0.7
   speedatk: 0
   ExplosionAfterDash: {fileID: 0}
+  Nimb: {fileID: 0}
   isSpecialDash: 0
 --- !u!114 &784567501729977345
 MonoBehaviour:
@@ -355,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  power: 10
+  power: 0
   stuntime: 0
 --- !u!1 &8592188822168210828
 GameObject:
@@ -385,7 +389,7 @@ Transform:
   m_GameObject: {fileID: 8592188822168210828}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.042, y: -1.833, z: 0}
+  m_LocalPosition: {x: -0.03, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -442,7 +446,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &1219135308949383712
 Animator:
   serializedVersion: 5

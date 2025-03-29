@@ -91,7 +91,7 @@ public class SpawnEnemy : MonoBehaviour
     }
     private IEnumerator EnemyspawnRange()
     {
-        if (dificulty >= 0)
+        if (dificulty >= 1)
         {
             range_count = Random.Range(1, 2);
             for (int i = 0; i < range_count; i++)
@@ -111,7 +111,7 @@ public class SpawnEnemy : MonoBehaviour
     }
     private IEnumerator EnemyspawnGorgoel()
     {
-        if (dificulty > 1)
+        if (dificulty > 2)
         {
 
             for (int i = 0; i < gorguel_count; i++)

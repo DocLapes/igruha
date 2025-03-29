@@ -55,7 +55,7 @@ public class ExpBar : MonoBehaviour
 
     }
     public void addExp() {
-        Exp += 10;
+        Exp += 15;
         Debug.Log(Exp);
     }
 

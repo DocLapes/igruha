@@ -18,7 +18,7 @@ public class SpearEnemyAi : EntityAi
     [SerializeField] private int drift;
     private bool havedirection;
     private float atacktime = 5f;
-    private float atacktimemetod = 1f;
+    [SerializeField] private float atacktimemetod = 0.6f;
     Vector2 Atackpoint;
     enum EnemyState
     {
@@ -155,5 +155,13 @@ public class SpearEnemyAi : EntityAi
             Invoke(nameof(ChangeState3), atacktimemetod);
         }
     }
-   
+    public void OnDestroy()
+    {
+        if (Player != null)
+        {
+            rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
+            Player.GetComponentInChildren<SpawnEnemy>().MinusEnemy();
+
+        }
+    }
 }

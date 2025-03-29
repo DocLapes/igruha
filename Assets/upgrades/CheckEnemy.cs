@@ -22,7 +22,7 @@ public class CheckEnemy : MonoBehaviour
         if (isreload==false)
         {
             SendProjectile();
-            Atackreload(reloadtime);
+            
         }
     }
     public void SendProjectile()
@@ -35,39 +35,42 @@ public class CheckEnemy : MonoBehaviour
         filter.useTriggers = true;
         filter.useLayerMask = true;
         int c_hits = collider.Cast(Vector2.zero, filter, hits);
-        RaycastHit2D hit = hits[0];
-        var heading = hit.transform.position - transform.position;
-        float distance = heading.sqrMagnitude;
-        if (hit.collider.gameObject.GetComponent<smert>() != null)
-        {
-            for (int i = 0; i < c_hits; i++)
+        if(c_hits > 0) {
+            Atackreload(reloadtime);
+            RaycastHit2D hit = hits[0];
+            var heading = hit.transform.position - thisgm.transform.position;
+            float distance = heading.sqrMagnitude;
+            if (hit.collider.gameObject.GetComponent<Smert>() != null)
             {
-                RaycastHit2D hit2 = hits[i];
-                var heading2 = hit2.transform.position - transform.position;
-                float distance2 = heading.sqrMagnitude;
-                if (distance2 < distance)
+                for (int i = 0; i < c_hits; i++)
                 {
-                    distance = distance2;
-                    hit = hit2;
+                    RaycastHit2D hit2 = hits[i];
+                    var heading2 = hit2.transform.position - transform.position;
+                    float distance2 = heading.sqrMagnitude;
+                    if (distance2 < distance)
+                    {
+                        distance = distance2;
+                        hit = hit2;
+                    }
                 }
-            }
-            
-            GameObject clone;
-            GameObject clone2;
-            GameObject clone3;
-            clone = Instantiate(projectile, transform.position, Quaternion.identity);
-            clone.GetComponent<Projectile>().GetDmg(damage);
-            clone.GetComponent<Projectile>().GetNum(numberofHits);
-            clone.GetComponent<Projectile>().GetDir(hit.transform.position - thisgm.transform.position);
-            clone2 = Instantiate(projectile, transform.position, Quaternion.identity);
-            clone2.GetComponent<Projectile>().GetDmg(damage);
-            clone2.GetComponent<Projectile>().GetNum(numberofHits);
-            clone2.GetComponent<Projectile>().GetDir(hit.transform.position - thisgm.transform.position + new Vector3(1f, 1f, 0));
-            clone3 = Instantiate(projectile, transform.position, Quaternion.identity);
-            clone3.GetComponent<Projectile>().GetDmg(damage);
-            clone3.GetComponent<Projectile>().GetNum(numberofHits);
-            clone3.GetComponent<Projectile>().GetDir(hit.transform.position - thisgm.transform.position + new Vector3(-1f, -1f, 0));
 
+                GameObject clone;
+                GameObject clone2;
+                GameObject clone3;
+                Vector3 direction = hit.transform.position - thisgm.transform.position;
+                clone = Instantiate(projectile, transform.position, Quaternion.identity);
+                clone.GetComponent<Projectile>().GetDmg(damage);
+                clone.GetComponent<Projectile>().GetNum(numberofHits);
+                clone.GetComponent<Projectile>().GetDir(direction);
+                clone2 = Instantiate(projectile, transform.position, Quaternion.identity);
+                clone2.GetComponent<Projectile>().GetDmg(damage);
+                clone2.GetComponent<Projectile>().GetNum(numberofHits);
+                clone2.GetComponent<Projectile>().GetDir(direction + new Vector3(1f, 1f, 0));
+                clone3 = Instantiate(projectile, transform.position, Quaternion.identity);
+                clone3.GetComponent<Projectile>().GetDmg(damage);
+                clone3.GetComponent<Projectile>().GetNum(numberofHits);
+                clone3.GetComponent<Projectile>().GetDir(direction + new Vector3(-1f, -1f, 0));
+            }
         }
         
     }

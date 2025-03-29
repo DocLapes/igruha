@@ -20,6 +20,7 @@ public class SpawnObject : MonoBehaviour
     }
     public void Spawn(Vector2 swpawnpoint)
     {
+        
         GameObject obj = Instantiate(Object, swpawnpoint, Quaternion.identity);
         if (obj.GetComponent<Damagedeal>() != null)
         {

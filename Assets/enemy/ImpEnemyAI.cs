@@ -14,7 +14,7 @@ public class ImpEnemyAI : EntityAi
     [SerializeField] private GameObject visualmodel;
     [SerializeField] private int drift;
    
-    private float atacktime = 0.3f;
+    private float atacktime = 0.5f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -66,8 +66,11 @@ public class ImpEnemyAI : EntityAi
     }
     public new void OnDestroy()
     {
-        rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
-        if (Player != null) { Player.GetComponentInChildren<SpawnEnemy>().MinusEnemy(); }
+        
+        if (Player != null) {
+            rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
+            Player.GetComponentInChildren<SpawnEnemy>().MinusEnemy(); 
+        }
         
     }
     //if (rb.velocity != Vector2.zero && distance <= 5.0f && isatack == false)

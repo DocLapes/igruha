@@ -4,25 +4,27 @@ using UnityEngine;
 
 public class EntityAi : MonoBehaviour
 {
-    
+
     protected bool isstuned;
     protected Rigidbody2D rb;
     protected bool isatack;
     
+
+
     // Start is called before the first frame update
     void Awake()
     {
-        
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-    
+
+
 
     }
-    
+
     public void Atackreload(float atacktimemetod)
     {
         isatack = true;
@@ -42,9 +44,5 @@ public class EntityAi : MonoBehaviour
     {
         isstuned = false;
     }
-    public void OnDestroy()
-    {
-        rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
-        
-    }
+    
 }

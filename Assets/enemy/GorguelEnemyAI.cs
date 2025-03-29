@@ -136,5 +136,14 @@ public class GorguelEnemyAI : EntityAi
         enemyState = EnemyState.Stalk;
     }
 
-   
+    public void OnDestroy()
+    {
+        if (Player != null)
+        {
+            rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
+            Player.GetComponentInChildren<SpawnEnemy>().MinusEnemy();
+
+        }
+    }
+
 }

@@ -171,6 +171,14 @@ public class RangeEnemyAi : EntityAi
     {
         nodash = false;
     }
+    public void OnDestroy()
+    {
+        if (Player != null)
+        {
+            rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
+            Player.GetComponentInChildren<SpawnEnemy>().MinusEnemy();
 
+        }
+    }
 
 }

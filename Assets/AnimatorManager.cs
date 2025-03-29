@@ -137,6 +137,32 @@ public class AnimatorManager : MonoBehaviour
     {
         entityanimator.CrossFade("atackout", 0f, 0);
     }
+    public void hit()
+    {
+        animationpriority = 2;
+        entityanimator.CrossFade("hit", 0f, 0);
+        Invoke(nameof(Prioritychange), 0.3f);
+    }
+    public void death()
+    {
+        animationpriority = 2;
+        entityanimator.CrossFade("death", 0f, 0);
+        Invoke(nameof(Prioritychange), 0.21f);
+    }
+    public void Ready()
+    {
+        animationpriority = 2;
+        entityanimator.CrossFade("ready", 0f, 0);
+        Invoke(nameof(Prioritychange), 0.28f);
+    }
+    public void Explosion()
+    {
+        animationpriority = 2;
+        entityanimator.CrossFade("explosion", 0f, 0);
+        Invoke(nameof(Prioritychange), 0.49f);
+
+    }
+
     //public void Atack(Vector2 direction)
     //{
 

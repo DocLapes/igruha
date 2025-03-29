@@ -24,7 +24,7 @@ public class CheckEnemyTrack : MonoBehaviour
         if (isreload==false)
         {
             SendProjectile();
-            Atackreload(reloadtime);
+            
         }
     }
     public void SendProjectile()
@@ -37,56 +37,54 @@ public class CheckEnemyTrack : MonoBehaviour
         filter.useTriggers = true;
         filter.useLayerMask = true;
         int c_hits = collider.Cast(Vector2.zero, filter, hits);
-        RaycastHit2D hit = hits[0];
-        float distance=1000 ;
-        for (int i = 0; i < c_hits; i++)
+        if (c_hits > 0)
         {
-            RaycastHit2D hit2 = hits[i];
-            if (hit2.collider.gameObject.GetComponent<smert>() != null)
-            {
-                var heading2 = hit2.transform.position - transform.position;
-                float distance2 = heading2.sqrMagnitude;
-                if (distance2 < distance)
-                {
-                    distance = distance2;
-                    hit = hit2;
-                }
-            }
-        }
-        if (hit.collider.gameObject != null)
-        {
-
-            GameObject clone;
-            clone = Instantiate(projectile, transform.position, Quaternion.identity);
-            clone.GetComponent<TrackingProjectile>().GetDir(hit.collider.gameObject);
-
-        }
-        GameObject[] clone1 = new GameObject[projNumber];
-        for (int n = 0; n < projNumber; n++)
-        {
-            RaycastHit2D[] checkedhits = { };
-            int LengthHits = 1;
+            Atackreload(reloadtime);
+            RaycastHit2D hit = hits[0];
+            float distance = 1000;
             for (int i = 0; i < c_hits; i++)
             {
-                RaycastHit2D hitchek = hits[i];
-                if (hitchek.collider.gameObject.GetComponent<smert>() != null)
+                RaycastHit2D hit2 = hits[i];
+                if (hit2.collider.gameObject.GetComponent<Smert>() != null)
                 {
-                    Array.Resize(ref checkedhits, LengthHits);
-                    checkedhits[LengthHits - 1] = hitchek;
-                    LengthHits += 1;
+                    var heading2 = hit2.transform.position - transform.position;
+                    float distance2 = heading2.sqrMagnitude;
+                    if (distance2 < distance)
+                    {
+                        distance = distance2;
+                        hit = hit2;
+                    }
                 }
             }
-            RaycastHit2D hit3 = checkedhits[UnityEngine.Random.Range(0, checkedhits.Length - 1)];
-            if (hit3.collider.gameObject.GetComponent<smert>() != null)
+            if (hit.collider.gameObject != null)
             {
-                clone1[n] = Instantiate(projectile, transform.position, Quaternion.identity);
-                clone1[n].GetComponent<TrackingProjectile>().GetDir(hit3.collider.gameObject);
-                clone1[n].GetComponent<TrackingProjectile>().UpdateDmg(damage);
+                GameObject[] clone1 = new GameObject[projNumber];
+                for (int n = 0; n < projNumber; n++)
+                {
+                    RaycastHit2D[] checkedhits = { };
+                    int LengthHits = 0;
+                    for (int i = 0; i < c_hits; i++)
+                    {
+                        RaycastHit2D hitchek = hits[i];
+                        if (hitchek.collider.gameObject.GetComponent<Smert>() != null)
+                        {
+                            LengthHits += 1;
+                            Array.Resize(ref checkedhits, LengthHits);
+                            checkedhits[LengthHits - 1] = hitchek;
+
+                        }
+                    }
+                    RaycastHit2D hit3 = checkedhits[UnityEngine.Random.Range(0, checkedhits.Length)];
+                    if (hit3.collider.gameObject.GetComponent<Smert>() != null)
+                    {
+                        clone1[n] = Instantiate(projectile, transform.position, Quaternion.identity);
+                        clone1[n].GetComponent<TrackingProjectile>().GetDir(hit3.collider.gameObject);
+                        clone1[n].GetComponent<TrackingProjectile>().UpdateDmg(damage);
+                    }
+                }
             }
+
         }
-
-
-
 
     }
     public void Atackreload(float atacktimemetod)
