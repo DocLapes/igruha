@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Damage
   m_EditorClassIdentifier: 
   Name: Damage
-  Description: Add 1 damage for weapon
+  Description: Add 3 damage for weapon
   Stat: 1
-  Icon: {fileID: 21300000, guid: 2fb1423e1f3251142b3ee9a1fac2221e, type: 3}
+  Icon: {fileID: 21300000, guid: 272b29115ca482c47836b4ce7d3f14c6, type: 3}

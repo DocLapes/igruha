@@ -37,9 +37,12 @@ public class PauseMenu : MonoBehaviour
     }
     public void PauseGame()
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        ispaused = true;
+        if (UpgradeMenu.isupgrademenu == false || SpecialUpgradeMenu.isspecialupgrademenu==false)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            ispaused = true;
+        }
     }
     public void Lose()
     {

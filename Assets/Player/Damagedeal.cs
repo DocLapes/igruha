@@ -145,7 +145,7 @@ public class Damagedeal : MonoBehaviour
             if (hit.collider.gameObject.GetComponent<Smert>() != null)
             {
                 hit.collider.gameObject.GetComponent<EntityAi>().StunEntity(stuntime);
-                hit.collider.gameObject.GetComponent<Smert>().Lifesteal(entity, lifestealpercent);
+                hit.collider.gameObject.GetComponent<Smert>().Lifesteal(entity);
                 hit.collider.gameObject.GetComponent<Smert>().takedamage(damage);
                 hit.collider.gameObject.GetComponent<Smert>().otkinytbyatack(hit.collider.gameObject.transform.position - gm.transform.position, power);
             }

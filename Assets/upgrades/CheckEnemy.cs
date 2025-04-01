@@ -7,7 +7,7 @@ public class CheckEnemy : MonoBehaviour
     
     [SerializeField] private GameObject projectile;
     private GameObject thisgm;
-    private int damage = 25;
+    [SerializeField] private int damage = 25;
     private int numberofHits = 1;
     private float reloadtime = 7f;
     private bool isreload=false;

@@ -75,18 +75,13 @@ public class playermanager : MonoBehaviour
             //    StartCoroutine(Atackwithdelay(lastmove));
 
             //}
-            if (atacking==true & isatack == false)
+            if (isatack == false)
             {
 
                 StartCoroutine(Atackwithdelay1());
 
             }
-            if (Input.GetMouseButtonDown(0) )
-            {
-
-                atacking = !atacking;
-
-            }
+           
         }
        
     }
@@ -243,7 +238,9 @@ public class playermanager : MonoBehaviour
     }
     public void UpgradeReload()
     {
-        atacktime += -0.05f * Time.deltaTime;
+        atacktime += -0.1f ;
+        gameObject.GetComponent<move>().DashBuff();
+        //* Time.deltaTime
         Debug.Log(atacktime);
     }
 }

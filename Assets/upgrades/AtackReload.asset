@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AtackReload
   m_EditorClassIdentifier: 
   Name: AtackReload
-  Description: AtackReload decrease
+  Description: 'AtackReload decrease and DashReload decrease '
   Stat: 2
-  Icon: {fileID: 21300000, guid: 2fb1423e1f3251142b3ee9a1fac2221e, type: 3}
+  Icon: {fileID: 21300000, guid: e40f7ac0797369344b051fcc858e2d65, type: 3}

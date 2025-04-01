@@ -14,7 +14,7 @@ public class ImpEnemyAI : EntityAi
     [SerializeField] private GameObject visualmodel;
     [SerializeField] private int drift;
    
-    private float atacktime = 0.5f;
+    private float atacktime = 0.3f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -48,7 +48,7 @@ public class ImpEnemyAI : EntityAi
 
             if (distance <= 5.0f)
             {
-                visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyAtackWalking();
+                visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
                 if (isatack == false)
                 {
                     hitbox.gameObject.GetComponent<DamagedealEnemy>().ProcessHit(targetDir);
@@ -64,7 +64,7 @@ public class ImpEnemyAI : EntityAi
 
 
     }
-    public new void OnDestroy()
+    public void OnDestroy()
     {
         
         if (Player != null) {

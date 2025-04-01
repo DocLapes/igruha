@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 655a86deb2d3ef447b3f0c958a7c55e0, type: 3}
-  m_Name: Fire Magic
+  m_Name: Heavenly arrows
   m_EditorClassIdentifier: 
-  Name: Fire Magic
+  Name: Heavenly arrows
   Description: +dmg
   Stat: 3
-  Icon: {fileID: 21300000, guid: 018ac242ac118ec42803173a89880256, type: 3}
+  Icon: {fileID: -6656000103504302677, guid: 8cecd72f7e1865a4986798a573455356, type: 3}

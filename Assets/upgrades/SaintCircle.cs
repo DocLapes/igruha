@@ -27,7 +27,7 @@ public class SaintCircle : MonoBehaviour
             Atackreload(reloadtime);
         }
         
-        angle += 50f * Time.deltaTime;
+        angle += 25f * Time.deltaTime;
         gameObject.transform.eulerAngles = new Vector3(0, 0, angle);
 
         

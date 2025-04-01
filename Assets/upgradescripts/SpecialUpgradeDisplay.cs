@@ -38,6 +38,7 @@ public class SpecialUpgradeDisplay : MonoBehaviour
     {
         GameMan.GetComponent<SpecialUpgradeMenu>().SwitchUpgrade(number);
         GameMan.GetComponent<SpecialUpgradeList>().NewActiveUpgrade(number);
+        GameMan.GetComponent<Inventory>().AddItems(Upgrade);
     }
 
 }

@@ -76,6 +76,7 @@ public class TrackingProjectile : MonoBehaviour
                 Debug.Log(LayerMask.GetMask(Maska));
                 //hit.collider.gameObject.GetComponent<move>().StunEntity(stuntime);
                 hitted.takedamage(damage);
+                gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.one * 0f;
                 Anim.death();
                 Invoke(nameof(Destr), 0.21f);
 

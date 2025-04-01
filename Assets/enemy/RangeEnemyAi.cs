@@ -176,7 +176,7 @@ public class RangeEnemyAi : EntityAi
         if (Player != null)
         {
             rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
-            Player.GetComponentInChildren<SpawnEnemy>().MinusEnemy();
+            Player.GetComponentInChildren<SpawnEnemy>().MinusRangeEnemy();
 
         }
     }

@@ -83,6 +83,6 @@ public class CheckEnemyThunder : MonoBehaviour
     {
         GameObject clone;
         clone = Instantiate(explosion, enemy.transform.position, Quaternion.identity);
-        clone.GetComponent<Explosion>().GiveExplosionDamage(damage);
+        clone.GetComponent<Explosion>().GiveExplosionDamage(damage,1);
     }
 }

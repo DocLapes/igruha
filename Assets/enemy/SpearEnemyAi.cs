@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Cinemachine.CinemachineOrbitalTransposer;
@@ -12,6 +13,7 @@ public class SpearEnemyAi : EntityAi
     
     
     [SerializeField] private GameObject hitbox;
+    [SerializeField] private GameObject hitbox2;
     private Collider2D cl;
     [SerializeField] private GameObject visualmodel;
     private Transform Player;
@@ -19,6 +21,8 @@ public class SpearEnemyAi : EntityAi
     private bool havedirection;
     private float atacktime = 5f;
     [SerializeField] private float atacktimemetod = 0.6f;
+    [SerializeField] private float LAreloadTime = 0.4f;
+    private bool isatacklight;
     Vector2 Atackpoint;
     enum EnemyState
     {
@@ -68,7 +72,17 @@ public class SpearEnemyAi : EntityAi
 
             Atackpoint = targetDir;
             
-            if (distance <= 50.0f && isatack== false) enemyState = EnemyState.AtackPrepare;
+            if (distance <= 50.0f && distance > 15.0f && isatack== false) enemyState = EnemyState.AtackPrepare;
+            if (distance <= 4.0f && isatack == true)
+            {
+                if (isatacklight == false)
+                {
+                    hitbox2.gameObject.GetComponent<DamagedealEnemy>().ProcessHit(targetDir);
+                    Debug.Log("smallatack");
+                    LightAtackreload(LAreloadTime);
+                }
+
+            }
 
 
 
@@ -126,7 +140,7 @@ public class SpearEnemyAi : EntityAi
     private IEnumerator AtackPrepare()
     {
         visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyGetReady();
-        yield return new WaitForSeconds(0.49f);
+        yield return new WaitForSeconds(0.7f);
         ChangeState4();
     }
     private void ChangeState2()
@@ -143,7 +157,15 @@ public class SpearEnemyAi : EntityAi
     {
         enemyState = EnemyState.Atack;
     }
-
+    public void LightAtackreload(float atacktimemetod)
+    {
+        isatacklight = true;
+        Invoke(nameof(LightOutAtackreload), atacktimemetod);
+    }
+    public void LightOutAtackreload()
+    {
+        isatacklight = false;
+    }
     private void ChangeState1(float atacktimemetod)
     {
         if (enemyState== EnemyState.Atack)
@@ -160,7 +182,7 @@ public class SpearEnemyAi : EntityAi
         if (Player != null)
         {
             rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
-            Player.GetComponentInChildren<SpawnEnemy>().MinusEnemy();
+            Player.GetComponentInChildren<SpawnEnemy>().MinusSpearEnemy();
 
         }
     }

@@ -17,16 +17,18 @@ public class Explosion : MonoBehaviour
     public IEnumerator Boom()
     {
         Visual.GetComponent<AnimatorManager>().Explosion();
-        yield return new WaitForSeconds(0.07f); 
-        gameObject.GetComponentInChildren<Damagedeal>().ProcessHitCircle();
         gameObject.GetComponentInChildren<Damagedeal>().GetDamag(damage);
+        yield return new WaitForSeconds(0.07f);
+        gameObject.GetComponentInChildren<Damagedeal>().ProcessHitCircle();
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
 
     }
-    public void GiveExplosionDamage(int dmg) {
+    public void GiveExplosionDamage(int dmg, float scale)
+    {
 
-        damage=dmg;
+        damage = dmg;
+        transform.localScale = transform.localScale * scale;
     }
-    
+
 }

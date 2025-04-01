@@ -13,6 +13,7 @@ public class move : MonoBehaviour
     [SerializeField] private GameObject ExplosionAfterDash;
     [SerializeField] private GameObject Nimb;
     [SerializeField] private bool isSpecialDash=false;
+    private float DashKDTime = 3f;
     //[SerializeField] private float maxspeed;
     private Vector2 moveVector;
     //[SerializeField] private GameObject visualmodel;
@@ -42,7 +43,7 @@ public class move : MonoBehaviour
         //rb.MovePosition(rb.position + direction*3f);
         rb.velocity = moveVector.normalized * 15 * Time.fixedDeltaTime * 100;
         //rb.AddForce(direction * 40f * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
-        DashKD(3);
+        DashKD(DashKDTime);
     }
    
     public void Move(Vector2 direction)
@@ -101,6 +102,10 @@ public class move : MonoBehaviour
     public void AktivSpDash()
     {
         isSpecialDash = true;
+    }
+    public void DashBuff()
+    {
+        DashKDTime += -0.3f;
     }
 
     //physic2d raycast

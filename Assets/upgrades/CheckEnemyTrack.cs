@@ -8,9 +8,9 @@ public class CheckEnemyTrack : MonoBehaviour
     
     [SerializeField] private GameObject projectile;
     private GameObject thisgm;
-    private int projNumber=1;
+    private int projNumber=2;
     private float reloadtime = 7f;
-    private int damage = 13;
+    [SerializeField] private int damage = 13;
 
     private bool isreload=false;
     void Awake()
@@ -107,11 +107,11 @@ public class CheckEnemyTrack : MonoBehaviour
     {
         if (lvl == 2)
         {
-            projNumber = 3;
+            projNumber = 4;
         }
         if (lvl == 4)
         {
-            projNumber = 5;
+            projNumber = 6;
         }
     }
 }

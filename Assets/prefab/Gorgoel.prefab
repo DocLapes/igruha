@@ -330,8 +330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 45
   AnimatorManager: {fileID: 7531716173484883767}
-  Menu: {fileID: 0}
-  isplayer: 0
 --- !u!114 &588249343286056682
 MonoBehaviour:
   m_ObjectHideFlags: 0

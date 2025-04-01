@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
         timertext.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        if (minutes == 2 && seconds == 30)
+        if (minutes == 4 && seconds == 0)
         {
             Win.GetComponent<PauseMenu>().Win();
         }

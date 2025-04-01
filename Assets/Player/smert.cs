@@ -6,14 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class Smert : MonoBehaviour
 {
-    private int CurrentEntityheath;
+    private float CurrentEntityheath;
     [SerializeField] private int MaxHealth;
     [SerializeField] private GameObject AnimatorManager;
+    [SerializeField] private GameObject VolumeDmg;
     private Rigidbody2D rb;
     private Vector2 otkidVector;
     private int stealedhealth;
-   
-    
+    private float regeninsec=0;
+
+
+
 
     public float Entityheath
     {
@@ -30,6 +33,10 @@ public class Smert : MonoBehaviour
         CurrentEntityheath = MaxHealth;
         rb = GetComponent<Rigidbody2D>();
         gameover = false;
+        if (gameObject.GetComponent<playermanager>() != null)
+        {
+            Regeneration();
+        }
     }
 
     // Update is called once per frame
@@ -44,6 +51,10 @@ public class Smert : MonoBehaviour
     }
     public void takedamage(int damageCount)
     {
+        if (gameObject.GetComponent<playermanager>() != null)
+        {
+            StartCoroutine(ShowDmg());
+        }
         if (AnimatorManager != null)
         {
             AnimatorManager.GetComponent<AnimatorManager>().hit();
@@ -57,14 +68,13 @@ public class Smert : MonoBehaviour
             
         }
     }
-    public void Lifesteal(GameObject entity,float stealpercent)
+    public void Lifesteal(GameObject entity)
     {
-        stealedhealth = (int)(CurrentEntityheath * stealpercent);
-        entity.GetComponent<Smert>().GetHeal(stealedhealth);
+        entity.GetComponent<Smert>().GetHeal();
     }
-    public void GetHeal(int stealedhealth)
+    public void GetHeal()
     {
-        CurrentEntityheath += stealedhealth;
+        CurrentEntityheath += 4;
         Debug.Log(stealedhealth);
     }
 
@@ -87,7 +97,23 @@ public class Smert : MonoBehaviour
     {
         MaxHealth += 10;
         CurrentEntityheath += 10;
+        regeninsec += 0.2f;
         Debug.Log(MaxHealth);
     }
-   
+    public void Regeneration()
+    {
+        CurrentEntityheath += regeninsec;
+        Invoke(nameof(Regeneration),1f);
+    }
+
+    public IEnumerator ShowDmg() 
+    {
+        VolumeDmg.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
+        VolumeDmg.SetActive(false);
+
+    }
+
 }

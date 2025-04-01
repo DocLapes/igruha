@@ -16,8 +16,12 @@ public class SpecialUpgradeMenu : MonoBehaviour
     [SerializeField] private GameObject SpearProj;
     [SerializeField] private GameObject Thunder;
     public static bool isspecialupgrademenu;
-   
+
     // Start is called before the first frame update
+    private void Start()
+    {
+       
+    }
     void Update()
     {
         if (isspecialupgrademenu == true)

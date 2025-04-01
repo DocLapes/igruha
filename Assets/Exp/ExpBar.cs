@@ -32,7 +32,7 @@ public class ExpBar : MonoBehaviour
         if (lvl % 2 == 1 && (Exp == ExpforNextLevel || Exp > ExpforNextLevel)) {
             Expleft = Exp - ExpforNextLevel;
             Exp = Expleft;
-            ExpforNextLevel += 30;
+            ExpforNextLevel += 15;
             expslider.maxValue = ExpforNextLevel;
             lvl++;
             Debug.Log(lvl + "¿œ√–Ã≈Õ" + lvl%2 );
