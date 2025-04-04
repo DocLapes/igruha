@@ -14006,6 +14006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   speedatk: 0
+  maxspeed: 6
   ExplosionAfterDash: {fileID: 210579516}
   Nimb: {fileID: 1755335113}
   isSpecialDash: 0
@@ -14145,6 +14146,7 @@ MonoBehaviour:
   Player: {fileID: 1097745537}
   impenemy: {fileID: 7262765636408421006, guid: c884f8a5fcb63674f8854f860874e10d, type: 3}
   spearskeleton: {fileID: 6247826741750272316, guid: 6131d5b5770f7fd4f9fe27aa2341fc49, type: 3}
+  worm: {fileID: 2738416095323930009, guid: 791d8878f239f0e41ae05d2a0a56346b, type: 3}
   gorguel: {fileID: 3132459541319759194, guid: 1fa4c75b721b4744383694d0bcac2901, type: 3}
   range: {fileID: 3084621932600354686, guid: de0608357a6f6b14c9ffcebc281bb49b, type: 3}
 --- !u!114 &1097745547

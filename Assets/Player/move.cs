@@ -10,6 +10,7 @@ public class move : MonoBehaviour
     private Collider2D colider;
     [SerializeField] private float speed;
     [SerializeField] private float speedatk;
+    [SerializeField] private float maxspeed;
     [SerializeField] private GameObject ExplosionAfterDash;
     [SerializeField] private GameObject Nimb;
     [SerializeField] private bool isSpecialDash=false;
@@ -107,7 +108,19 @@ public class move : MonoBehaviour
     {
         DashKDTime += -0.3f;
     }
+    public void Move2(Vector2 direction)
+    {
 
+        if (isstuned) return;
+        //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
+        moveVector = direction;
+        rb.AddForce(moveVector * speed * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
+        if (rb.velocity.magnitude > maxspeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxspeed;
+        }
+
+    }
     //physic2d raycast
     //public abstract class BaseInputController
     //{

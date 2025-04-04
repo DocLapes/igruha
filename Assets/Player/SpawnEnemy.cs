@@ -14,6 +14,7 @@ public class SpawnEnemy : MonoBehaviour
     private int enemy_count_max= 10;
     [SerializeField] public GameObject impenemy;
     [SerializeField] public GameObject spearskeleton;
+    [SerializeField] public GameObject worm;
     [SerializeField] public GameObject gorguel;
     [SerializeField] public GameObject range;
     private int dificulty = 0;
@@ -30,10 +31,11 @@ public class SpawnEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Enemyspawn());
-        StartCoroutine(EnemyspawnGorgoel());
-        StartCoroutine(EnemyspawnSkelet());
-        StartCoroutine(EnemyspawnRange());
+        //StartCoroutine(Enemyspawn());
+        //StartCoroutine(EnemyspawnGorgoel());
+        //StartCoroutine(EnemyspawnSkelet());
+        //StartCoroutine(EnemyspawnRange());
+        StartCoroutine(EnemyspawnWorm());
     }
 
     // Update is called once per frame
@@ -144,6 +146,28 @@ public class SpawnEnemy : MonoBehaviour
         }
         yield return new WaitForSeconds(23f);
         StartCoroutine(EnemyspawnGorgoel());
+    }
+    private IEnumerator EnemyspawnWorm()
+    {
+        if (spearskeleton_count_max > spearskeleton_count_current)
+        {
+            if (dificulty >= 0)
+            {
+
+                for (int i = 0; i < spearskeleton_count; i++)
+                {
+                    Vector2 circle = Random.onUnitSphere;
+                    circle = circle.normalized;
+                    Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
+                    GameObject enemy = Instantiate(worm, swpawnpoint, Quaternion.identity);
+
+                }
+                //Debug.Log(range_count);
+
+            }
+        }
+        yield return new WaitForSeconds(5f);
+        StartCoroutine(EnemyspawnSkelet());
     }
     public void MinusEnemy()
     {

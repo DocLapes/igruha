@@ -402,7 +402,6 @@ GameObject:
   - component: {fileID: 8366267556513787393}
   - component: {fileID: 527593894198403787}
   - component: {fileID: 2209711443646667276}
-  - component: {fileID: 2267411650259204821}
   m_Layer: 6
   m_Name: SpearSkelet
   m_TagString: Untagged
@@ -572,6 +571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   speedatk: 7
+  maxspeed: 0
   ExplosionAfterDash: {fileID: 0}
   Nimb: {fileID: 0}
   isSpecialDash: 0
@@ -606,41 +606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 2340745366901207195, guid: dc59cb4c064d9da46b9439fb6ba00e61, type: 3}
---- !u!70 &2267411650259204821
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6247826741750272316}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0126824435, y: -0.042392746}
-  m_Size: {x: 0.7463615, y: 1.314918}
-  m_Direction: 0
+  damage: 25
 --- !u!1 &6540655134906826575
 GameObject:
   m_ObjectHideFlags: 0

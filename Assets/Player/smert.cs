@@ -14,6 +14,7 @@ public class Smert : MonoBehaviour
     private Vector2 otkidVector;
     private int stealedhealth;
     private float regeninsec=0;
+    [SerializeField] private bool isWorm=false;
 
 
 

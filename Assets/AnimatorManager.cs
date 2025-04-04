@@ -137,6 +137,10 @@ public class AnimatorManager : MonoBehaviour
     {
         entityanimator.CrossFade("atackout", 0f, 0);
     }
+    public void Stunout()
+    {
+        entityanimator.CrossFade("stunout", 0f, 0);
+    }
     public void hit()
     {
         animationpriority = 2;
