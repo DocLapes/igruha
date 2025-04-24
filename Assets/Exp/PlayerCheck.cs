@@ -15,6 +15,10 @@ public class PlayerCheck : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Player == null)
+        {
+            Destroy(gameObject);
+        }
         Vector2 targetDir = Player.position - transform.position;
         var heading = Player.position - transform.position;
         float distance = heading.sqrMagnitude;
@@ -23,5 +27,7 @@ public class PlayerCheck : MonoBehaviour
             expmove.GetComponent<move>().Move(targetDir);
 
         }
+        
     }
+
 }

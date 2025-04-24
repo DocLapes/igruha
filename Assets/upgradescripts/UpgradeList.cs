@@ -8,7 +8,6 @@ public class UpgradeList : MonoBehaviour
     [SerializeField] Button UpgradeOne;
     [SerializeField] Button UpgradeTwo;
     [SerializeField] upgrade[] Massive;
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log(Massive[0]);
@@ -16,8 +15,6 @@ public class UpgradeList : MonoBehaviour
         Debug.Log(Massive[2]);
         Debug.Log(Massive.Length);
     }
-
-    // Update is called once per frame
     public void RNG_Upgrade()
     {
         
@@ -26,8 +23,6 @@ public class UpgradeList : MonoBehaviour
         int n2 = Random.Range(0, count);
         upgrade upgr1 = Massive[n1];
         upgrade upgr2 = Massive[n2];
-
-
         if (n1 != n2)
         {
             Debug.Log(n1);
@@ -35,12 +30,10 @@ public class UpgradeList : MonoBehaviour
             Debug.Log(count);
             UpgradeOne.GetComponent<UpgradeDisplay>().GetUpgrade(upgr1);
             UpgradeTwo.GetComponent<UpgradeDisplay>().GetUpgrade(upgr2);
-
         }
         else
         {
             RNG_Upgrade();
         }
-
     }
 }

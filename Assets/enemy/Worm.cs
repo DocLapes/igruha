@@ -10,12 +10,14 @@ public class Worm : EntityAi
 {
     // Start is called before the first frame update
     [SerializeField] private GameObject hitbox;
+    //[SerializeField] private GameObject Smertnost;
     private Collider2D cl;
     [SerializeField] private GameObject visualmodel;
     private Transform Player;
     [SerializeField] private int drift;
     private float atacktime = 5f;
     private Vector2 currenttargetdir = Vector2.one;
+    [SerializeField] private Smert Smertnost;
     enum EnemyState
     {
         Stalk,
@@ -41,54 +43,59 @@ public class Worm : EntityAi
         float distance = heading.sqrMagnitude;
         if (enemyState == EnemyState.Stalk)
         {
+            if (isstuned == true && stuntype2 == true)
+            {
+                Smertnost.Stun();
+                StartCoroutine(Stun());
+
+            }
+
             if (distance > 30f)
             {
                currenttargetdir = targetDir;
             }
            
-            if (isstuned == true && stuntype2==true)
-            {
-                ChangeState4();
-            }
             //else { rb.gameObject.GetComponent<move>().Move(targetDir); }
             visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
             rb.gameObject.GetComponent<move>().Move2(currenttargetdir);
-            cl.enabled = false;    
+            //Smertnost.enabled = false;
             hitbox.gameObject.GetComponent<BoxCollider2D>().enabled = true;
 
         }
         if (enemyState == EnemyState.Stun)
         {
-            StartCoroutine(Stun());
+            visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
         }
         if (enemyState == EnemyState.StunOut)
         {
-            StartCoroutine(StunOutC());
+            
         }
     }
 
 
     private IEnumerator StunOutC()
     {
+        ChangeState2();
         rb.velocity = Vector2.zero;
-        cl.enabled = false;
+        Smertnost.enabled = false;
         visualmodel.gameObject.GetComponent<AnimatorManager>().Stunout();
-        yield return new WaitForSeconds(0.6f);
-        rb.mass = 30f;
-        rb.drag = 5;
+        yield return new WaitForSeconds(0.55f);
+        rb.mass = 25f;
+        rb.drag = 0;
+        Smertnost.Stun();
         ChangeState3();
 
     }
     private IEnumerator Stun()
     {
+        ChangeState4();
         rb.velocity = Vector2.zero;
         rb.mass = 100f;
         rb.drag = 50f;
-        cl.enabled = true;
+        Smertnost.enabled = true;
         hitbox.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
         yield return new WaitForSeconds(3f);
-        ChangeState2();
+        StartCoroutine(StunOutC());
     }
     private void ChangeState2()
     {
@@ -107,7 +114,7 @@ public class Worm : EntityAi
         if (Player != null)
         {
             rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
-            //Player.GetComponentInChildren<SpawnEnemy>().MinusSpearEnemy();
+            Player.GetComponentInChildren<SpawnEnemy>().MinusWorm();
 
         }
     }

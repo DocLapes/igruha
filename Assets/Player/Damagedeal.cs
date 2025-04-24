@@ -28,12 +28,6 @@ public class Damagedeal : MonoBehaviour
     public void ProcessHit(Vector2 direction)
     {
 
-
-        //this.spriteRenderer = hitboxL.GetComponent<SpriteRenderer>();
-        //this.spriteRenderer.enabled = true;
-        //Hero.GetComponent<move>().StunEntity(stuntime);
-        
-        //Debug.Log("говно");
         Collider2D collider = GetComponent<Collider2D>();
         RaycastHit2D[] hits = new RaycastHit2D[3];
         ContactFilter2D filter = new ContactFilter2D();
@@ -41,7 +35,6 @@ public class Damagedeal : MonoBehaviour
         filter.useTriggers = true;
         filter.useLayerMask = true;
         int c_hits = collider.Cast(Vector2.zero, filter, hits);
-        // Instantiate the projectile at the position and rotation of this transform
         if (isprojectile == true)
         {
             GameObject clone;
@@ -61,8 +54,6 @@ public class Damagedeal : MonoBehaviour
                 hit.collider.gameObject.GetComponent<Smert>().takedamage(damage);
                 hit.collider.gameObject.GetComponent<Smert>().otkinytbyatack(direction, power);
             }
-
-
 
         }
     }
@@ -174,5 +165,4 @@ public class Damagedeal : MonoBehaviour
     {
         numofhits = num;
     }
-
 }

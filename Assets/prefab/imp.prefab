@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 784567501729977345}
   - component: {fileID: 602882975222886543}
   - component: {fileID: 7927208519687389884}
+  - component: {fileID: 6266601922789606918}
   m_Layer: 6
   m_Name: imp
   m_TagString: Untagged
@@ -133,6 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 19
   AnimatorManager: {fileID: 8592188822168210828}
+  VolumeDmg: {fileID: 0}
+  isWorm: 0
 --- !u!114 &2312431137931603655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.7
   speedatk: 0
+  maxspeed: 0
   ExplosionAfterDash: {fileID: 0}
   Nimb: {fileID: 0}
   isSpecialDash: 0
@@ -165,6 +169,8 @@ MonoBehaviour:
   hitbox: {fileID: 8204686702700887807}
   visualmodel: {fileID: 8592188822168210828}
   drift: 10
+  isimp: 1
+  isdog: 0
 --- !u!114 &602882975222886543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 2340745366901207195, guid: dc59cb4c064d9da46b9439fb6ba00e61, type: 3}
+  damage: 25
 --- !u!58 &7927208519687389884
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -213,6 +220,18 @@ CircleCollider2D:
   m_Offset: {x: 0.16972733, y: 0.1760912}
   serializedVersion: 2
   m_Radius: 0.40885067
+--- !u!210 &6266601922789606918
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262765636408421006}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &8204686702700887807
 GameObject:
   m_ObjectHideFlags: 0

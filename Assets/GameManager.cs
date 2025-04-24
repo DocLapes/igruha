@@ -9,35 +9,26 @@ public class GameManager : MonoBehaviour
     
 
     public GameObject Player => Hero;
-    // Start is called before the first frame update
-    public static GameManager instance = null; // Ёкземпл€р объекта
+    public static GameManager instance = null; 
 
     
-    // ћетод, выполн€емый при старте игры
+   
     void Start()
     {
-        // “еперь, провер€ем существование экземпл€ра
         if (instance == null)
-        { // Ёкземпл€р менеджера был найден
-            instance = this; // «адаем ссылку на экземпл€р объекта
-            InitializeGameManager();
+        { 
+            instance = this; 
         }
         else if (instance == this)
-        { // Ёкземпл€р объекта уже существует на сцене
+        { 
             
         }
 
-        
-
-
-
     }
     
-    // ћетод инициализации менеджера
-    private void InitializeGameManager()
-    {
-        /* TODO: «десь мы будем проводить инициализацию */
-    }
+    //private void InitializeGameManager()
+    //{
+    //}
 }
 
 

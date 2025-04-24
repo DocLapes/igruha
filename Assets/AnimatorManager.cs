@@ -86,29 +86,28 @@ public class AnimatorManager : MonoBehaviour
     }
     public void EnemyAtackWalking()
     {
-        if (animationpriority < 2)
+
+        if (rb != null)
         {
-            if (rb != null)
+            if (rb.velocity.x > 0)
             {
-                if (rb.velocity.x > 0)
-                {
-                    spriter.flipX = false;
-                    entityanimator.CrossFade("walkatack", 0f, 0);
-                }
-                if (rb.velocity.x < 0)
-                {
-                    spriter.flipX = true;
-                    entityanimator.CrossFade("walkatack", 0f, 0);
-                }
-                if (rb.velocity.y < 0)
-                {
-                    entityanimator.CrossFade("walkatack", 0f, 0);
-                }
-                if (rb.velocity.y > 0)
-                {
-                    entityanimator.CrossFade("walkatack", 0f, 0);
-                }
+                spriter.flipX = false;
+                entityanimator.CrossFade("walkatack", 0f, 0);
             }
+            if (rb.velocity.x < 0)
+            {
+                spriter.flipX = true;
+                entityanimator.CrossFade("walkatack", 0f, 0);
+            }
+            if (rb.velocity.y < 0)
+            {
+                entityanimator.CrossFade("walkatack", 0f, 0);
+            }
+            if (rb.velocity.y > 0)
+            {
+                entityanimator.CrossFade("walkatack", 0f, 0);
+            }
+
         }
         else { return; }
 

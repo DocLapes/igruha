@@ -15,9 +15,7 @@ public class move : MonoBehaviour
     [SerializeField] private GameObject Nimb;
     [SerializeField] private bool isSpecialDash=false;
     private float DashKDTime = 3f;
-    //[SerializeField] private float maxspeed;
     private Vector2 moveVector;
-    //[SerializeField] private GameObject visualmodel;
     void Awake()
     {
         
@@ -41,9 +39,7 @@ public class move : MonoBehaviour
         if (isSpecialDash == true) {
             ExplosionAfterDash.GetComponent<SpawnObject>().Spawn(transform.position);
         }
-        //rb.MovePosition(rb.position + direction*3f);
         rb.velocity = moveVector.normalized * 15 * Time.fixedDeltaTime * 100;
-        //rb.AddForce(direction * 40f * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
         DashKD(DashKDTime);
     }
    
@@ -52,15 +48,8 @@ public class move : MonoBehaviour
 
       
       if (isstuned) return;
-      //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
       moveVector = direction;
       rb.velocity= moveVector.normalized * speed * Time.fixedDeltaTime*100;
-      //rb.AddForce(moveVector.normalized * 1f * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
-
-        //if (rb.velocity.magnitude > maxspeed)
-        //{
-        //    rb.velocity = rb.velocity.normalized * maxspeed;
-        //} 
 
     }
     public void MoveAtack(Vector2 direction)
@@ -114,6 +103,10 @@ public class move : MonoBehaviour
         if (isstuned) return;
         //visualmodel.gameObject.GetComponent<AnimatorManager>().walking();
         moveVector = direction;
+        if (rb.velocity.magnitude < 1)
+        {
+            rb.velocity = rb.velocity.normalized * 1;
+        }
         rb.AddForce(moveVector * speed * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
         if (rb.velocity.magnitude > maxspeed)
         {

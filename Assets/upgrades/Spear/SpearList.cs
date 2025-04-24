@@ -72,5 +72,8 @@ public class SpearList : MonoBehaviour
         numberofhits += 1;
         aktiveSpear.GetComponent<SpearAtackNumber>().UpgradeNumberofHits(numberofhits);
     }
-   
+    public int ReturnDamage()
+    {
+        return damage;
+    }
 }

@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 51458413342654074}
   - component: {fileID: 9130235258850221451}
   - component: {fileID: 9135178613411016643}
+  - component: {fileID: 2997653173214917689}
   m_Layer: 0
   m_Name: Exp
   m_TagString: Untagged
@@ -262,9 +263,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   speedatk: 0
+  maxspeed: 0
   ExplosionAfterDash: {fileID: 0}
   Nimb: {fileID: 0}
   isSpecialDash: 0
+--- !u!114 &2997653173214917689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2340745366901207195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f38670212ee4704e959ceb3d44fafd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3074096738709019910
 GameObject:
   m_ObjectHideFlags: 0

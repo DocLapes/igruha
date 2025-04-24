@@ -49,17 +49,18 @@ public class GorguelEnemyAI : EntityAi
         //var direction = heading / distance;
         if (enemyState == EnemyState.Stalk)
         {
+            visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
             rb.drag = 0;
             rb.mass = 1;
-            if (distance > 1.0f )
+            if (distance > 3.0f )
             {
                 rb.gameObject.GetComponent<move>().Move(targetDir);
                 
-                visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
+                
             }
             if (distance <= 1.0f & isatack==false)
             {
-                visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
+               
                 rb.drag = 100;
                 StartCoroutine(Atack(targetDir));
                 
@@ -69,12 +70,16 @@ public class GorguelEnemyAI : EntityAi
         if (enemyState == EnemyState.AtackOut)
         {
             rb.mass = 100;
-            StartCoroutine(AtackOutM());
+            
         }
         if (enemyState == EnemyState.Stun)
         {
             rb.mass = 100;
-            StartCoroutine(Stun());
+            enemyState = EnemyState.Stun;
+            rb.velocity = Vector2.zero;
+            visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
+            Invoke(nameof(ChangeState2),1f);
+            
         }
         //if (rb.velocity != Vector2.zero && distance <= 5.0f && isatack == false)
         //{
@@ -96,7 +101,7 @@ public class GorguelEnemyAI : EntityAi
         visualmodel.gameObject.GetComponent<AnimatorManager>().AtackOut();
         yield return new WaitForSeconds(0.5f);
         cl.enabled = false;
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.45f);
         ChangeState3();
 
 
@@ -111,14 +116,14 @@ public class GorguelEnemyAI : EntityAi
         cl.enabled = true;
         ChangeState4();
     }
-    private IEnumerator Stun()
-    {
-        enemyState = EnemyState.Stun;
-        rb.velocity = Vector2.zero;
-        visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
-        yield return new WaitForSeconds(1f);
-        ChangeState2();
-    }
+    //private IEnumerator Stun()
+    //{
+    //    enemyState = EnemyState.Stun;
+    //    rb.velocity = Vector2.zero;
+    //    visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
+    //    yield return new WaitForSeconds(1f);
+    //    ChangeState2();
+    //}
     private void ChangeState4()
     {
         enemyState = EnemyState.Stun;
@@ -128,12 +133,15 @@ public class GorguelEnemyAI : EntityAi
     private void ChangeState2()
     {
         enemyState = EnemyState.AtackOut;
+        StartCoroutine(AtackOutM());
 
 
     }
     private void ChangeState3()
     {
+        visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyWalking();
         enemyState = EnemyState.Stalk;
+
     }
 
     public void OnDestroy()

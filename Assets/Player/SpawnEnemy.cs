@@ -12,11 +12,20 @@ public class SpawnEnemy : MonoBehaviour
     private int enemy_count;
     private int enemy_count_current = 0;
     private int enemy_count_max= 10;
+    private int dog_count;
+    private int dog_count_current = 0;
+    private int dog_count_max = 1;
+    private int skelet_count;
+    private int skelet_count_current = 0;
+    private int skelet_count_max = 2;
     [SerializeField] public GameObject impenemy;
+    [SerializeField] public GameObject dog;
+    [SerializeField] public GameObject skelet;
     [SerializeField] public GameObject spearskeleton;
     [SerializeField] public GameObject worm;
     [SerializeField] public GameObject gorguel;
     [SerializeField] public GameObject range;
+    [SerializeField] public GameObject skull;
     private int dificulty = 0;
     float time;
     private int t =0;
@@ -24,6 +33,12 @@ public class SpawnEnemy : MonoBehaviour
     private int spearskeleton_count=1;
     private int spearskeleton_count_current = 0;
     private int spearskeleton_count_max = 1;
+    private int worm_count = 1;
+    private int worm_count_current = 0;
+    private int worm_count_max = 1;
+    private int skull_count = 1;
+    private int skull_count_current = 0;
+    private int skull_count_max = 2;
     private int range_count;
     private int range_count_current = 0;
     private int range_count_max = 1;
@@ -31,14 +46,31 @@ public class SpawnEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(Enemyspawn());
-        //StartCoroutine(EnemyspawnGorgoel());
-        //StartCoroutine(EnemyspawnSkelet());
-        //StartCoroutine(EnemyspawnRange());
-        StartCoroutine(EnemyspawnWorm());
+        if (impenemy != null)
+        {
+            StartCoroutine(Enemyspawn());
+        }
+        if (gorguel != null)
+        {
+            StartCoroutine(EnemyspawnGorgoel());
+        }
+        if (spearskeleton != null)
+        {
+            StartCoroutine(EnemyspawnSkelet());
+        }
+        if (range != null)
+        {
+            StartCoroutine(EnemyspawnRange());
+        }
+        if (worm != null)
+        {
+            StartCoroutine(EnemyspawnWorm());
+        }
+        if (skull != null)
+        {
+            StartCoroutine(EnemyspawnSkull());
+        }
     }
-
-    // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
@@ -48,7 +80,8 @@ public class SpawnEnemy : MonoBehaviour
             t = halfminutes;
             dificulty++;
             Debug.Log(dificulty);
-            enemy_count_max += 3;
+            enemy_count_max += 2;
+            dog_count_max += 1;
             return;
         }
         int minutes = Mathf.FloorToInt(time / 60);
@@ -56,6 +89,7 @@ public class SpawnEnemy : MonoBehaviour
         {
             t2 = minutes;
             range_count_max += 1;
+            skelet_count_max++;
             return;
         }
 
@@ -66,20 +100,78 @@ public class SpawnEnemy : MonoBehaviour
 
         if (enemy_count_max > enemy_count_current)
         {
-            enemy_count = enemy_count_max - enemy_count_current;
-            for (int i = 0; i < enemy_count; i++)
+            if (dificulty < 3)
             {
-                enemy_count_current += 1;
-                Vector2 circle = Random.onUnitSphere;
-                circle = circle.normalized;
-                Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
-                GameObject enemy = Instantiate(impenemy, swpawnpoint, Quaternion.identity);
+                enemy_count = enemy_count_max - enemy_count_current;
+                for (int i = 0; i < enemy_count; i++)
+                {
+                    enemy_count_current += 1;
+                    Vector2 circle = Random.onUnitSphere;
+                    circle = circle.normalized;
+                    Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
+                    GameObject enemy = Instantiate(impenemy, swpawnpoint, Quaternion.identity);
+
+                }
+            }
+            if (dificulty <= 6 && dificulty >= 3)
+            {
+                enemy_count = enemy_count_max - enemy_count_current;
+                dog_count = dog_count_max - dog_count_current;
+                for (int i = 0; i < enemy_count; i++)
+                {
+                    enemy_count_current += 1;
+                    Vector2 circle = Random.onUnitSphere;
+                    circle = circle.normalized;
+                    Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
+                    GameObject enemy = Instantiate(impenemy, swpawnpoint, Quaternion.identity);
+
+                }
+                for (int i = 0; i < dog_count; i++)
+                {
+                    dog_count_current += 1;
+                    Vector2 circle = Random.onUnitSphere;
+                    circle = circle.normalized;
+                    Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
+                    GameObject enemy2 = Instantiate(dog, swpawnpoint, Quaternion.identity);
+
+                }
+
+            }
+            if (dificulty > 6)
+            {
+                enemy_count = enemy_count_max - enemy_count_current;
+                dog_count = dog_count_max - dog_count_current;
+                skelet_count = skelet_count_max - skelet_count_current;
+                for (int i = 0; i < enemy_count; i++)
+                {
+                    enemy_count_current += 1;
+                    Vector2 circle = Random.onUnitSphere;
+                    circle = circle.normalized;
+                    Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
+                    GameObject enemy = Instantiate(impenemy, swpawnpoint, Quaternion.identity);
+
+                }
+                for (int i = 0; i < dog_count; i++)
+                {
+                    dog_count_current += 1;
+                    Vector2 circle = Random.onUnitSphere;
+                    circle = circle.normalized;
+                    Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
+                    GameObject enemy2 = Instantiate(dog, swpawnpoint, Quaternion.identity);
+
+                }
+                //for (int i = 0; i < skelet_count; i++)
+                //{
+                //    skelet_count_current += 1;
+                //    Vector2 circle = Random.onUnitSphere;
+                //    circle = circle.normalized;
+                //    Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
+                //    GameObject enemy3 = Instantiate(skelet, swpawnpoint, Quaternion.identity);
+
+                //}
 
             }
         }
-        //Debug.Log(enemy_count_current);
-        
-       
         yield return new WaitForSeconds(timeBetweenWaves);
         StartCoroutine(Enemyspawn());
     }
@@ -87,8 +179,7 @@ public class SpawnEnemy : MonoBehaviour
     {
         if (spearskeleton_count_max > spearskeleton_count_current) {
             if (dificulty > 2)
-            {
-                
+            { 
                 for (int i = 0; i < spearskeleton_count; i++)
                 {
                     spearskeleton_count_current += 1;
@@ -98,8 +189,6 @@ public class SpawnEnemy : MonoBehaviour
                     GameObject enemy = Instantiate(spearskeleton, swpawnpoint, Quaternion.identity);
 
                 }
-                //Debug.Log(range_count);
-
             }
         }
         yield return new WaitForSeconds(Random.Range(15f, 19f));
@@ -120,8 +209,6 @@ public class SpawnEnemy : MonoBehaviour
                     GameObject enemy = Instantiate(range, swpawnpoint, Quaternion.identity);
 
                 }
-                //Debug.Log(enemy_count);
-
             }
         }
         yield return new WaitForSeconds(12f);
@@ -140,34 +227,52 @@ public class SpawnEnemy : MonoBehaviour
                 GameObject enemy = Instantiate(gorguel, swpawnpoint, Quaternion.identity);
 
             }
-            //Debug.Log(enemy_count);
-
-            
         }
         yield return new WaitForSeconds(23f);
         StartCoroutine(EnemyspawnGorgoel());
     }
     private IEnumerator EnemyspawnWorm()
     {
-        if (spearskeleton_count_max > spearskeleton_count_current)
+        if (worm_count_max > worm_count_current)
         {
-            if (dificulty >= 0)
+            if (dificulty >= 3)
             {
 
-                for (int i = 0; i < spearskeleton_count; i++)
+                for (int i = 0; i < worm_count; i++)
                 {
+                    worm_count_current += 1;
                     Vector2 circle = Random.onUnitSphere;
                     circle = circle.normalized;
                     Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
                     GameObject enemy = Instantiate(worm, swpawnpoint, Quaternion.identity);
 
                 }
-                //Debug.Log(range_count);
-
             }
         }
-        yield return new WaitForSeconds(5f);
-        StartCoroutine(EnemyspawnSkelet());
+        yield return new WaitForSeconds(20f);
+        StartCoroutine(EnemyspawnWorm());
+    }
+    private IEnumerator EnemyspawnSkull()
+    {
+        if (skull_count_max > skull_count_current)
+        {
+            if (dificulty > 1)
+            {
+                skull_count = skull_count_max - skull_count_current;
+
+                for (int i = 0; i < skull_count; i++)
+                {
+                    Vector2 circle = Random.onUnitSphere;
+                    circle = circle.normalized;
+                    Vector2 swpawnpoint = (circle * 15) + (Vector2)transform.position;
+                    GameObject enemy = Instantiate(skull, swpawnpoint, Quaternion.identity);
+
+                }
+ 
+            }
+        }
+        yield return new WaitForSeconds(12f);
+        StartCoroutine(EnemyspawnSkull());
     }
     public void MinusEnemy()
     {
@@ -181,4 +286,17 @@ public class SpawnEnemy : MonoBehaviour
     {
         range_count_current += -1;
     }
+    public void MinusWorm()
+    {
+        worm_count_current += -1;
+    }
+    public void MinusSkull()
+    {
+        skull_count_current += -1;
+    }
+    public void MinusDog()
+    {
+        dog_count_current += -1;
+    }
+
 }

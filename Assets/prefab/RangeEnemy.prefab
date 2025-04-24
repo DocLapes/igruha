@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 988368462427694662}
   - component: {fileID: 7972664421481289323}
   - component: {fileID: 6185493532783793394}
+  - component: {fileID: -8338416134218996021}
   m_Layer: 6
   m_Name: RangeEnemy
   m_TagString: Untagged
@@ -80,6 +81,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 15
   AnimatorManager: {fileID: 4909866731808683494}
+  VolumeDmg: {fileID: 0}
+  isWorm: 0
 --- !u!114 &9040357759292791578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.2
   speedatk: 0
+  maxspeed: 0
   ExplosionAfterDash: {fileID: 0}
   Nimb: {fileID: 0}
   isSpecialDash: 0
@@ -145,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 2340745366901207195, guid: dc59cb4c064d9da46b9439fb6ba00e61, type: 3}
+  damage: 25
 --- !u!114 &7972664421481289323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +202,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!210 &-8338416134218996021
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3084621932600354686}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &4909866731808683494
 GameObject:
   m_ObjectHideFlags: 0

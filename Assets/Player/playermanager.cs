@@ -243,5 +243,9 @@ public class playermanager : MonoBehaviour
         //* Time.deltaTime
         Debug.Log(atacktime);
     }
+    public float ReturnAtackSpeed()
+    {
+        return atacktime; 
+    }
 }
 

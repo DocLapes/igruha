@@ -8,10 +8,6 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class SpearEnemyAi : EntityAi
 {
-    // Start is called before the first frame update
-
-    
-    
     [SerializeField] private GameObject hitbox;
     [SerializeField] private GameObject hitbox2;
     private Collider2D cl;
@@ -31,8 +27,9 @@ public class SpearEnemyAi : EntityAi
         AtackPrepare,
         AtackOut
     }
+
     private EnemyState enemyState = EnemyState.Stalk;
-    // Start is called before the first frame update
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,27 +37,20 @@ public class SpearEnemyAi : EntityAi
         Player = GameManager.instance.Player.transform;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        //Debug.Log(rb.GetComponent<smert>().Entityheath);
         Vector2 targetDir = Player.position - transform.position;
         var heading = Player.position - transform.position;
         float distance = heading.sqrMagnitude;
-        //SpriteRenderer sprite = hitbox.gameObject.GetComponent<SpriteRenderer>();
-        //Debug.Log(rb.GetComponent<smert>().Entityheath);
-        //var direction = heading / distance;
+       
         if (enemyState == EnemyState.Stalk)
         {
-            //Debug.Log(enemyState);
-            
             if (isstuned == true)
             {
                 visualmodel.gameObject.GetComponent<AnimatorManager>().Idle();
                 rb.drag = drift;
 
             }
-            //else { rb.gameObject.GetComponent<move>().Move(targetDir); }
 
             if (rb.velocity != Vector2.zero && isstuned == false)
             {
@@ -84,25 +74,15 @@ public class SpearEnemyAi : EntityAi
 
             }
 
-
-
         }
         if (enemyState == EnemyState.Atack)
         {
             
             cl.enabled = false;
             visualmodel.gameObject.GetComponent<AnimatorManager>().Atack();
-            //Vector2.MoveTowards(transform.position, Atackpoint, 25f);
             rb.gameObject.GetComponent<move>().MoveAtack(Atackpoint);
             hitbox.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-            
-            
-            //Debug.Log(Vector2.Distance(Atackpoint, (Vector2)transform.position));
-            
             ChangeState1(atacktimemetod);
-
-            //if (Atackpoint.x == transform.position.x & Atackpoint.y == transform.position.y) enemyState = EnemyState.Stalk;
-
         }
         if (enemyState == EnemyState.AtackOut)
         {
@@ -115,17 +95,6 @@ public class SpearEnemyAi : EntityAi
 
         }
     }
-
-    //private IEnumerator Atack(Vector2 direction)
-    //{
-    //    visualmodel.gameObject.GetComponent<AnimatorManager>().EnemyGetReady();
-
-    //    yield return new WaitForSeconds(0.1f);
-    //    visualmodel.gameObject.GetComponent<AnimatorManager>().Atack();
-    //    hitbox.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-
-    //    Invoke(nameof(AtackOut), atacktimemetod);
-    //}
     private IEnumerator AtackOutM()
     {
         rb.velocity = Vector2.zero;
@@ -146,8 +115,6 @@ public class SpearEnemyAi : EntityAi
     private void ChangeState2()
     {
         enemyState = EnemyState.AtackOut;
-        
-        
     }
     private void ChangeState3()
     {
@@ -183,7 +150,6 @@ public class SpearEnemyAi : EntityAi
         {
             rb.gameObject.GetComponent<SpawnObject>().Spawn(rb.transform.position);
             Player.GetComponentInChildren<SpawnEnemy>().MinusSpearEnemy();
-
         }
     }
 }

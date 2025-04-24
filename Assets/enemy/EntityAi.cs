@@ -9,12 +9,13 @@ public class EntityAi : MonoBehaviour
     protected Rigidbody2D rb;
     protected bool isatack;
     protected bool stuntype2=false;
+    
 
 
     // Start is called before the first frame update
     void Awake()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -48,5 +49,6 @@ public class EntityAi : MonoBehaviour
         stuntype2= false;
         isstuned = false;
     }
-    
+   
+
 }

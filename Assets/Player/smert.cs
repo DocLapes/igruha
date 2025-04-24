@@ -10,11 +10,12 @@ public class Smert : MonoBehaviour
     [SerializeField] private int MaxHealth;
     [SerializeField] private GameObject AnimatorManager;
     [SerializeField] private GameObject VolumeDmg;
-    private Rigidbody2D rb;
+    private Rigidbody2D rb; 
     private Vector2 otkidVector;
     private int stealedhealth;
     private float regeninsec=0;
     [SerializeField] private bool isWorm=false;
+    private bool isStuned=false;
 
 
 
@@ -52,21 +53,39 @@ public class Smert : MonoBehaviour
     }
     public void takedamage(int damageCount)
     {
-        if (gameObject.GetComponent<playermanager>() != null)
+        if (isWorm == false)
         {
-            StartCoroutine(ShowDmg());
+            if (gameObject.GetComponent<playermanager>() != null)
+            {
+                StartCoroutine(ShowDmg());
+            }
+            if (AnimatorManager != null)
+            {
+                AnimatorManager.GetComponent<AnimatorManager>().hit();
+            }
+            CurrentEntityheath -= damageCount;
+
+
+            if (CurrentEntityheath <= 0)
+            {
+                Destroy(gameObject);
+
+            }
         }
-        if (AnimatorManager != null)
+        if(isWorm == true && isStuned == true) 
         {
-            AnimatorManager.GetComponent<AnimatorManager>().hit();
-        }
-        CurrentEntityheath -= damageCount ;
-       
-        
-        if (CurrentEntityheath <= 0)
-        {
-            Destroy(gameObject);
-            
+            if (AnimatorManager != null)
+            {
+                AnimatorManager.GetComponent<AnimatorManager>().hit();
+            }
+            CurrentEntityheath -= damageCount;
+
+
+            if (CurrentEntityheath <= 0)
+            {
+                Destroy(gameObject);
+
+            }
         }
     }
     public void Lifesteal(GameObject entity)
@@ -81,13 +100,18 @@ public class Smert : MonoBehaviour
 
     public void otkinyt(int power)
     {
-        
-        rb.AddForce(otkidVector * power * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
+        if (isWorm == false)
+        {
+            rb.AddForce(otkidVector * power * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
+        }
     }
     public void otkinytbyatack(Vector2 otkidDirection, int power)
     {
-        rb.velocity = Vector2.zero;
-        rb.AddForce(otkidDirection * power * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
+        if (isWorm == false)
+        {
+            rb.velocity = Vector2.zero;
+            rb.AddForce(otkidDirection * power * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
+        }
     }
     public void StunEntitySpear(float stuntime)
     {
@@ -115,6 +139,18 @@ public class Smert : MonoBehaviour
 
         VolumeDmg.SetActive(false);
 
+    }
+    public void Stun()
+    {
+        isStuned = !isStuned;
+    }
+    public int ReturnHeath()
+    {
+        return MaxHealth;
+    }
+    public float ReturnRegen()
+    {
+        return regeninsec;
     }
 
 }

@@ -7,10 +7,15 @@ public class Exp : MonoBehaviour
     GameObject Obj;
    
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         
         Obj = gameObject;
+        if (gameObject.GetComponent<CheckMonument>() != null)
+        {
+            Debug.Log("idle");
+            gameObject.GetComponent<CheckMonument>().ChechMon();
+        }
     }
 
     // Update is called once per frame

@@ -9,8 +9,6 @@ public class UpgradeMenu : MonoBehaviour
     [SerializeField] private GameObject upgradeMenu;
     [SerializeField] private GameObject Hero;
     public static bool isupgrademenu;
-   
-    // Start is called before the first frame update
     void Update()
     {
         if (isupgrademenu == true)
@@ -18,10 +16,7 @@ public class UpgradeMenu : MonoBehaviour
             upgradeMenu.SetActive(true);
             Time.timeScale = 0f;
         }
-        
     }
-
-
     public void ResumeGame()
     {
         upgradeMenu.SetActive(false);
@@ -43,7 +38,5 @@ public class UpgradeMenu : MonoBehaviour
                 break;
         }
     }
-
-
 
 }

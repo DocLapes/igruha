@@ -23,7 +23,7 @@ public class SpawnObject : MonoBehaviour
     {
         
         GameObject obj = Instantiate(Object, swpawnpoint, Quaternion.identity);
-        if (obj.GetComponent<Damagedeal>() != null)
+        if (obj.GetComponent<Damagedeal>() != null && obj.GetComponent<DamagedealEnemy>() == null)
         {
             obj.GetComponent<Explosion>().GiveExplosionDamage(damage, scale);
         }

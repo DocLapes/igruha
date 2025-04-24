@@ -9,9 +9,16 @@ public class Timer : MonoBehaviour
     int t = 10;
     [SerializeField] TextMeshProUGUI timertext;
     [SerializeField] GameObject Win;
+    [SerializeField] GameObject Monument;
+    [SerializeField] private bool WinCondition;
+    
     // Start is called before the first frame update
     void Start()
     {
+        if(Monument!=null)
+        {
+            Monument.GetComponent<Monument>().Activate();
+        }
         
     }
 
@@ -22,14 +29,15 @@ public class Timer : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
         timertext.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        if (minutes == 4 && seconds == 0)
+        if (minutes == 4 && seconds == 0 && WinCondition==true)
         {
-            Win.GetComponent<PauseMenu>().Win();
+            WinScreen();
         }
-
-
 
     }
 
-    
+    public void WinScreen()
+    {
+        Win.GetComponent<PauseMenu>().Win();
+    }
 }
