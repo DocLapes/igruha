@@ -6,7 +6,7 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     float time;
-    int t = 10;
+    //int t = 10;
     [SerializeField] TextMeshProUGUI timertext;
     [SerializeField] GameObject Win;
     [SerializeField] GameObject Monument;

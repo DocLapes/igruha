@@ -27,8 +27,6 @@ public class SuperProjModule : UpgradeModule
     {
         Proj.GetComponent<CheckEnemy>().GetUpgradeType2(lvl);
     }
-    public void Begining(int ceratelvl)
-    {
-        lvl = ceratelvl;
-    }
+   
+
 }

@@ -6,7 +6,8 @@ public class ExplosionEnemy : MonoBehaviour
 {
     [SerializeField] private GameObject Visual;
     private int damage;
-    [SerializeField] private float time;
+    [SerializeField] private float time1;
+    [SerializeField] private float time2;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +18,9 @@ public class ExplosionEnemy : MonoBehaviour
     public IEnumerator Boom()
     {
         Visual.GetComponent<AnimatorManager>().Explosion();
-        gameObject.GetComponentInChildren<Damagedeal>().GetDamag(damage);
-        yield return new WaitForSeconds(0.07f);
+        yield return new WaitForSeconds(time1);
         gameObject.GetComponentInChildren<DamagedealEnemy>().ProcessHitCircle();
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time2);
         Destroy(gameObject);
 
     }

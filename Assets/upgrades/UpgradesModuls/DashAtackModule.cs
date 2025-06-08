@@ -27,5 +27,22 @@ public class DashAtackModule : UpgradeModule
     {
         Dash.GetComponent<SpawnObject>().GetUpgradeType2(lvl);
     }
-    
+    public override void CheckModule()
+    {
+        if (SuperUpgrade != null)
+        {
+            if (SecondUpgrade.lvl > 0)
+            {
+                int lvl2 = SecondUpgrade.lvl;
+                if (lvl2 + lvl >= 4)
+                {
+                    SuperUpgrade.SetActive(true);
+                    gameObject.GetComponentInParent<move>().GetSuperUpgr(SuperUpgrade);
+                    UpgradeLsit.GetComponent<SpecialUpgradeList>().DeleteSkill(Upgrnum);
+                    UpgradeLsit.GetComponent<SpecialUpgradeList>().DeleteSkill(SecondUpgrade.Upgrnum);
+                }
+            }
+        }
+
+    }
 }

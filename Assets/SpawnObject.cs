@@ -7,11 +7,12 @@ public class SpawnObject : MonoBehaviour
     [SerializeField] GameObject Object;
     [SerializeField] private int damage=25;
     private float scale = 1;
+    [SerializeField] private float delay;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+    
     }
 
     // Update is called once per frame

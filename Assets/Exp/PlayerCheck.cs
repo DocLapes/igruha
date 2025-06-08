@@ -6,10 +6,21 @@ public class PlayerCheck : MonoBehaviour
 {
     [SerializeField]private GameObject expmove;
     private Transform Player;
+    private float radius;
+    private float speed;
     // Start is called before the first frame update
     void Awake()
     {
         Player = GameManager.instance.Player.transform;
+        
+    }
+    private void Start()
+    {
+        radius = Player.gameObject.GetComponent<playermanager>().radius;
+        speed = Player.gameObject.GetComponent<playermanager>().speed;
+        expmove.GetComponent<move>().GetSpeed(speed);
+        Debug.Log(radius);
+        Debug.Log(speed);
     }
 
     // Update is called once per frame
@@ -22,8 +33,10 @@ public class PlayerCheck : MonoBehaviour
         Vector2 targetDir = Player.position - transform.position;
         var heading = Player.position - transform.position;
         float distance = heading.sqrMagnitude;
-        if (distance <= 15f)
+        
+        if (distance <= radius)
         {
+           
             expmove.GetComponent<move>().Move(targetDir);
 
         }

@@ -11,7 +11,7 @@ public class Smert : MonoBehaviour
     [SerializeField] private GameObject AnimatorManager;
     [SerializeField] private GameObject VolumeDmg;
     private Rigidbody2D rb; 
-    private Vector2 otkidVector;
+    //private Vector2 otkidVector;
     private int stealedhealth;
     private float regeninsec=0;
     [SerializeField] private bool isWorm=false;
@@ -44,7 +44,7 @@ public class Smert : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        otkidVector = rb.velocity;
+        //otkidVector = rb.velocity;
         if (CurrentEntityheath > MaxHealth)
         {
             CurrentEntityheath = MaxHealth;
@@ -98,13 +98,13 @@ public class Smert : MonoBehaviour
         Debug.Log(stealedhealth);
     }
 
-    public void otkinyt(int power)
-    {
-        if (isWorm == false)
-        {
-            rb.AddForce(otkidVector * power * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
-        }
-    }
+    //public void otkinyt(int power)
+    //{
+    //    if (isWorm == false)
+    //    {
+    //        rb.AddForce(otkidVector * power * Time.fixedDeltaTime * 100, ForceMode2D.Impulse);
+    //    }
+    //}
     public void otkinytbyatack(Vector2 otkidDirection, int power)
     {
         if (isWorm == false)

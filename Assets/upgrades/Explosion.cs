@@ -16,6 +16,7 @@ public class Explosion : MonoBehaviour
     }
     public IEnumerator Boom()
     {
+        yield return new WaitForSeconds(0.2f);
         Visual.GetComponent<AnimatorManager>().Explosion();
         gameObject.GetComponentInChildren<Damagedeal>().GetDamag(damage);
         yield return new WaitForSeconds(0.07f);

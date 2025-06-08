@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Monument : MonoBehaviour
 {
-    [SerializeField] private Transform Player;
+    [SerializeField] private GameObject Player;
     [SerializeField] private GameObject visualmodel;
     [SerializeField] private GameObject NextMonolith;
     [SerializeField] private GameObject Win;
@@ -29,7 +29,6 @@ public class Monument : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Player = GameManager.instance.Player.transform;
         StartCoroutine(LoseSoul());
     }
 
@@ -38,8 +37,8 @@ public class Monument : MonoBehaviour
     {
         if (Player != null)
         {
-            Vector2 targetDir = Player.position - transform.position;
-            var heading = Player.position - transform.position;
+            Vector2 targetDir = Player.transform.position - transform.position;
+            var heading = Player.transform.position - transform.position;
             distance = heading.sqrMagnitude;
         }
         if (distance <= 55f)
@@ -81,6 +80,7 @@ public class Monument : MonoBehaviour
     public void Activate()
     {
         state = State.TakeEnergy;
+        Player.GetComponentInChildren<DirectionToAltar>().GetAltar(gameObject);
     }
     public void ActivateNext()
     {

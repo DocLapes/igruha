@@ -36,8 +36,8 @@ public class SpecialUpgradeDisplay : MonoBehaviour
     }
     public void TransferUpddate()
     {
-        GameMan.GetComponent<SpecialUpgradeMenu>().SwitchUpgrade(number);
         GameMan.GetComponent<SpecialUpgradeList>().NewActiveUpgrade(number);
+        GameMan.GetComponent<SpecialUpgradeMenu>().SwitchUpgrade(number);
         GameMan.GetComponent<Inventory>().AddItems(Upgrade);
     }
 

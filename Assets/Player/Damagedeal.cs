@@ -145,7 +145,31 @@ public class Damagedeal : MonoBehaviour
 
         }
     }
-    
+    public void ProcessHitVacuum()
+    {
+
+        gm = gameObject;
+        Collider2D collider = GetComponent<Collider2D>();
+        RaycastHit2D[] hits = new RaycastHit2D[20];
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.layerMask = LayerMask.GetMask("entity");
+        filter.useTriggers = true;
+        filter.useLayerMask = true;
+        int c_hits = collider.Cast(Vector2.zero, filter, hits);
+        // Instantiate the projectile at the position and rotation of this transform
+        for (int i = 0; i < c_hits; i++)
+        {
+            RaycastHit2D hit = hits[i];
+            if (hit.collider.gameObject.GetComponent<Smert>() != null)
+            {
+                hit.collider.gameObject.GetComponent<EntityAi>().StunEntity(stuntime);
+                hit.collider.gameObject.GetComponent<Smert>().takedamage(damage);
+                hit.collider.gameObject.GetComponent<Smert>().otkinytbyatack(gm.transform.position - hit.collider.gameObject.transform.position, power);
+            }
+
+        }
+    }
+
     public void GetPrjctl()
     {
         isprojectile = true;

@@ -575,6 +575,7 @@ MonoBehaviour:
   speedatk: 7
   maxspeed: 0
   ExplosionAfterDash: {fileID: 0}
+  SuperExplosionAfterDash: {fileID: 0}
   Nimb: {fileID: 0}
   isSpecialDash: 0
 --- !u!114 &527593894198403787
@@ -609,6 +610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Object: {fileID: 2340745366901207195, guid: dc59cb4c064d9da46b9439fb6ba00e61, type: 3}
   damage: 25
+  delay: 0
 --- !u!210 &4234023565136404342
 SortingGroup:
   m_ObjectHideFlags: 0

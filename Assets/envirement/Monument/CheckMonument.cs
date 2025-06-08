@@ -22,7 +22,6 @@ public class CheckMonument : MonoBehaviour
         filter.useTriggers = true;
         filter.useLayerMask = true;
         int c_hits = collider.Cast(Vector2.zero, filter, hits);
-        Debug.Log(c_hits);
         for (int i = 0; i < c_hits; i++)
         {
             

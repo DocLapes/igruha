@@ -16,7 +16,10 @@ public class AnimatorManager : MonoBehaviour
     {
         spriter = GetComponent<SpriteRenderer>();
         entityanimator = GetComponent<Animator>();
-        rb = Hero.GetComponent<Rigidbody2D>();
+        if (Hero.GetComponent<Rigidbody2D>() != null)
+        {
+            rb = Hero.GetComponent<Rigidbody2D>();
+        }
     }
 
     // Update is called once per frame

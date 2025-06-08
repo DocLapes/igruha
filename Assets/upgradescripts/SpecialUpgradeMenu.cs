@@ -15,6 +15,8 @@ public class SpecialUpgradeMenu : MonoBehaviour
     [SerializeField] private GameObject Spear;
     [SerializeField] private GameObject SpearProj;
     [SerializeField] private GameObject Thunder;
+    [SerializeField] private GameObject Bounce;
+    [SerializeField] private GameObject Vacuum;
     public static bool isspecialupgrademenu;
 
     // Start is called before the first frame update
@@ -67,6 +69,12 @@ public class SpecialUpgradeMenu : MonoBehaviour
                 break;
             case 8:
                 Thunder.GetComponent<UpgradeModule>().NewUpgradelvl();
+                break;
+            case 9:
+                Bounce.GetComponent<UpgradeModule>().NewUpgradelvl();
+                break;
+            case 10:
+                Vacuum.GetComponent<UpgradeModule>().NewUpgradelvl();
                 break;
 
         }

@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    [SerializeField] float spawnRate;
     float timeBetweenWaves = 5;
     [SerializeField] private Transform Player;
     private int enemy_count;

@@ -12,6 +12,7 @@ public class move : MonoBehaviour
     [SerializeField] private float speedatk;
     [SerializeField] private float maxspeed;
     [SerializeField] private GameObject ExplosionAfterDash;
+    [SerializeField] private GameObject SuperExplosionAfterDash;
     [SerializeField] private GameObject Nimb;
     [SerializeField] private bool isSpecialDash=false;
     private float DashKDTime = 3f;
@@ -37,6 +38,10 @@ public class move : MonoBehaviour
         if (nodash) return;
         StunEntity(0.1f);
         if (isSpecialDash == true) {
+            if (SuperExplosionAfterDash != null)
+            {
+                SuperExplosionAfterDash.GetComponent<Damagedeal>().ProcessHitVacuum();
+            }
             ExplosionAfterDash.GetComponent<SpawnObject>().Spawn(transform.position);
         }
         rb.velocity = moveVector.normalized * 15 * Time.fixedDeltaTime * 100;
@@ -113,6 +118,14 @@ public class move : MonoBehaviour
             rb.velocity = rb.velocity.normalized * maxspeed;
         }
 
+    }
+    public void GetSpeed(float newspeed)
+    {
+        speed = newspeed;
+    }
+    public void GetSuperUpgr(GameObject superExplosionAfterDash)
+    {
+        SuperExplosionAfterDash = superExplosionAfterDash;
     }
     //physic2d raycast
     //public abstract class BaseInputController

@@ -28,11 +28,14 @@ public class playermanager : MonoBehaviour
     bool atacking;
     [SerializeField] private GameObject Skill;
     [SerializeField] private GameObject Skill2;
+    public float radius;
+    public float speed;
 
     // Update is called once per frame
     void Awake()
     {
-       
+        radius = 15f;
+        speed = 0.5f;
         rb = Hero.GetComponent<Rigidbody2D>();
     }
 
@@ -186,9 +189,10 @@ public class playermanager : MonoBehaviour
     }
     private IEnumerator ShieldAtackwithdelay(Vector2 Atackdirection)
     {
+        Debug.Log(Atackdirection);
         if (Atackdirection == Vector2.left)
         {
-
+            Debug.Log("право");
             shieldL.gameObject.GetComponentInChildren<AtackAnimatiomManager>().ShieldAtack(Vector2.left);
             yield return new WaitForSeconds(0.1f);
             shieldL.gameObject.GetComponent<Damagedeal>().ProcessHitShield(Vector2.left);
@@ -225,6 +229,7 @@ public class playermanager : MonoBehaviour
             yield return new WaitForSeconds(0.21f);
             HealAtack.gameObject.GetComponent<Damagedeal>().ProcessHitlifesteal(Vector2.right, Hero);
             HealdAtackreload(healdatacktime);
+
         }
 
     public void UpgradeDMG()
@@ -247,5 +252,14 @@ public class playermanager : MonoBehaviour
     {
         return atacktime; 
     }
+    public void Getradius()
+    {
+        radius+=5f ;
+    }
+    public void Getspeed()
+    {
+        speed += 0.25f;
+    }
+
 }
 

@@ -11,14 +11,14 @@ public class Projectile : MonoBehaviour
     private bool isatack;
     Vector3 localscale;
     [SerializeField] private string Maska;
-    private GameObject Pr;
+    [SerializeField] private bool isbounce;
     private Vector2 Direction;
-    private int numberofHits=1;
+    [SerializeField] private int numberofHits=1;
+    private GameObject CheckE;
     int numofhits = 0;
 
     void Start()
     {
-        Pr = gameObject; 
         Invoke(nameof(Destr), 5);
         
         //Pr.GetComponent<Rigidbody2D>().velocity = Direction.normalized * 3f * Time.fixedDeltaTime * 100;
@@ -26,14 +26,11 @@ public class Projectile : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Pr.GetComponent<move>().Move(Direction);
+        gameObject.GetComponent<move>().Move(Direction);
         
-
-
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
         Collider2D collider = GetComponent<Collider2D>();
         RaycastHit2D[] hits = new RaycastHit2D[2];
         ContactFilter2D filter = new ContactFilter2D();
@@ -43,28 +40,32 @@ public class Projectile : MonoBehaviour
         int c_hits = collider.Cast(Vector2.zero, filter, hits);
         for (int i = 0; i < c_hits; i++)
         {
-            
-            numofhits += 1;
             RaycastHit2D hit = hits[i];
             Debug.Log(numofhits);
-            Debug.Log(numberofHits);
+            Debug.Log(c_hits);
             if (hit.collider.gameObject.GetComponent<Smert>() != null)
             {
+                numofhits += 1;
                 //hit.collider.gameObject.GetComponent<move>().StunEntity(stuntime);
                 hit.collider.gameObject.GetComponent<Smert>().takedamage(damage);
                 if (numberofHits == numofhits)
                 {
-                    Debug.Log("встреча проджа и варага2");
-                    Destroy(Pr);
+                    Destroy(gameObject);
                 }
+                if (isbounce == true)
+                {
+                    //Invoke(nameof(Bounce), 0.5f);
+                    Bounce();
+                }
+
             }
-                
 
         }
 
     }
     public void GetDir(Vector3 dir)
     {
+        Debug.Log("баунс");
         Direction=dir;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         gameObject.transform.eulerAngles = new Vector3(0, 0, angle);
@@ -93,7 +94,15 @@ public class Projectile : MonoBehaviour
     }
     public void Destr()
     {
-        Destroy(Pr);
+        Destroy(gameObject);
     }
-   
+    public void GetCheckModule(GameObject checkEnemy)
+    {
+        CheckE=checkEnemy;
+    }
+    public void Bounce()
+    {
+        CheckE.GetComponent<CheckEnemy>().ChangeDirection(gameObject);
+    }
+
 }

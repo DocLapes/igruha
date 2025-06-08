@@ -152,6 +152,7 @@ MonoBehaviour:
   speedatk: 0
   maxspeed: 0
   ExplosionAfterDash: {fileID: 0}
+  SuperExplosionAfterDash: {fileID: 0}
   Nimb: {fileID: 0}
   isSpecialDash: 0
 --- !u!114 &784567501729977345
@@ -185,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Object: {fileID: 2340745366901207195, guid: dc59cb4c064d9da46b9439fb6ba00e61, type: 3}
   damage: 25
+  delay: 0
 --- !u!58 &7927208519687389884
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -217,9 +219,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16972733, y: 0.1760912}
+  m_Offset: {x: 0.16972728, y: 0.09282428}
   serializedVersion: 2
-  m_Radius: 0.40885067
+  m_Radius: 0.49211758
 --- !u!210 &6266601922789606918
 SortingGroup:
   m_ObjectHideFlags: 0
